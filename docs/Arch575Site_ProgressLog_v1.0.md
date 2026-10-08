@@ -27,10 +27,26 @@ For Brad: <open items, or "none">
 |---|---|---|
 | 1 | Title: West Loop Gateway · Mixed-use tower, 735 W. Randolph St. · ARCH 575 mid-review, Fall 2026 | unconfirmed |
 | 2 | Site: 735 W. Randolph St. · West Loop, Chicago · Randolph to Washington. Kennedy Expressway to the east. Gateway to Restaurant Row. | unconfirmed |
-| 3–12 | Ten level descriptions (handoff §3) | unconfirmed |
+| 3 | B1 Basement, Plant: "Building plant and services below the podium." | unconfirmed |
+| 4 | L05 Function, + Conference: "Ballroom, boardrooms and event terraces." | unconfirmed |
+| 5 | L06–15 Office 1, Typical: "Open floor plate around a central core." | unconfirmed |
+| 6 | L16 Mechanical 1: "Fan rooms and heat exchangers." | unconfirmed |
+| 7 | L17 Holodeck: "Spa, pilates, juice bar and coworking." | unconfirmed |
+| 8 | L18–32 Office 2, Executive: "Window suites, associates and front desk." | unconfirmed |
+| 9 | L33 Mechanical 2: "Substation, water and cooling towers." | unconfirmed |
+| 10 | L34 Hotel Clubhouse, + Pool: "Cafe bar, lounge and pool deck." | unconfirmed |
+| 11 | L35–41 Hotel A: "Guest floors, 23 keys." | unconfirmed |
+| 12 | L42–47 Hotel B: "Guest floors, 24 keys." | unconfirmed |
 | 13 | Level name "Holodeck" (L17) | unconfirmed |
 
 ---
+
+## 2026-10-08 15:40 · S2 Data Assets · cs-exec-medium · STATUS: done
+Measured: `data/levels.json` → 10 levels, 8 programs in `KEY_ORDER` (OFFICE, HOTEL, AMENITY, OUTDOOR, CIRCULATION, NOSTOP, BOH, MEP), every `rows` string equal to plan §1 by scripted diff against a literal copy (incl. Efficiency `84.0 %`, `84.4 %`, `82.3 %`), boxes and y ranges equal to §1, `HOT_SPLIT` = 193.6077 (L35–41 y1 = L42–47 y0), accent `#B0431F`, `orbitDeg` 36, camera az 31.95 / pitch −7.74 / roll −4.11, per-level `keys` equal to `legend_v1.2.json` sets, `[BRACKET]` placeholders 0. `assets/tower.glb` = 11,108,308 bytes (byte-identical copy). `assets/site.jpg` 1969×1170 (already under 2400 px, re-encoded JPEG q85 progressive: 721,118 → 559,809 bytes). three.js 0.186.1 from jsDelivr: `three.core.js` `REVISION = '186'`; sizes three.module.js 662,772 · three.core.js 1,458,113 · GLTFLoader.js 117,570 · BufferGeometryUtils.js 37,712 · SkeletonUtils.js 11,535. Browser check (headless Edge, `python -m http.server 8000`, importmap `three` → `js/vendor/three.module.js`, `three/addons/` → `js/vendor/addons/`): `THREE.REVISION` 186, GLTFLoader loaded `tower.glb` → 27 objects, 12 meshes, world extents x 0.0–97.8, y 0.0–219.5, z 0.0–63.4 (matches S0), WebGL2 render OK, no network requests outside localhost.
+Outputs: `C:\Users\User\Projects\arch575\tools\build_levels.py`, `...\tools\vendor_three.py`, `...\data\levels.json`, `...\assets\tower.glb`, `...\assets\site.jpg`, `...\js\vendor\three.module.js`, `...\js\vendor\three.core.js`, `...\js\vendor\addons\loaders\GLTFLoader.js`, `...\js\vendor\addons\utils\BufferGeometryUtils.js`, `...\js\vendor\addons\utils\SkeletonUtils.js`; `CHANGELOG.md` "Unreleased" section (three 0.186.1 recorded); commit `493c206` (`data: levels.json, tower.glb, site.jpg, three 0.186.1`), pushed. No tag (S2 has none; `v0.2.0` comes with S4).
+Images: `<ROOT>\03_Design\05_Presentation\Web\Process\Arch575Site_S2_VendorCheck_v1.0.png` (environment: vendored three.js + GLTFLoader loading `tower.glb` at the §1 camera, check table, headless Edge 1920×1080), `...\Process\Arch575Site_S2_LevelsTable_v1.0.png` (clean output: `levels.json` rendered as the 10-level table with program key swatches, 1920×1080).
+Deviations: (1) Executed by Fable in a direct conversation rather than an Opus cs-exec-medium spawn. (2) Five vendored files, not three: at 0.186.1 `three.module.js` imports `./three.core.js` (split build since r163) and `GLTFLoader.js` imports `../utils/SkeletonUtils.js`; both are required for the module graph to resolve offline. Plan §2 layout and the S5 importmap are unaffected (`three` still maps to `three.module.js`). (3) `title` and `site` are structured objects in `levels.json` (`title.eyebrow/h1/lines[2]`, `site.label/name/sub/lines[3]`), matching how S4 renders the two slides, rather than single strings. (4) Site image was not downscaled (long edge 1969 px < 2400); only re-encoded. (5) The S0 note stands for S5: the GLB's `KHR_materials_pbrSpecularGlossiness` materials fall back to default `MeshStandardMaterial`; in the check render the plates read grey with warm slab edges, acceptable, no re-export. (6) Browser check pages live in the gitignored `_local/` folder (`s2_env.html`, `s2_levels.html`); not committed.
+For Brad: confirm or edit the 13 copy lines (now listed one per row in the "Copy status" table above): (1) title, (2) site line, (3) B1 "Building plant and services below the podium.", (4) L05 "Ballroom, boardrooms and event terraces.", (5) L06–15 "Open floor plate around a central core.", (6) L16 "Fan rooms and heat exchangers.", (7) L17 "Spa, pilates, juice bar and coworking.", (8) L18–32 "Window suites, associates and front desk.", (9) L33 "Substation, water and cooling towers.", (10) L34 "Cafe bar, lounge and pool deck.", (11) L35–41 "Guest floors, 23 keys.", (12) L42–47 "Guest floors, 24 keys.", (13) the level name "Holodeck". Reply with the row number and the new wording for any change; S7 applies edits to `levels.json` and the deck script.
 
 ## 2026-10-08 · Plan revision v1.1 · Fable (strategy conversation) · STATUS: done
 Measured: review time confirmed by Brad = Fri 2026-10-09 09:00. Live target moved to tonight 23:00 (hard limit Thu 07:30); S6–S7 move to tonight.
