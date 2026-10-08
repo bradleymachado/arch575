@@ -81,9 +81,10 @@ with tempfile.TemporaryDirectory() as prof:
 m = re.search(r'<pre id="out">(.*?)</pre>', dom, re.S)
 R = json.loads(html.unescape(m.group(1)))
 S = R["slides"]
-check("rendered: 12 slides", len(S) == 12, str(len(S)))
+LV = [s for s in S if s["kind"] == "level"]
+check("rendered: 10 level slides (+ title, site, story)", len(LV) == 10, f"{len(S)} slides, kinds " + " ".join(s["kind"][0] for s in S))
 rmism, nums_seen = [], 0
-for s, (key, label, name, sub, prog, box, y0, y1, rows) in zip(S[2:], PLAN):
+for n, (s, (key, label, name, sub, prog, box, y0, y1, rows)) in enumerate(zip(LV, PLAN), 1):
     got_rows = [tuple(r) for r in s["rows"]]
     want_rows = [(a, b) for a, b in rows]
     if [(a.lower(), b) for a, b in got_rows] != [(a.lower(), b) for a, b in want_rows]:
@@ -92,7 +93,7 @@ for s, (key, label, name, sub, prog, box, y0, y1, rows) in zip(S[2:], PLAN):
         if (s[fld] or "") != want: rmism.append(f"{label}.{fld} {s[fld]!r}")
     # every number in the slide's visible text must come from §1 (label, rows) or the caption/scale furniture
     allowed = set(NUM.findall(label + " " + name + " " + " ".join(b for _, b in rows)))
-    allowed |= {f"{s['index'] - 2:02d}", "1", "40", "20", "50", "100", "200"}  # Fig. nn, 1 in = 40 ft, scale bar
+    allowed |= {f"{n:02d}", "1", "40", "20", "50", "100", "200"}  # Fig. nn, 1 in = 40 ft, scale bar
     for n in NUM.findall(s["text"]):
         nums_seen += 1
         if n not in allowed: rmism.append(f"{label}: stray number {n}")

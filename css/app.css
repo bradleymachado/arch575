@@ -103,8 +103,10 @@ html, body { height: 100%; }
   min-width: 0;
 }
 
-.deck[data-kind="title"] .deck__tower { grid-column: 7 / 13; }
-.deck[data-kind="site"]  .deck__tower { visibility: hidden; }
+.deck[data-kind="title"] .deck__tower,
+.deck[data-kind="text"]  .deck__tower { grid-column: 7 / 13; }
+.deck[data-kind="site"]  .deck__tower,
+.deck[data-kind="image"] .deck__tower { visibility: hidden; }
 
 #tower {
   display: block;
@@ -172,6 +174,36 @@ html, body { height: 100%; }
 }
 
 .slide--site .slide__text { grid-column: 9 / 13; }
+
+/* --------------------------------------------------------------------------
+   Story slides (data/story.json, review T4): text = title layout, image = site layout
+   -------------------------------------------------------------------------- */
+
+.slide--text .slide__text { grid-column: 1 / 7; }
+
+.text__h2 {
+  margin-top: 40px;
+  font-size: clamp(36px, 3.4vw, 64px);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+  max-width: 18ch;
+}
+
+.text__lines { margin-top: 32px; max-width: 46ch; }
+
+.text__lines p {
+  font-size: 20px;
+  line-height: 1.45;
+  color: var(--color-body);
+}
+
+.text__lines p + p { margin-top: 10px; }
+
+.text__data { margin-top: 32px; max-width: 560px; }
+.data.text__data td { font-size: 20px; }
+.data.text__data th { width: auto; white-space: nowrap; padding-right: 24px; letter-spacing: 0.08em; }
 
 .site__lines { margin-top: 24px; }
 
@@ -408,7 +440,10 @@ html, body { height: 100%; }
     border-bottom: var(--rule-thin) solid var(--color-hairline);
   }
 
-  .slide--level { scroll-margin-top: var(--tower-h-phone); }
+  .slide--level,
+  .slide--outro { scroll-margin-top: var(--tower-h-phone); }
+  .text__h2 { margin-top: 24px; font-size: 32px; }
+  .text__lines p, .data.text__data td { font-size: 17px; }
 
   .slide__text { display: block; }
 
@@ -421,7 +456,8 @@ html, body { height: 100%; }
     border-bottom: var(--rule-thin) solid var(--color-hairline);
   }
 
-  .deck[data-kind="site"] .deck__tower { visibility: visible; }
+  .deck[data-kind="site"] .deck__tower,
+  .deck[data-kind="image"] .deck__tower { visibility: visible; }
 
   .slide--title { min-height: 60vh; }
   .slide--title .slide__text {

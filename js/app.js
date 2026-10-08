@@ -1,7 +1,7 @@
 /* ==========================================================================
    arch575.bradmachado.com — js/app.js
-   Renders the 12 slides (title, site, ten levels) from data/levels.json into
-   the <template>s in index.html, and owns slide state and navigation.
+   Renders the slides (title, site, story intro, ten levels, story outro) from
+   data/levels.json + data/story.json into the <template>s in index.html, and owns slide state and navigation.
 
    Modes (css/app.css):
      'slides'  >= 900 px: one slide visible at a time.
@@ -10,14 +10,14 @@
 
    Navigation: Left/Right, Up/Down (slides mode), Space (Shift+Space back),
    PageUp/PageDown, Home, End, F (fullscreen), prev/next buttons, swipe
-   (slides mode), URL hash #01..#12 (deep link and back button).
+   (slides mode), URL hash #01..#nn (deep link and back button).
 
    Public API for js/tower.js (S5):
      window.deck.ready        Promise resolving to the parsed levels.json
      window.deck.data         parsed levels.json (after ready)
-     window.deck.index        active slide index 0..11 (0 title, 1 site, 2..11 levels)
-     window.deck.count        12
-     window.deck.slides[i]    { index, kind: 'title'|'site'|'level', level, levelIndex, el }
+     window.deck.index        active slide index 0..count-1 (0 title, 1 site, then story/levels)
+     window.deck.count        number of slides (12 without data/story.json)
+     window.deck.slides[i]    { index, kind: 'title'|'site'|'text'|'image'|'level', level, levelIndex, el }
                               levelIndex is 0..9 for level slides, -1 otherwise
      window.deck.mode         'slides' | 'scroll'
      window.deck.on('change', (index, slide) => {})
@@ -32,6 +32,7 @@
    ========================================================================== */
 
 const DATA_URL = 'data/levels.json';
+const STORY_URL = 'data/story.json';  // optional story slides (review T4); absent = 12 slides
 const PX_PER_IN = 96;          // CSS px per inch
 const FT_PER_IN = 40;          // plan scale, 1 in = 40 ft
 const SCALE_STEPS = [200, 100, 50, 20];
@@ -149,6 +150,49 @@ function renderSite(s) {
   return el;
 }
 
+// Story slides (data/story.json): 'text' = title layout with a heading, lines and an
+// optional ruled table, tower cols 7-12; 'image' = site layout; 'closing' = the title again.
+function renderText(t) {
+  const el = clone('tpl-text');
+  setText(el, 'eyebrow', t.eyebrow);
+  setText(el, 'heading', t.heading);
+  setLines(el, 'lines', t.lines || []);
+  const tbody = field(el, 'rows');
+  for (const [k, v] of t.rows || []) {
+    const tr = document.createElement('tr');
+    const th = document.createElement('th');
+    th.scope = 'row';
+    th.textContent = k;
+    const td = document.createElement('td');
+    td.textContent = v;
+    tr.append(th, td);
+    tbody.append(tr);
+  }
+  if (!(t.rows || []).length) tbody.parentElement.remove();
+  return el;
+}
+
+function renderImage(t) {
+  const el = clone('tpl-site');
+  el.classList.add('slide--image');
+  setText(el, 'label', t.label);
+  setText(el, 'name', t.name);
+  setText(el, 'sub', t.sub);
+  setLines(el, 'lines', t.lines || []);
+  const img = field(el, 'img');
+  img.src = t.src;
+  img.alt = t.caption;
+  setText(el, 'caption', `Fig. ${pad2(t.fig)} — ${t.caption}.`);
+  return el;
+}
+
+function renderStory(t, data) {
+  if (t.kind === 'text') return { kind: 'text', el: renderText(t) };
+  if (t.kind === 'image') return { kind: 'image', el: renderImage(t) };
+  if (t.kind === 'closing') return { kind: 'title', el: renderTitle(data.title) };
+  return null;
+}
+
 function renderLevel(level, n, data) {
   const el = clone('tpl-level');
   setText(el, 'label', level.label);
@@ -261,14 +305,30 @@ function build(data) {
   slides.push({ index: 1, kind: 'site', level: null, levelIndex: -1, el: siteEl });
   frag.append(siteEl);
 
+  const story = data.story || { intro: [], outro: [] };
+  for (const t of story.intro || []) {
+    const r = renderStory(t, data);
+    if (!r) continue;
+    slides.push({ index: slides.length, kind: r.kind, level: null, levelIndex: -1, el: r.el });
+    frag.append(r.el);
+  }
+
   // Title and site go before the tower wrapper (phone: tower sticks from here down)
   deckEl.insertBefore(frag, towerWrap);
 
   data.levels.forEach((level, k) => {
     const el = renderLevel(level, k + 1, data);
-    slides.push({ index: k + 2, kind: 'level', level, levelIndex: k, el });
+    slides.push({ index: slides.length, kind: 'level', level, levelIndex: k, el });
     deckEl.append(el);
   });
+
+  for (const t of story.outro || []) {
+    const r = renderStory(t, data);
+    if (!r) continue;
+    r.el.classList.add('slide--outro');
+    slides.push({ index: slides.length, kind: r.kind, level: null, levelIndex: -1, el: r.el });
+    deckEl.append(r.el);
+  }
 
   slides.forEach((s) => {
     s.el.id = `s${pad2(s.index + 1)}`;
@@ -455,12 +515,15 @@ window.addEventListener('load', () => {
    Boot
    -------------------------------------------------------------------------- */
 
-fetch(DATA_URL)
-  .then((r) => {
+Promise.all([
+  fetch(DATA_URL).then((r) => {
     if (!r.ok) throw new Error(`${DATA_URL}: HTTP ${r.status}`);
     return r.json();
-  })
-  .then((data) => {
+  }),
+  fetch(STORY_URL).then((r) => (r.ok ? r.json() : null)).catch(() => null),
+])
+  .then(([data, story]) => {
+    if (story) data.story = story;
     build(data);
     const start = hashIndex();
     activate(start >= 0 ? start : 0, { replace: true, fromHash: start >= 0, instant: true });

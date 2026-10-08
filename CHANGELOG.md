@@ -2,6 +2,14 @@
 
 Format: one section per tag, newest first. Site releases use `vMAJOR.MINOR.PATCH`; documentation milestones use `plan-vX.Y`.
 
+## Unreleased (v1.0.0 candidate, awaiting copy confirmation) — 2026-10-08
+
+- Story slides (review T4): `data/story.json` (optional; without it the deck is the 12-slide build). Intro after the site slide: Thesis, Stacking (office 827,970 sf vs 812,500 sf target, 305 keys), Ground floor; outro after the levels: two massing views (greyscale copies of the 10/05 placeholders in `assets/story/`) and a closing slide repeating the title. Deck now 18 slides. New `tpl-text`, slide kinds `text` and `image` in `js/app.js`; tower shows on text slides (cols 7–12, no highlight), hidden on image slides.
+- Projector legibility (T3): 13 px counter, data labels, key labels, scale-bar text and captions; labels and captions muted.
+- Copy (T1, pending Brad): L16 "Transfer and booster pumps.", L33 "Transfer and booster pumps; rooftop-bound systems." via `MidReview_LevelDeck_v1.4.py`.
+- Numbers (T2): plate and core re-checked against V14 v1.3 slab boundaries; unchanged.
+- `tools/review_s6.py`: level slides found by kind; 390 px scroll-width check.
+
 ## v0.4.0 — 2026-10-08
 
 - Plans re-rendered from `Core_Tower_V14_v1.3.3dm` (saved 2026-10-08 17:07; includes the Office 1 open plan, Office 2 executive floor, L34 clubhouse edits and the L17 fit-out) with `tools/Core_V13_PlanFurnished_v1.4.py --nogen L1,L2,V,W` (model furniture only on L06–L15, L17, L18–L32, L34; no duplicated generated furniture).

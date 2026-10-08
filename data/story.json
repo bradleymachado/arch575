@@ -1,0 +1,63 @@
+{
+ "_source": "Review notes T4 (2026-10-08). Copy from 03_Design/05_Presentation/MidReview/ARCH575_MidReview_Plan_v1.0.md decisions D5 (thesis) and D6 (the hall); totals from levels.json rows, office target 812,500 gsf from V14Plates plan. All lines await Brad's confirmation (copy gate).",
+ "intro": [
+  {
+   "kind": "text",
+   "eyebrow": "Thesis",
+   "heading": "The gateway lot from the Loop into Fulton Market.",
+   "lines": [
+    "Class A+ amenity-driven office: coworking, outdoor floors, the L17 spa, pilates and juice bar.",
+    "The ground feeds Restaurant Row: two Randolph restaurants, a bar, a patio over Randolph.",
+    "A convention center on the podium.",
+    "The hotel diversifies income."
+   ]
+  },
+  {
+   "kind": "text",
+   "eyebrow": "Stacking",
+   "heading": "Office below, hotel above.",
+   "lines": [],
+   "rows": [
+    ["Office 1 · L06–15", "10 × 39,930 sf"],
+    ["Office 2 · L18–32", "15 × 28,578 sf"],
+    ["Office total", "827,970 sf"],
+    ["Office target", "812,500 sf · 101.9 %"],
+    ["Hotel · L35–47", "13 floors · 305 keys"]
+   ]
+  },
+  {
+   "kind": "text",
+   "eyebrow": "Ground floor",
+   "heading": "One grand lobby.",
+   "lines": [
+    "Hotel entrance on Halsted, with the drop-off.",
+    "Office entrance on Washington.",
+    "The office rises at once to a mezzanine for its banks and turnstiles.",
+    "The hotel stays at grade to its cars."
+   ]
+  }
+ ],
+ "outro": [
+  {
+   "kind": "image",
+   "src": "assets/story/massing-sw.jpg",
+   "label": "Massing",
+   "name": "From the southwest",
+   "sub": "",
+   "lines": [],
+   "fig": 11,
+   "caption": "Massing from the southwest"
+  },
+  {
+   "kind": "image",
+   "src": "assets/story/massing-nne.jpg",
+   "label": "Massing",
+   "name": "From the north-northeast",
+   "sub": "",
+   "lines": [],
+   "fig": 12,
+   "caption": "Massing from the north-northeast"
+  },
+  { "kind": "closing" }
+ ]
+}
