@@ -1,0 +1,19 @@
+# Prompt S0 — Env Check
+
+Copy everything inside the fence into a new conversation (or hand it to the `cs-exec-lite` agent).
+
+```
+4.0 Env Check
+Name this conversation exactly '4.0 Env Check'. Your first response must begin with the line: CONVERSATION NAME: 4.0 Env Check.
+Model tier: cs-exec-lite (Sonnet). (If run from the orchestrator session, spawn with that cs-exec agent type.)
+Project: arch575.bradmachado.com web presentation — ARCH 575, Fall 2026. Execute subtask S0 only: Environment verification.
+First read C:\Users\User\Projects\arch575\docs\Arch575Site_Plan_v1.0.md (plan §3 rules and §4 S0 steps) and the progress log C:\Users\User\Projects\arch575\docs\Arch575Site_ProgressLog_v1.0.md. Do not re-plan; follow the subtask steps as written. Also read docs/reference/Arch575Site_Handoff_v1.0.md and docs/reference/Subdomain_Handoff_v1.0.md in the repo when the steps cite them.
+Inputs: Plan §1 environment row; GLB at C:\Users\User\OneDrive - University of Illinois - Urbana\Architecture\2026 Fall - Arch 575\03_Design\05_Presentation\Web\Assets\TowerModel_GLB_v1.0.glb.
+Time budget: 10 min. Required outputs: Log entry with printed values (Python/import versions, gh auth, GLB node/mesh counts and POSITION extents, headless-Edge screenshot path).
+Acceptance checks: Imports rhino3dm, matplotlib, markdown, pptx all succeed; GLB extents consistent with x 0-98, y up to ~220, z 0-63; nslookup arch575.bradmachado.com returns no record; screenshot file exists.
+Tooling rules: GitHub Pages (public repo bradleymachado/arch575, branch main, root); static HTML + CSS + ES-module JS; three.js 0.186.1 vendored into js/vendor/ (no CDN at runtime); Python 3.10.11 for build scripts (rhino3dm 8.35.0, matplotlib 3.10.9, python-pptx, Markdown); git + gh CLI (logged in as bradleymachado); headless Edge for captures; no Node, no build step, no Chrome/computer-use automation while Brad is at the machine; Microsoft Office only; no Google products. Never save a .3dm. Never touch C:\Users\User\Projects\bradmachado-com, the main repo, or any existing DNS record. Give explicit UI instructions (which window, menu, cell) and precede every code block with a placement instruction and a one-line intent.
+Repo and versioning: work in C:\Users\User\Projects\arch575 on branch main; commit as 'section: what changed' ending with 'Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>'; tag releases as the plan says; never delete, supersede into docs/_superseded/; mirror plan and log to the OneDrive Web folder at every tag.
+Portfolio capture: export process images to C:\Users\User\OneDrive - University of Illinois - Urbana\Architecture\2026 Fall - Arch 575\03_Design\05_Presentation\Web\Process named Arch575Site_S0_<Desc>_v1.0.png (environment capture + clean output image, minimum) using headless Edge where a browser capture is needed.
+Gating: STOP only if an import fails or the GLB extents disagree with plan §1 - then end with: STOP - report <the failing item> before I continue.
+On completion: append a progress-log entry (date/time, status, measured values, output files, image files, deviations, for Brad). Then, as the LAST element of your final response, output the handoff prompt for S1 copied verbatim from docs/prompts/S1_RepoScaffold.md with placeholders replaced by measured values, inside a single fenced code block headed 'COPY/PASTE — Prompt S1 — new conversation name: 4.1 Repo Scaffold'. The first line inside the block must be the next conversation name. Nothing may follow that block.
+```

@@ -1,0 +1,19 @@
+# Prompt S5 — 3D Tower
+
+Copy everything inside the fence into a new conversation (or hand it to the `cs-exec-top` agent).
+
+```
+4.5 3D Tower
+Name this conversation exactly '4.5 3D Tower'. Your first response must begin with the line: CONVERSATION NAME: 4.5 3D Tower.
+Model tier: cs-exec-top (Fable). (If run from the orchestrator session, spawn with that cs-exec agent type.)
+Project: arch575.bradmachado.com web presentation — ARCH 575, Fall 2026. Execute subtask S5 only: js/tower.js: GLB load, accent highlight box per level, camera tween.
+First read C:\Users\User\Projects\arch575\docs\Arch575Site_Plan_v1.0.md (plan §3 rules and §4 S5 steps) and the progress log C:\Users\User\Projects\arch575\docs\Arch575Site_ProgressLog_v1.0.md. Do not re-plan; follow the subtask steps as written. Also read docs/reference/Arch575Site_Handoff_v1.0.md and docs/reference/Subdomain_Handoff_v1.0.md in the repo when the steps cite them.
+Inputs: assets/tower.glb (glTF units, y up); levels.json box [x0,x1,z0,z1], y [y0,y1], camera and orbitDeg; vendored three.js 0.186.1 (importmap: 'three' -> ./js/vendor/three.module.js, 'three/addons/' -> ./js/vendor/addons/); window.deck.on('change') from S4; plan §4 S5 steps.
+Time budget: 30 min. Required outputs: js/tower.js, importmap in index.html, assets/tower-fallback.png, captures at slides 01, 03, 06, 10 in C:\Users\User\OneDrive - University of Illinois - Urbana\Architecture\2026 Fall - Arch 575\03_Design\05_Presentation\Web\Process; commit 'tower: GLB, level highlight, camera tween'; tag v0.3.0; log entry with the yaw per slide.
+Acceptance checks: First paint < 3 s on localhost; yaw per level = 31.95 + 36 * index (log all ten); highlight box = plan §1 box ± pad 0.5 and the level's y range; only the active box visible; no console errors; no network requests except Google Fonts; fallback image shows when WebGL is disabled (test with --disable-gpu --disable-software-rasterizer or by renaming the GLB).
+Tooling rules: GitHub Pages (public repo bradleymachado/arch575, branch main, root); static HTML + CSS + ES-module JS; three.js 0.186.1 vendored into js/vendor/ (no CDN at runtime); Python 3.10.11 for build scripts (rhino3dm 8.35.0, matplotlib 3.10.9, python-pptx, Markdown); git + gh CLI (logged in as bradleymachado); headless Edge for captures; no Node, no build step, no Chrome/computer-use automation while Brad is at the machine; Microsoft Office only; no Google products. Never save a .3dm. Never touch C:\Users\User\Projects\bradmachado-com, the main repo, or any existing DNS record. Give explicit UI instructions (which window, menu, cell) and precede every code block with a placement instruction and a one-line intent.
+Repo and versioning: work in C:\Users\User\Projects\arch575 on branch main; commit as 'section: what changed' ending with 'Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>'; tag releases as the plan says; never delete, supersede into docs/_superseded/; mirror plan and log to the OneDrive Web folder at every tag.
+Portfolio capture: export process images to C:\Users\User\OneDrive - University of Illinois - Urbana\Architecture\2026 Fall - Arch 575\03_Design\05_Presentation\Web\Process named Arch575Site_S5_<Desc>_v1.0.png (environment capture + clean output image, minimum) using headless Edge where a browser capture is needed.
+Gating: not gated; this subtask does not end on a STOP line.
+On completion: append a progress-log entry (date/time, status, measured values, output files, image files, deviations, for Brad). Then, as the LAST element of your final response, output the handoff prompt for S6 copied verbatim from docs/prompts/S6_Review.md with placeholders replaced by measured values, inside a single fenced code block headed 'COPY/PASTE — Prompt S6 — new conversation name: 4.6 Review'. The first line inside the block must be the next conversation name. Nothing may follow that block.
+```
