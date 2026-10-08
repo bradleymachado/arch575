@@ -2,7 +2,11 @@
 
 Format: one section per tag, newest first. Site releases use `vMAJOR.MINOR.PATCH`; documentation milestones use `plan-vX.Y`.
 
-## Unreleased
+## v0.2.0 — 2026-10-08
+
+- Page shell: `index.html` (running header with eyebrow + `nn / 12` counter, `<main class="deck">` with a persistent `<canvas id="tower">` wrapper, prev/next buttons, three `<template>`s), `css/app.css` (12-column grid, 72 px margins, text cols 1–3 / tower cols 4–6 / plan cols 7–12; title slide text cols 1–6 + tower cols 7–12; site image cols 1–8 + lines cols 9–12; < 900 px stacked scroll with the tower sticky at 40vh), `js/app.js` (renders 12 slides from `data/levels.json`, keys, buttons, swipe, hash `#01`…`#12`, fullscreen on `F`, reduced-motion, `IntersectionObserver` in scroll mode, `window.deck` API for `js/tower.js`).
+- Plan figures: scale bar and north mark (north left) sized from the rendered plan (1 in = 40 ft → 2.4 px/ft × fit scale), caption `Fig. nn — Name, 1 in = 40 ft.`
+- Plans v1.3 SVG (S3): `assets/plans/PlanColor_<key>_v1.3.svg` ×10 + `legend_v1.3.json` rendered by `Core_V13_PlanFurnished_v1.3.py` (oxide accent `#B0431F`, outdoor `#EFD9D2`, pool `#D7A18F`), mirrors in `tools/`.
 
 - `data/levels.json` built by `tools/build_levels.py` from `MidReview_LevelDeck_v1.3.py` (10 levels, 8 programs, oxide accent `#B0431F`, legend keys from `legend_v1.2.json`).
 - `assets/tower.glb` (11,108,308 bytes, copy of `TowerModel_GLB_v1.0.glb`), `assets/site.jpg` (1969×1170, JPEG q85).

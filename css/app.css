@@ -4,4 +4,447 @@
    Baseline tokens and components come from css/style.css, vendored from the
    main site and never edited; add project rules here only.
    Accent #B0431F is the only hue. No shadows, rounded corners, or gradients.
+
+   Layout: one page, 12 slides (title, site, ten levels).
+   >= 900 px  full-viewport slides, 12-column grid, 72 px margins, one slide
+              visible at a time (keyboard / buttons / hash).
+   <  900 px  slides stack at natural height, 24 px margins, the tower canvas
+              sticks to the top at 40vh, plan below the text.
    ========================================================================== */
+
+:root {
+  --deck-header-h: 56px;
+  --deck-gap: 24px;
+  --deck-top: 40px;      /* space between the header rule and the slide content */
+  --deck-bottom: 56px;
+  --tower-h-phone: 40vh;
+}
+
+html, body { height: 100%; }
+
+/* --------------------------------------------------------------------------
+   Running header: eyebrow left, counter right, 1 px hairline below
+   -------------------------------------------------------------------------- */
+
+.deck-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 20;
+  height: var(--deck-header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 0 var(--side-margin);
+  background: var(--color-bg);
+  border-bottom: var(--rule-thin) solid var(--color-hairline);
+}
+
+.deck-header__eyebrow { display: inline-block; }
+.deck-header__eyebrow:hover { color: var(--color-ink); }
+
+.deck-header__count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   Deck grid (desktop)
+   -------------------------------------------------------------------------- */
+
+.deck {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: minmax(0, 1fr);
+  column-gap: var(--deck-gap);
+  height: 100vh;
+  padding: calc(var(--deck-header-h) + var(--deck-top)) var(--side-margin) var(--deck-bottom);
+}
+
+.slide {
+  grid-row: 1;
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: minmax(0, 1fr);
+  column-gap: var(--deck-gap);
+  min-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.slide.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.slide__text {
+  grid-column: 1 / 4;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+}
+
+/* Single persistent three.js canvas (js/tower.js, S5). Level slides: cols 4-6.
+   Title slide: cols 7-12 (hero). Site slide: hidden (image takes cols 1-8). */
+.deck__tower {
+  grid-row: 1;
+  grid-column: 4 / 7;
+  position: relative;
+  z-index: 1;
+  min-height: 0;
+  min-width: 0;
+}
+
+.deck[data-kind="title"] .deck__tower { grid-column: 7 / 13; }
+.deck[data-kind="site"]  .deck__tower { visibility: hidden; }
+
+#tower {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   Title slide
+   -------------------------------------------------------------------------- */
+
+.slide--title .slide__text {
+  grid-column: 1 / 7;
+  justify-content: space-between;
+}
+
+.title__h1 {
+  font-size: clamp(48px, 5vw, 96px);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin-left: -0.04em;
+}
+
+.title__lines {
+  margin-top: 24px;
+}
+
+.title__lines p {
+  font-size: 20px;
+  line-height: 1.4;
+  color: var(--color-body);
+}
+
+/* --------------------------------------------------------------------------
+   Site slide: image cols 1-8, three lines cols 9-12
+   -------------------------------------------------------------------------- */
+
+.slide__site {
+  grid-column: 1 / 9;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+}
+
+.site__img {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: left top;
+}
+
+.slide--site .slide__text { grid-column: 9 / 13; }
+
+.site__lines { margin-top: 24px; }
+
+.site__lines p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-body);
+}
+
+/* --------------------------------------------------------------------------
+   Level slide: text cols 1-3, tower cols 4-6, plan cols 7-12
+   -------------------------------------------------------------------------- */
+
+.level__label {
+  font-family: var(--font-sans);
+  font-size: clamp(72px, 6.6vw, 160px);
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  margin-left: -0.05em;
+  white-space: nowrap;
+  color: var(--color-ink);
+}
+
+.level__name {
+  font-size: 28px;
+  line-height: 1.15;
+  color: var(--color-ink);
+  margin-top: 28px;
+}
+
+.level__sub {
+  font-size: 28px;
+  line-height: 1.15;
+  color: var(--color-muted);
+}
+
+.level__sub:empty { display: none; }
+
+.level__desc {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-body);
+  max-width: 34ch;
+  margin-top: 16px;
+}
+
+/* Ruled data table */
+.data {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 24px;
+  border-top: var(--rule-thin) solid var(--color-hairline);
+}
+
+.data tr { border-bottom: var(--rule-thin) solid var(--color-hairline); }
+
+.data th {
+  width: 50%;
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--color-faint);
+  padding: 9px 0 8px;
+  vertical-align: baseline;
+}
+
+.data td {
+  font-size: 15px;
+  color: var(--color-ink);
+  font-variant-numeric: tabular-nums;
+  padding: 8px 0;
+  white-space: nowrap;
+  vertical-align: baseline;
+}
+
+/* Vertical key; the level program comes first, in the accent */
+.key {
+  margin-top: 32px;
+}
+
+.key li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 0;
+}
+
+.key__swatch {
+  flex: none;
+  width: 12px;
+  height: 12px;
+}
+
+.key__swatch--bordered { border: var(--rule-thin) solid var(--color-hairline); }
+
+.key__label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-muted);
+}
+
+.key__item--accent .key__label { color: var(--color-ink); }
+
+/* Plan figure: image hangs from the top-left; scale bar and caption sit
+   directly under the rendered plan */
+.slide__plan {
+  grid-column: 7 / 13;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+}
+
+.plan__img {
+  flex: 0 0 auto;
+  min-height: 0;
+  width: 100%;
+  height: auto;            /* js/app.js sets the fitted height in slides mode */
+  object-fit: contain;
+  object-position: left top;
+}
+
+.plan__scale {
+  display: block;
+  width: 100%;
+  height: 24px;
+  margin-top: 16px;
+  overflow: visible;
+}
+
+.plan__scale .sb {
+  stroke: var(--color-ink);
+  stroke-width: 1;
+  fill: none;
+  shape-rendering: crispEdges;
+}
+
+.plan__scale .sb-fill { fill: var(--color-ink); }
+
+.plan__scale text {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  fill: var(--color-faint);
+}
+
+.slide figcaption { margin-top: 8px; }
+
+/* --------------------------------------------------------------------------
+   Prev / next buttons, bottom right
+   -------------------------------------------------------------------------- */
+
+.deck-nav {
+  position: fixed;
+  right: var(--side-margin);
+  bottom: 16px;
+  z-index: 20;
+  display: flex;
+}
+
+.deck-nav__btn {
+  width: 40px;
+  height: 40px;
+  border: var(--rule-thin) solid var(--color-ink);
+  background: var(--color-bg);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1;
+  color: var(--color-ink);
+}
+
+.deck-nav__btn + .deck-nav__btn { margin-left: -1px; }
+
+.deck-nav__btn:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  position: relative;
+}
+
+.deck-nav__btn:disabled {
+  color: var(--color-hairline);
+  border-color: var(--color-hairline);
+  cursor: default;
+}
+
+/* --------------------------------------------------------------------------
+   Motion
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .slide { transition: opacity 200ms ease, visibility 0s linear 200ms; }
+  .slide.is-active { transition: opacity 200ms ease, visibility 0s; }
+  html { scroll-behavior: smooth; }
+}
+
+/* --------------------------------------------------------------------------
+   Desktop only: lock the page to the viewport
+   -------------------------------------------------------------------------- */
+
+@media (min-width: 900px) {
+  body { overflow: hidden; }
+}
+
+/* --------------------------------------------------------------------------
+   Phone / narrow: stacked scroll, sticky tower
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 899.98px) {
+  .deck-header {
+    position: static;
+    height: auto;
+    padding: 20px var(--side-margin-mobile);
+  }
+
+  .deck {
+    display: block;
+    height: auto;
+    padding: 0;
+  }
+
+  .slide {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    overflow: visible;
+    padding: 32px var(--side-margin-mobile) 48px;
+    border-bottom: var(--rule-thin) solid var(--color-hairline);
+  }
+
+  .slide--level { scroll-margin-top: var(--tower-h-phone); }
+
+  .slide__text { display: block; }
+
+  .deck__tower {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    height: var(--tower-h-phone);
+    background: var(--color-bg);
+    border-bottom: var(--rule-thin) solid var(--color-hairline);
+  }
+
+  .deck[data-kind="site"] .deck__tower { visibility: visible; }
+
+  .slide--title { min-height: 60vh; }
+  .slide--title .slide__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: calc(60vh - 80px);
+  }
+
+  .title__h1 { font-size: clamp(40px, 11vw, 64px); }
+  .title__lines p { font-size: 17px; }
+
+  .slide__site { display: block; }
+  .site__img { height: auto; }
+  .slide--site .slide__text { margin-top: 32px; }
+
+  .level__label { font-size: clamp(64px, 22vw, 120px); }
+  .level__name { margin-top: 20px; }
+  .level__name, .level__sub { font-size: 24px; }
+
+  .key { margin-top: 24px; }
+
+  .slide__plan {
+    display: block;
+    margin-top: 32px;
+  }
+
+  .plan__img {
+    height: auto;
+    max-height: 60vh;
+  }
+
+  .deck-nav {
+    right: var(--side-margin-mobile);
+    bottom: 16px;
+  }
+}
