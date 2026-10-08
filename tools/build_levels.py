@@ -53,7 +53,7 @@ def build(deck, legend):
             "box": [round(v, 4) for v in box],
             "y": [round(y0, 4), round(y1, 4)],
             "keys": keys,
-            "plan": "assets/plans/PlanColor_%s_v1.3.svg" % key,
+            "plan": "assets/plans/PlanColor_%s_v1.4.svg" % key,
         })
     return {
         "title": TITLE, "site": SITE_TEXT, "accent": ACCENT,

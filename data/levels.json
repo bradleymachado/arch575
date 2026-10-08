@@ -96,7 +96,7 @@
     "BOH",
     "MEP"
    ],
-   "plan": "assets/plans/PlanColor_B1_v1.3.svg"
+   "plan": "assets/plans/PlanColor_B1_v1.4.svg"
   },
   {
    "key": "L05",
@@ -128,7 +128,7 @@
     "BOH",
     "MEP"
    ],
-   "plan": "assets/plans/PlanColor_L05_v1.3.svg"
+   "plan": "assets/plans/PlanColor_L05_v1.4.svg"
   },
   {
    "key": "L06-L15",
@@ -172,7 +172,7 @@
     "BOH",
     "MEP"
    ],
-   "plan": "assets/plans/PlanColor_L06-L15_v1.3.svg"
+   "plan": "assets/plans/PlanColor_L06-L15_v1.4.svg"
   },
   {
    "key": "L16",
@@ -203,7 +203,7 @@
     "BOH",
     "MEP"
    ],
-   "plan": "assets/plans/PlanColor_L16_v1.3.svg"
+   "plan": "assets/plans/PlanColor_L16_v1.4.svg"
   },
   {
    "key": "L17",
@@ -236,7 +236,7 @@
     "BOH",
     "MEP"
    ],
-   "plan": "assets/plans/PlanColor_L17_v1.3.svg"
+   "plan": "assets/plans/PlanColor_L17_v1.4.svg"
   },
   {
    "key": "L18-L32",
@@ -280,7 +280,7 @@
     "BOH",
     "MEP"
    ],
-   "plan": "assets/plans/PlanColor_L18-L32_v1.3.svg"
+   "plan": "assets/plans/PlanColor_L18-L32_v1.4.svg"
   },
   {
    "key": "L33",
@@ -311,7 +311,7 @@
     "BOH",
     "MEP"
    ],
-   "plan": "assets/plans/PlanColor_L33_v1.3.svg"
+   "plan": "assets/plans/PlanColor_L33_v1.4.svg"
   },
   {
    "key": "L34",
@@ -343,7 +343,7 @@
     "BOH",
     "MEP"
    ],
-   "plan": "assets/plans/PlanColor_L34_v1.3.svg"
+   "plan": "assets/plans/PlanColor_L34_v1.4.svg"
   },
   {
    "key": "L35-L41",
@@ -390,7 +390,7 @@
     "BOH",
     "MEP"
    ],
-   "plan": "assets/plans/PlanColor_L35-L41_v1.3.svg"
+   "plan": "assets/plans/PlanColor_L35-L41_v1.4.svg"
   },
   {
    "key": "L42-L47",
@@ -437,7 +437,7 @@
     "BOH",
     "MEP"
    ],
-   "plan": "assets/plans/PlanColor_L42-L47_v1.3.svg"
+   "plan": "assets/plans/PlanColor_L42-L47_v1.4.svg"
   }
  ]
 }

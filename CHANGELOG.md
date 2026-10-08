@@ -2,6 +2,12 @@
 
 Format: one section per tag, newest first. Site releases use `vMAJOR.MINOR.PATCH`; documentation milestones use `plan-vX.Y`.
 
+## v0.4.0 — 2026-10-08
+
+- Plans re-rendered from `Core_Tower_V14_v1.3.3dm` (saved 2026-10-08 17:07; includes the Office 1 open plan, Office 2 executive floor, L34 clubhouse edits and the L17 fit-out) with `tools/Core_V13_PlanFurnished_v1.4.py --nogen L1,L2,V,W` (model furniture only on L06–L15, L17, L18–L32, L34; no duplicated generated furniture).
+- v1.4 script: rooms on the office plans classed as Office (executive offices and suites were reading as Hotel/Amenity grey and adding Hotel to the office-floor key).
+- `assets/plans/PlanColor_<key>_v1.4.svg` ×10 + `legend_v1.4.json`; `data/levels.json` and `tools/build_levels.py` point at v1.4 (new file names also bypass cached v1.3 SVGs). Legend keys per level unchanged. Plate/core table values not recomputed.
+
 ## plan-v1.2 — 2026-10-08
 
 - Reviewer comments added as conditional subtasks S10 Comment API (Opus medium), S11 Phone Comments (Opus high), S12 Presenter Overlay (Fable): Cloudflare Worker + KV, phone comment/sketch layer, presenter overlay with a 13th Comments slide. Run only if `v1.0.0` is live by 22:00 and Brad supplies a Cloudflare API token (`_local/cf.env`, gitignored).
