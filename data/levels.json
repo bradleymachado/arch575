@@ -1,0 +1,443 @@
+{
+ "title": {
+  "eyebrow": "ARCH 575 / Mid-review",
+  "h1": "West Loop Gateway",
+  "lines": [
+   "Mixed-use tower, 735 W. Randolph St.",
+   "ARCH 575 mid-review, Fall 2026"
+  ]
+ },
+ "site": {
+  "label": "Site",
+  "name": "735 W. Randolph St.",
+  "sub": "West Loop, Chicago",
+  "lines": [
+   "Randolph to Washington.",
+   "Kennedy Expressway to the east.",
+   "Gateway to Restaurant Row."
+  ]
+ },
+ "accent": "#B0431F",
+ "orbitDeg": 36.0,
+ "camera": {
+  "azDeg": 31.95,
+  "pitchDeg": -7.74,
+  "rollDeg": -4.11
+ },
+ "programs": [
+  {
+   "key": "OFFICE",
+   "label": "Office",
+   "color": "#B5B5B5"
+  },
+  {
+   "key": "HOTEL",
+   "label": "Hotel",
+   "color": "#B5B5B5"
+  },
+  {
+   "key": "AMENITY",
+   "label": "Amenity",
+   "color": "#B5B5B5"
+  },
+  {
+   "key": "OUTDOOR",
+   "label": "Outdoor",
+   "color": "#EFD9D2"
+  },
+  {
+   "key": "CIRCULATION",
+   "label": "Circulation",
+   "color": "#FFFFFF"
+  },
+  {
+   "key": "NOSTOP",
+   "label": "Elevator, no stop",
+   "color": "#F0F0F0"
+  },
+  {
+   "key": "BOH",
+   "label": "Back of house",
+   "color": "#D9D9D9"
+  },
+  {
+   "key": "MEP",
+   "label": "MEP",
+   "color": "#3A3A3A"
+  }
+ ],
+ "levels": [
+  {
+   "key": "B1",
+   "label": "B1",
+   "name": "Basement",
+   "sub": "Plant",
+   "description": "Building plant and services below the podium.",
+   "rows": [
+    [
+     "Area",
+     "43,378 sf"
+    ]
+   ],
+   "program": "MEP",
+   "box": [
+    0.0,
+    97.8,
+    0.0,
+    63.4
+   ],
+   "y": [
+    -5.0,
+    0.0
+   ],
+   "keys": [
+    "CIRCULATION",
+    "NOSTOP",
+    "BOH",
+    "MEP"
+   ],
+   "plan": "assets/plans/PlanColor_B1_v1.3.svg"
+  },
+  {
+   "key": "L05",
+   "label": "L05",
+   "name": "Function",
+   "sub": "+ Conference",
+   "description": "Ballroom, boardrooms and event terraces.",
+   "rows": [
+    [
+     "Area",
+     "35,143 sf"
+    ]
+   ],
+   "program": "AMENITY",
+   "box": [
+    7.9,
+    97.8,
+    0.3,
+    39.9
+   ],
+   "y": [
+    17.5,
+    23.2
+   ],
+   "keys": [
+    "AMENITY",
+    "OUTDOOR",
+    "CIRCULATION",
+    "BOH",
+    "MEP"
+   ],
+   "plan": "assets/plans/PlanColor_L05_v1.3.svg"
+  },
+  {
+   "key": "L06-L15",
+   "label": "L06–15",
+   "name": "Office 1",
+   "sub": "Typical",
+   "description": "Open floor plate around a central core.",
+   "rows": [
+    [
+     "Floors",
+     "10"
+    ],
+    [
+     "Plate",
+     "39,930 sf"
+    ],
+    [
+     "Core",
+     "6,386 sf"
+    ],
+    [
+     "Efficiency",
+     "84.0 %"
+    ]
+   ],
+   "program": "OFFICE",
+   "box": [
+    7.9,
+    97.8,
+    0.3,
+    39.9
+   ],
+   "y": [
+    23.8,
+    77.9
+   ],
+   "keys": [
+    "OFFICE",
+    "CIRCULATION",
+    "NOSTOP",
+    "BOH",
+    "MEP"
+   ],
+   "plan": "assets/plans/PlanColor_L06-L15_v1.3.svg"
+  },
+  {
+   "key": "L16",
+   "label": "L16",
+   "name": "Mechanical 1",
+   "sub": "",
+   "description": "Fan rooms and heat exchangers.",
+   "rows": [
+    [
+     "Area",
+     "39,930 sf"
+    ]
+   ],
+   "program": "MEP",
+   "box": [
+    7.9,
+    97.8,
+    0.3,
+    39.9
+   ],
+   "y": [
+    77.9,
+    80.4
+   ],
+   "keys": [
+    "CIRCULATION",
+    "NOSTOP",
+    "BOH",
+    "MEP"
+   ],
+   "plan": "assets/plans/PlanColor_L16_v1.3.svg"
+  },
+  {
+   "key": "L17",
+   "label": "L17",
+   "name": "Holodeck",
+   "sub": "",
+   "description": "Spa, pilates, juice bar and coworking.",
+   "rows": [
+    [
+     "Area",
+     "25,203 sf"
+    ]
+   ],
+   "program": "AMENITY",
+   "box": [
+    7.9,
+    97.8,
+    0.3,
+    39.9
+   ],
+   "y": [
+    80.4,
+    82.8
+   ],
+   "keys": [
+    "AMENITY",
+    "OUTDOOR",
+    "CIRCULATION",
+    "NOSTOP",
+    "BOH",
+    "MEP"
+   ],
+   "plan": "assets/plans/PlanColor_L17_v1.3.svg"
+  },
+  {
+   "key": "L18-L32",
+   "label": "L18–32",
+   "name": "Office 2",
+   "sub": "Executive",
+   "description": "Window suites, associates and front desk.",
+   "rows": [
+    [
+     "Floors",
+     "15"
+    ],
+    [
+     "Plate",
+     "28,578 sf"
+    ],
+    [
+     "Core",
+     "4,466 sf"
+    ],
+    [
+     "Efficiency",
+     "84.4 %"
+    ]
+   ],
+   "program": "OFFICE",
+   "box": [
+    27.7,
+    97.8,
+    0.3,
+    39.9
+   ],
+   "y": [
+    83.4,
+    158.5
+   ],
+   "keys": [
+    "OFFICE",
+    "CIRCULATION",
+    "NOSTOP",
+    "BOH",
+    "MEP"
+   ],
+   "plan": "assets/plans/PlanColor_L18-L32_v1.3.svg"
+  },
+  {
+   "key": "L33",
+   "label": "L33",
+   "name": "Mechanical 2",
+   "sub": "",
+   "description": "Substation, water and cooling towers.",
+   "rows": [
+    [
+     "Area",
+     "28,578 sf"
+    ]
+   ],
+   "program": "MEP",
+   "box": [
+    27.7,
+    97.8,
+    0.3,
+    39.9
+   ],
+   "y": [
+    158.5,
+    161.0
+   ],
+   "keys": [
+    "CIRCULATION",
+    "NOSTOP",
+    "BOH",
+    "MEP"
+   ],
+   "plan": "assets/plans/PlanColor_L33_v1.3.svg"
+  },
+  {
+   "key": "L34",
+   "label": "L34",
+   "name": "Hotel Clubhouse",
+   "sub": "+ Pool",
+   "description": "Cafe bar, lounge and pool deck.",
+   "rows": [
+    [
+     "Area",
+     "11,760 sf"
+    ]
+   ],
+   "program": "AMENITY",
+   "box": [
+    27.7,
+    97.8,
+    0.3,
+    39.9
+   ],
+   "y": [
+    161.0,
+    163.4
+   ],
+   "keys": [
+    "AMENITY",
+    "OUTDOOR",
+    "CIRCULATION",
+    "BOH",
+    "MEP"
+   ],
+   "plan": "assets/plans/PlanColor_L34_v1.3.svg"
+  },
+  {
+   "key": "L35-L41",
+   "label": "L35–41",
+   "name": "Hotel A",
+   "sub": "",
+   "description": "Guest floors, 23 keys.",
+   "rows": [
+    [
+     "Floors",
+     "7"
+    ],
+    [
+     "Keys",
+     "23"
+    ],
+    [
+     "Plate",
+     "14,040 sf"
+    ],
+    [
+     "Core",
+     "2,480 sf"
+    ],
+    [
+     "Efficiency",
+     "82.3 %"
+    ]
+   ],
+   "program": "HOTEL",
+   "box": [
+    31.1,
+    72.5,
+    3.7,
+    36.6
+   ],
+   "y": [
+    164.0,
+    193.6077
+   ],
+   "keys": [
+    "HOTEL",
+    "CIRCULATION",
+    "BOH",
+    "MEP"
+   ],
+   "plan": "assets/plans/PlanColor_L35-L41_v1.3.svg"
+  },
+  {
+   "key": "L42-L47",
+   "label": "L42–47",
+   "name": "Hotel B",
+   "sub": "",
+   "description": "Guest floors, 24 keys.",
+   "rows": [
+    [
+     "Floors",
+     "6"
+    ],
+    [
+     "Keys",
+     "24"
+    ],
+    [
+     "Plate",
+     "14,040 sf"
+    ],
+    [
+     "Core",
+     "2,480 sf"
+    ],
+    [
+     "Efficiency",
+     "82.3 %"
+    ]
+   ],
+   "program": "HOTEL",
+   "box": [
+    31.1,
+    72.5,
+    3.7,
+    36.6
+   ],
+   "y": [
+    193.6077,
+    219.5
+   ],
+   "keys": [
+    "HOTEL",
+    "CIRCULATION",
+    "BOH",
+    "MEP"
+   ],
+   "plan": "assets/plans/PlanColor_L42-L47_v1.3.svg"
+  }
+ ]
+}
