@@ -8,7 +8,7 @@ Format: one section per tag, newest first. Site releases use `vMAJOR.MINOR.PATCH
 - Added `docs/prompts/Brad_GoDaddy_CNAME.md` (Claude app walkthrough for the S1 gate).
 - Plan v1.0 copied to `docs/_superseded/`.
 
-## plan-v1.0 — 2026-10-08
+## v0.1.0 — 2026-10-08
 
 - Placeholder page live: `index.html` (eyebrow, title, two title lines, "Site in progress.", `noindex`), `404.html`, `CNAME` (`arch575.bradmachado.com`), `.nojekyll`.
 - `css/style.css` vendored from `bradleymachado/bradleymachado.github.io` (main, 2026-10-08, 16,279 bytes); `css/app.css` created (header only).
