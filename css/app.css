@@ -112,6 +112,17 @@ html, body { height: 100%; }
   height: 100%;
 }
 
+/* Static fallback (js/tower.js): no WebGL or the GLB failed */
+#tower[hidden] { display: none; }
+
+.deck__tower-fallback {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
 /* --------------------------------------------------------------------------
    Title slide
    -------------------------------------------------------------------------- */

@@ -2,6 +2,14 @@
 
 Format: one section per tag, newest first. Site releases use `vMAJOR.MINOR.PATCH`; documentation milestones use `plan-vX.Y`.
 
+## v0.3.0 — 2026-10-08
+
+- 3D tower (S5): `js/tower.js` loads `assets/tower.glb` once with three.js 0.186.1 through an importmap in `index.html` (`three` → `./js/vendor/three.module.js`, `three/addons/` → `./js/vendor/addons/`); transparent `WebGLRenderer`, `PerspectiveCamera` fov 28, hemisphere + camera-parented directional light; GLB materials replaced by flat neutral greys (accent stays the only hue).
+- One accent `MeshStandardMaterial` box per level (plan box ± 0.5 in x/z, level y range, + 0.02 per face), only the active level visible; none on the title and site slides.
+- Camera: yaw 31.95° + 36° × level index (title/site use index 0), pitch −7.74°; on `deck.on('change')` the yaw (shortest path) and the look-at height (toward the active level, clamped so the whole tower stays in frame) tween over 900 ms ease-in-out-cubic; instant under `prefers-reduced-motion`; render on demand only. Fit over all yaws with 6 % padding; `ResizeObserver` on `#tower-wrap`.
+- Fallback: no WebGL or GLB failure → `assets/tower-fallback.png` (static render of slide 06) in the tower column plus a console warning; `#tower[hidden]` and `.deck__tower-fallback` rules in `css/app.css`.
+- `window.tower` debug API (`ready`, `status`, `yaw`, `targetY`, `yawFor`, `levels[].bounds`, `active`, `distance`, `clamp`, `show`).
+
 ## v0.2.0 — 2026-10-08
 
 - Page shell: `index.html` (running header with eyebrow + `nn / 12` counter, `<main class="deck">` with a persistent `<canvas id="tower">` wrapper, prev/next buttons, three `<template>`s), `css/app.css` (12-column grid, 72 px margins, text cols 1–3 / tower cols 4–6 / plan cols 7–12; title slide text cols 1–6 + tower cols 7–12; site image cols 1–8 + lines cols 9–12; < 900 px stacked scroll with the tower sticky at 40vh), `js/app.js` (renders 12 slides from `data/levels.json`, keys, buttons, swipe, hash `#01`…`#12`, fullscreen on `F`, reduced-motion, `IntersectionObserver` in scroll mode, `window.deck` API for `js/tower.js`).
