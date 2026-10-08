@@ -23,6 +23,8 @@ For Brad: <open items, or "none">
 6. For S10–S12 (reviewer comments, conditional): Cloudflare Account ID + API token saved as `C:\Users\User\Projects\arch575\_local\cf.env` before 22:00. Walkthrough: `docs/prompts/Brad_Cloudflare_Token.md`.
 7. Reviewer names: free text (default) unless you want a fixed list.
 8. After S12: scan the QR with your phone and send one test comment (S12 gate).
+9. Projector check: open the site, press `F`, confirm full screen, `Esc` (S6 row 6).
+10. Optional: hide prev/next buttons below 900 px (they cover the plan corner while scrolling); default keep.
 
 ## Copy status (S2 fills, S6 checks)
 
@@ -43,6 +45,43 @@ For Brad: <open items, or "none">
 | 13 | Level name "Holodeck" (L17) | unconfirmed |
 
 ---
+
+## 2026-10-08 16:51 · S6 Review · cs-exec-high (Opus 5.5, direct conversation) · STATUS: done (gated on copy confirmation)
+Measured: `tools/review_s6.py` (levels.json + headless-Edge `--dump-dom` of `_local/s6_check.html`, 1920×1080 frame stepped through all 12 slides): number diff **0 mismatches** (levels.json vs a literal copy of §1: labels, names, subs, programs, boxes, y ranges incl. `HOT_SPLIT` 193.6077, 23 rows, 8 programs, accent, orbit, camera; rendered DOM: 88 numbers on the 10 level slides, all from §1 or the `Fig. nn` / `1 in = 40 ft` / scale-bar furniture). `[BRACKETS]` on screen: 0. Computed styles over every element: chromatic colours only `#B0431F` and `#EFD9D2` (key swatch); five samples: header eyebrow `rgb(176,67,31)`, level label `rgb(23,23,21)`, first key swatch bg `rgb(176,67,31)`, data cell `rgb(23,23,21)`, figcaption `rgb(152,151,143)`, nav button `rgb(23,23,21)` on `rgb(252,252,250)`. Radius / shadow / gradient / non-left text on slides: 0 each. Plan SVGs: text + marker elements 0 in all 10; hues accent + tints only, except L18–L32 (`#7F8C99`, 40 hairline strokes 0.17 px, see row 18). L18–L32 NOSTOP: 6 `#F0F0F0` shaft fills with X, key row "Elevator, no stop". Phone deep-links (390×844 real frames): slide top 337–338 px = tower band bottom 338 px on #03 #04 #05 #08 #12. Live: `https://arch575.bradmachado.com/` 200 (Pages build `ac30770` = HEAD before this run, `https_enforced` true), `http://` 301 → https, unknown path 404; `https://bradmachado.com/` 200 title unchanged, `www` 301 → apex as before; `/about/` 200. `css/style.css` byte-identical to the main repo raw file. `Tower_LevelDeck_v1.7.pptx` present (121,432,756 bytes).
+
+Review table (handoff §9 = H, subdomain §9 = D, plan S6 extras = X):
+
+| # | Check | Result | Owner |
+|---|---|---|---|
+| 1 | H: HTTPS live; bradmachado.com and www unchanged | PASS | — |
+| 2 | H: title, site, 10 levels; tower 36°/level, accent highlight | PASS (S5 yaw values; 12 captures) | — |
+| 3 | H: plans from the saved model, no duplicate furniture | ASSIGNED | S8 (needs V14 v1.3 saved) |
+| 4 | H: every number matches §3/§1 | PASS (0 mismatches) | — |
+| 5 | H: Brad confirmed all copy | FAIL, blocks `v1.0.0` | Brad (13 lines, gate below) |
+| 6 | H: full screen on the projector | ASSIGNED (`F` needs a user gesture; not testable headless) | Brad |
+| 7 | H: works offline from the local folder | PASS (S5: only localhost + Google Fonts, fonts fail silently) | — |
+| 8 | H: usable on a phone | PASS (12 captures at 390×844; S4 no horizontal scroll) | — |
+| 9 | H: backup deck kept | PASS | — |
+| 10 | D: HTTPS with padlock | PASS | — |
+| 11 | D: §4 tokens and type, desktop + phone | PASS | — |
+| 12 | D: links to the main site absolute and resolve | PASS | — |
+| 13 | D: main-site link-in | ASSIGNED (D5: post-review, Brad approves) | S9 |
+| 14 | D: `CNAME`, `.nojekyll`, `404.html` present | PASS | — |
+| 15 | D: zero `[BRACKETED]` placeholders | PASS (0) | — |
+| 16 | D: report to Brad (repo, live URL, placeholders) | ASSIGNED | S7 |
+| 17 | X: tokens only | PASS | — |
+| 18 | X: accent is the only hue | PASS on page styles; L18–L32 plan has `#7F8C99` glass hairlines from `exec_office()` (`GLASS`), read as neutral grey at screen scale | S8 (`--nogen L1,L2` drops that generator; no hand edit of the generated SVG) |
+| 19 | X: flush-left type | PASS | — |
+| 20 | X: no callouts or arrows on plans | PASS (0 text/marker elements) | — |
+| 21 | X: plans grey, one accent program | PASS (accent + its two tints only; row 18 aside) | — |
+| 22 | X: hotel elevators never read as office circulation on L18–32 (NOSTOP) | PASS | — |
+| 23 | X: no `[BRACKETS]` on screen | PASS | — |
+
+Capture review (24 images viewed): no defects in the desktop set. Phone: the fixed prev/next buttons sit over the bottom-right corner of the plan while scrolling (S4 requires tap arrows, so not hidden; optional). First phone capture of #04 showed the B1 plan above L05; real-frame measurement aligned and the recapture with a longer virtual-time budget is clean (headless timing artifact, not a site defect).
+Outputs: `C:\Users\User\Projects\arch575\tools\review_s6.py` (commit `00dc154`, `review: fixes (none needed); S6 audit script`), gitignored `_local/s6_check.html`, `_local/s6_report.html`, `_local/s6_out.txt`. No tag (S6 has none), so no OneDrive mirror this run.
+Images: `<ROOT>\03_Design\05_Presentation\Web\Process\Arch575Site_S6_ReviewScript_v1.0.png` (environment: review-script output), `...\Process\Arch575Site_S6_Slide01_1920_v1.0.png` … `Slide12_1920_v1.0.png` and `...\Arch575Site_S6_Slide01_390_v1.0.png` … `Slide12_390_v1.0.png` (24 clean captures), `...\Arch575Site_S6_ContactSheet1920_v1.0.png`, `...\Arch575Site_S6_ContactSheet390_v1.0.png`.
+Deviations: (1) Executed by Opus 5.5 in a direct conversation; commit trailer names Opus 5.5 (the model that ran it) rather than Fable 5.1. (2) No one-line defects, so the `review: fixes` commit carries only the audit script. (3) Phone captures use the S4 wrapper `_local/s4_phone.html` cropped to 390×844 (Edge minimum window width). (4) The site photograph carries its own colour; it is image content, not a style, and was not counted in the hue audit.
+For Brad: (a) confirm or edit the 13 copy lines (gate); (b) on the projector: open the site, press `F`, check full screen, `Esc`; (c) optional: hide the prev/next buttons on phones (they cover the plan corner when scrolling); default is keep.
 
 ## 2026-10-08 16:45 · Plan revision v1.2 · Fable (strategy conversation) · STATUS: done
 Measured: Brad (16:30): reviewer comments on the slides, "add this in at the end if we have time". Added as conditional S10 Comment API (medium, 15 min) → S11 Phone Comments (high, 20 min) → S12 Presenter Overlay (top, 20 min), 55 min + buffer = 66; condition: `v1.0.0` live by 22:00 and `_local/cf.env` present; S12 accepted by 23:30 or Brad presents from the plain URL. Feature is inert without `?review=` / `?present=`, so partial work may stay on `main`.
