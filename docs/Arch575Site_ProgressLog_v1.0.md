@@ -32,7 +32,7 @@ For Brad: <open items, or "none">
 15. T6 plan fills: default no change tonight (full accent on the level's program).
 16. T8 model gaps: L34 west / perimeter deck has no model furniture; the 3D tower is the template GLB (TowerModel_GLB_v1.0), not a V14 export, so treat its massing as schematic.
 
-11. **Review notes for the build agent:** `docs/Arch575Site_ReviewNotes_v1.0.md` (tasks T1–T8, priority order). Read before the next subtask.
+11. **Review notes for the build agent:** `docs/Arch575Site_ReviewNotes_v1.1.md` (tasks T1–T9; T9 = 3D context sequence, priority above T5). Read before the next subtask.
 
 ## Copy status (S2 fills, S6 checks)
 
