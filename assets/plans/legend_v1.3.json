@@ -1,0 +1,68 @@
+{
+ "B1": [
+  "BOH",
+  "CIRCULATION",
+  "NOSTOP",
+  "MEP"
+ ],
+ "L05": [
+  "AMENITY",
+  "OUTDOOR",
+  "CIRCULATION",
+  "BOH",
+  "MEP"
+ ],
+ "L06-L15": [
+  "OFFICE",
+  "CIRCULATION",
+  "BOH",
+  "NOSTOP",
+  "MEP"
+ ],
+ "L16": [
+  "MEP",
+  "CIRCULATION",
+  "BOH",
+  "NOSTOP"
+ ],
+ "L17": [
+  "AMENITY",
+  "OUTDOOR",
+  "CIRCULATION",
+  "NOSTOP",
+  "BOH",
+  "MEP"
+ ],
+ "L18-L32": [
+  "OFFICE",
+  "CIRCULATION",
+  "NOSTOP",
+  "BOH",
+  "MEP"
+ ],
+ "L33": [
+  "MEP",
+  "CIRCULATION",
+  "NOSTOP",
+  "BOH"
+ ],
+ "L34": [
+  "AMENITY",
+  "OUTDOOR",
+  "CIRCULATION",
+  "BOH",
+  "MEP"
+ ],
+ "L35-L41": [
+  "CIRCULATION",
+  "BOH",
+  "HOTEL",
+  "MEP"
+ ],
+ "L42-L47": [
+  "CIRCULATION",
+  "BOH",
+  "HOTEL",
+  "MEP"
+ ]
+}
