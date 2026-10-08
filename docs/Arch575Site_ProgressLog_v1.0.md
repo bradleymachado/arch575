@@ -16,7 +16,7 @@ For Brad: <open items, or "none">
 ## For Brad (running list)
 
 1. Review time: confirmed Fri 2026-10-09 09:00.
-2. GoDaddy CNAME `arch575` → `bradleymachado.github.io` after the S1 gate.
+2. ~~GoDaddy CNAME `arch575` → `bradleymachado.github.io` after the S1 gate.~~ Done 2026-10-08; HTTPS enforced, live.
 3. Confirm or edit the 13 copy lines (S2 lists them here).
 4. Save `Core_Tower_V14_v1.3.3dm` (triggers S8).
 5. Pink area on Office 2 = SV-4 + lobby as back of house: confirm.
@@ -38,6 +38,13 @@ Outputs: `docs/Arch575Site_Plan_v1.1.md` (v1.0 in `docs/_superseded/`), `docs/pr
 Images: none.
 Deviations: none.
 For Brad: run the GoDaddy walkthrough prompt in the Claude app as soon as S1 reports the custom domain is set.
+
+## 2026-10-08 12:40 · S1 gate cleared (GoDaddy CNAME) · Brad + Fable · STATUS: done
+Measured: Brad added CNAME `arch575` → `bradleymachado.github.io` at GoDaddy; `nslookup arch575.bradmachado.com` → 185.199.108–111.153 (+ IPv6 2606:50c0:8000–8003::153), alias confirmed. `gh api repos/bradleymachado/arch575/pages` → `https_enforced: true`, `protected_domain_state: verified`, status `built`. `https://arch575.bradmachado.com/` → 200, title `West Loop Gateway — Brad Machado`; `http://` → 301 to https; unknown path → 404 (custom page). `https://bradmachado.com` → 200, title unchanged; `www` → 301 as before. Brad confirmed the four apex A records, `www` CNAME, TXT challenge, and the `era` CNAME untouched.
+Outputs: this entry; running-list item 2 closed.
+Images: `<ROOT>\03_Design\05_Presentation\Web\Process\Arch575Site_S1_LiveHTTPS_v1.0.png` (live site over HTTPS, headless Edge 1920×1080).
+Deviations: Brad ticked Enforce HTTPS himself during the gate, so S7 step 2 is already satisfied (keep the check, skip the PUT).
+For Brad: none for S1. S2 and S3 proceed; S7 no longer waits on DNS.
 
 ## 2026-10-08 12:25 · S1 Repo Scaffold · cs-exec-medium · STATUS: done (gated on GoDaddy CNAME)
 Measured: `gh api repos/bradleymachado/arch575/pages` → `cname: arch575.bradmachado.com`, `build_type: legacy`, `source: main /`, `protected_domain_state: verified`, `https_enforced: false`, `custom_404: true`, status `built` (latest build commit `aa5c15e`, error null). `https://bradleymachado.github.io/arch575/` → 301 → `http://arch575.bradmachado.com/` (redirect to the custom domain, as the acceptance check allows). `nslookup arch575.bradmachado.com` → no record (expected; DNS is Brad's gate step). `https://bradmachado.com` → 200, untouched. `css/style.css` vendored 16,279 bytes from the main repo raw URL. Local preview `python -m http.server 8000`: `/`, `/css/style.css`, `/404.html` all 200. `[BRACKETS]` on the placeholder: 0 (bracket count on `index.html` and `404.html` = 0).
