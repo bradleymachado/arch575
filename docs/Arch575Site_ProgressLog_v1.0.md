@@ -26,6 +26,12 @@ For Brad: <open items, or "none">
 9. Projector check: open the site, press `F`, confirm full screen, `Esc` (S6 row 6).
 10. Optional: hide prev/next buttons below 900 px (they cover the plan corner while scrolling); default keep.
 
+12. Copy gate now 18 rows (table below): L16/L33 carry the review's proposed wording; rows 14–18 are the new story slides. Reply "all confirmed" or row + wording; edits go in `data/story.json` / deck script v1.4.
+13. L05 area: table 35,143 sf (plan title, 157 × 224) vs model slab boundary 45,720 sf (polygon includes the terraces). Keep 35,143 (default) or say which.
+14. T5 interior views over Google Earth: not started; needs the Rhino MCP (camera + ViewCaptureToFile), which the build session did not have.
+15. T6 plan fills: default no change tonight (full accent on the level's program).
+16. T8 model gaps: L34 west / perimeter deck has no model furniture; the 3D tower is the template GLB (TowerModel_GLB_v1.0), not a V14 export, so treat its massing as schematic.
+
 11. **Review notes for the build agent:** `docs/Arch575Site_ReviewNotes_v1.0.md` (tasks T1–T8, priority order). Read before the next subtask.
 
 ## Copy status (S2 fills, S6 checks)
@@ -37,16 +43,28 @@ For Brad: <open items, or "none">
 | 3 | B1 Basement, Plant: "Building plant and services below the podium." | unconfirmed |
 | 4 | L05 Function, + Conference: "Ballroom, boardrooms and event terraces." | unconfirmed |
 | 5 | L06–15 Office 1, Typical: "Open floor plate around a central core." | unconfirmed |
-| 6 | L16 Mechanical 1: "Fan rooms and heat exchangers." | unconfirmed |
+| 6 | L16 Mechanical 1: "Transfer and booster pumps." (was "Fan rooms and heat exchangers."; review T1) | unconfirmed (new wording) |
 | 7 | L17 Holodeck: "Spa, pilates, juice bar and coworking." | unconfirmed |
 | 8 | L18–32 Office 2, Executive: "Window suites, associates and front desk." | unconfirmed |
-| 9 | L33 Mechanical 2: "Substation, water and cooling towers." | unconfirmed |
+| 9 | L33 Mechanical 2: "Transfer and booster pumps; rooftop-bound systems." (was "Substation, water and cooling towers."; review T1) | unconfirmed (new wording) |
 | 10 | L34 Hotel Clubhouse, + Pool: "Cafe bar, lounge and pool deck." | unconfirmed |
 | 11 | L35–41 Hotel A: "Guest floors, 23 keys." | unconfirmed |
 | 12 | L42–47 Hotel B: "Guest floors, 24 keys." | unconfirmed |
 | 13 | Level name "Holodeck" (L17) | unconfirmed |
+| 14 | Thesis heading: "The gateway lot from the Loop into Fulton Market." (MidReview plan D5) | unconfirmed |
+| 15 | Thesis lines: "Class A+ amenity-driven office: coworking, outdoor floors, the L17 spa, pilates and juice bar." / "The ground feeds Restaurant Row: two Randolph restaurants, a bar, a patio over Randolph." / "A convention center on the podium." / "The hotel diversifies income." (D5) | unconfirmed |
+| 16 | Stacking heading: "Office below, hotel above." + table labels (Office 1 · L06–15, Office 2 · L18–32, Office total, Office target, Hotel · L35–47) | unconfirmed |
+| 17 | Ground floor heading: "One grand lobby." + lines "Hotel entrance on Halsted, with the drop-off." / "Office entrance on Washington." / "The office rises at once to a mezzanine for its banks and turnstiles." / "The hotel stays at grade to its cars." (D6) | unconfirmed |
+| 18 | Massing slides: "From the southwest", "From the north-northeast" (10/05 placeholder views, greyscale; keep or drop) | unconfirmed |
 
 ---
+
+## 2026-10-08 17:45 · S7 Deploy Log + review notes T1–T8 · Opus 5.5 (direct conversation, Brad: "execute these yourself continuously") · STATUS: partial (v1.0.0 not tagged: copy gate open)
+Measured: pulled `f83debe`/`0c3a195`/`87e9d33` (S8 + review notes from other sessions) before any change. T1: L16/L33 descriptions set to the review's proposed wording via new `<ROOT>_Analysis_Tools\MidReview_LevelDeck_v1.4.py` (build_levels reads it); pending Brad. T2: V14 v1.3 read-only with rhino3dm: `RVT_V13::01_Floors` slab boundaries B1 43,378.2 · L05 45,720.0 · Office 1 / L16 39,930.4 · L17 25,202.5 · Office 2 / L33 28,577.8 · L34 11,760.0 · hotel 14,040.0 sf; plan-title core values identical to v1.2 (6,386 / 4,466 / 2,480); every table value unchanged except the open L05 question (title 35,143 vs boundary 45,720 incl. terraces, For Brad 13). T3: 13 px counter / data labels / key labels / scale text / captions, labels and captions muted; north mark moved clear of the scale label. T4: 6 story slides from `data/story.json` (Thesis, Stacking, Ground floor before the levels; 2 greyscale massing views and a closing title after): deck 18 slides; no L01–L04 plan exists in the model, so the ground floor is a text slide (D6) and no podium plan was drawn. T6: default, no change. T7: `<ROOT>_Design_Presentation\Tower_LevelDeck_v1.8.pptx` (12 slides, 121,302,318 bytes; v1.4 plans as PNG in `...\MidReview\PlanFurnished_V14_v1.4_nogenVW_png\`, oxide accent, outdoor tint #EFD9D2); v1.7 kept; not opened in PowerPoint. `tools/review_s6.py`: ALL PASS (0 number mismatches over 88 rendered numbers, 0 brackets, hues accent + tints only, glass-hue row 18 of S6 cleared by the v1.4 plans, 390 px scrollWidth = clientWidth on slides 04 06 11 16 18). Live: Pages build `1e5e48a` built; `https://arch575.bradmachado.com/` 200, `data/story.json` 200; `https_enforced` true; nslookup alias + 185.199.108–111.153; `https://bradmachado.com/` 200 title unchanged, `www` 301 → apex as before.
+Outputs: commits `6413571` (T1/T3), `1e5e48a` (T4), this `docs:` commit; `data/story.json`, `assets/story/massing-sw.jpg`, `massing-nne.jpg`, `index.html` (`tpl-text`), `js/app.js` (kinds `text`/`image`, optional story fetch), `css/app.css`, `CHANGELOG.md` (Unreleased section); `<ROOT>_Analysis_Tools\MidReview_LevelDeck_v1.4.py`. Mirrors and PROJECT_LOG entry below. No tag: `v1.0.0` waits for the copy gate (18 rows).
+Images: `<ROOT>_Design_Presentation\Web\Process\Arch575Site_T3_Slide06_*`, `..._T3_Slide08_*` (1920 + 390), `..._T4_Slide{01,03,04,05,06,16,17,18}_{1920,390}_v1.0.png`, `..._S7_Live03_1920_v1.0.png`, `..._S7_Live11_1920_v1.0.png` (live site).
+Deviations: (1) copy treated as "not yet confirmed": site deployed (every push to main deploys) but untagged. (2) T5 not run (no Rhino MCP in this session). (3) S10–S12 skipped: `_local/cf.env` absent at 17:45; S8 already done by another session. (4) The S11/S12 prompts assume 12 slides; with story.json the deck has 18 (review mode would need `nn / 19`).
+For Brad: running-list items 12–16.
 
 ## 2026-10-08 17:20 · S8 Plans v1.3 Model · Opus 5.5 (direct conversation) · STATUS: done
 Measured: `Core_Tower_V14_v1.3.3dm` written 17:07 (33,987 objects) via Rhino MCP save_doc. `Core_V13_PlanFurnished_v1.3.py --nogen L1,L2` first pass: L06-L15 and L18-L32 keys gained HOTEL + AMENITY (exec offices named SUITE / unmatched fell to HOTEL / AMENITY grey) and L17 / L34 showed generated terrace furniture over the model fit-out. Fix: `Core_V13_PlanFurnished_v1.4.py` (L1/L2 rooms -> OFFICE; VERSION v1.4) run with `--nogen L1,L2,V,W`: 10 SVGs, legend keys per level equal to v1.3 (scripted), no duplicate furniture on L06-L15, L17, L18-L32, L34 (visual), L34 pool fill present. Plate / core table values not recomputed (still from LevelDeck v1.3). Live `data/levels.json` serves v1.4 paths.
