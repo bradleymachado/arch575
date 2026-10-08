@@ -20,6 +20,9 @@ For Brad: <open items, or "none">
 3. Confirm or edit the 13 copy lines (S2 lists them here).
 4. Save `Core_Tower_V14_v1.3.3dm` (triggers S8).
 5. Pink area on Office 2 = SV-4 + lobby as back of house: confirm.
+6. For S10–S12 (reviewer comments, conditional): Cloudflare Account ID + API token saved as `C:\Users\User\Projects\arch575\_local\cf.env` before 22:00. Walkthrough: `docs/prompts/Brad_Cloudflare_Token.md`.
+7. Reviewer names: free text (default) unless you want a fixed list.
+8. After S12: scan the QR with your phone and send one test comment (S12 gate).
 
 ## Copy status (S2 fills, S6 checks)
 
@@ -40,6 +43,13 @@ For Brad: <open items, or "none">
 | 13 | Level name "Holodeck" (L17) | unconfirmed |
 
 ---
+
+## 2026-10-08 16:45 · Plan revision v1.2 · Fable (strategy conversation) · STATUS: done
+Measured: Brad (16:30): reviewer comments on the slides, "add this in at the end if we have time". Added as conditional S10 Comment API (medium, 15 min) → S11 Phone Comments (high, 20 min) → S12 Presenter Overlay (top, 20 min), 55 min + buffer = 66; condition: `v1.0.0` live by 22:00 and `_local/cf.env` present; S12 accepted by 23:30 or Brad presents from the plain URL. Feature is inert without `?review=` / `?present=`, so partial work may stay on `main`.
+Outputs: `docs/Arch575Site_Plan_v1.2.md` (v1.1 in `docs/_superseded/`), `docs/prompts/S10_CommentAPI.md`, `S11_PhoneComments.md`, `S12_PresenterOverlay.md`, `Brad_Cloudflare_Token.md`; S0–S9 prompts regenerated (plan path v1.2; S7 handoff conditional); CHANGELOG `plan-v1.2`; tag `plan-v1.2`; mirrors in `<ROOT>\03_Design\05_Presentation\Web\` (plan .md + .pdf, log, `Arch575Site_CloudflarePrompt_v1.0.md`).
+Images: none.
+Deviations: none.
+For Brad: (6) Cloudflare Account ID + API token into `_local\cf.env` before 22:00 (walkthrough prompt above); (7) reviewer names free text unless you say otherwise; (8) after S12, scan the QR and send a test comment.
 
 ## 2026-10-08 16:30 · S5 3D Tower · cs-exec-top · STATUS: done
 Measured: acceptance harness `_local/s5_check.html` (headless Edge 1920×1080, 1280×720 frame of `index.html`, scripted): 12/12 PASS. Yaw per slide (`tower.yawFor`, instant path): 01 31.95 (title) · 02 31.95 (site) · 03 31.95 B1 · 04 67.95 L05 · 05 103.95 L06–15 · 06 139.95 L16 · 07 175.95 L17 · 08 211.95 L18–32 · 09 247.95 L33 · 10 283.95 L34 · 11 319.95 L35–41 · 12 355.95 L42–47; the nine consecutive differences all 36.00. Highlight bounds (box ± 0.5, level y): B1 x −0.5–98.3 z −0.5–63.9 y −5–0 · L05 x 7.4–98.3 z −0.2–40.4 y 17.5–23.2 · L06–L15 same x/z, y 23.8–77.9 · L16 y 77.9–80.4 · L17 y 80.4–82.8 · L18–L32 x 27.2–98.3 z −0.2–40.4 y 83.4–158.5 · L33 y 158.5–161 · L34 y 161–163.4 · L35–L41 x 30.6–73 z 3.2–37.1 y 164–193.6077 · L42–L47 y 193.6077–219.5; each mesh = bounds + 0.02 on every face (z-fight offset); only the active box visible on 03–12, none on 01–02. First paint 488 ms, first-contentful-paint 488 ms, GLB in the scene at 620 ms from navigation start (earlier runs 352–448 ms / 530–931 ms); `tower.glb` fetched once, 11,108,308 bytes in 107–112 ms. Network hosts: `localhost:8000` and `fonts.googleapis.com` only; 5 vendor files local. Console (Edge `--enable-logging=stderr --v=1`) across the slide 01/03/06/10 captures: 0 lines; the no-WebGL run (`--disable-gpu --disable-software-rasterizer`) logs exactly one warning, `tower: WebGL is not available; showing assets/tower-fallback.png`, and the capture shows the static image in the tower column. Camera fit (all yaws, pitch −7.74°, 6 % padding each side): level-slide canvas 426×928 at 1920×1080 → distance 597.7, look-at clamp 109.7–115.1; 266×568 in the 1280 frame → 574.2, clamp 100.7–109.7. Tween (`_local/s5_tween.html`, top-level page, real-time headless, reduced-motion forced off): 01→02 levels yaw 32.12 @111 ms · 34.04 @223 · 38.05 @335 · 48.57 @447 · 58.11 @559 · 65.12 @671 · 67.63 @783 · 67.95 @894 then steady (mid-tween target 49.95 at 450 ms); look-at eases 109.8 → 115.1 (clamp max) on level 10; 12→01 takes the short path 355.95 → 375.40 @450 ms → 31.95 (+36°, not −324°); no drift after settling (600 ms). Fallback image `assets/tower-fallback.png` 742×1448, 33,900 bytes: headless render of the loaded tower at slide 06 (L16 highlighted, 1200×1600 window) cropped to content + 4 % margin on `#FCFCFA`.

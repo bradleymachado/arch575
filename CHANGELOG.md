@@ -2,6 +2,12 @@
 
 Format: one section per tag, newest first. Site releases use `vMAJOR.MINOR.PATCH`; documentation milestones use `plan-vX.Y`.
 
+## plan-v1.2 — 2026-10-08
+
+- Reviewer comments added as conditional subtasks S10 Comment API (Opus medium), S11 Phone Comments (Opus high), S12 Presenter Overlay (Fable): Cloudflare Worker + KV, phone comment/sketch layer, presenter overlay with a 13th Comments slide. Run only if `v1.0.0` is live by 22:00 and Brad supplies a Cloudflare API token (`_local/cf.env`, gitignored).
+- Prompts regenerated against plan v1.2; new `docs/prompts/S10_CommentAPI.md`, `S11_PhoneComments.md`, `S12_PresenterOverlay.md`, `Brad_Cloudflare_Token.md`. S7's handoff is now conditional (S10 or S8).
+- Tags `v1.1.0` / `v1.2.0` go to S8 and S10–S12 in the order they ship. Plan v1.1 copied to `docs/_superseded/`.
+
 ## v0.3.0 — 2026-10-08
 
 - 3D tower (S5): `js/tower.js` loads `assets/tower.glb` once with three.js 0.186.1 through an importmap in `index.html` (`three` → `./js/vendor/three.module.js`, `three/addons/` → `./js/vendor/addons/`); transparent `WebGLRenderer`, `PerspectiveCamera` fov 28, hemisphere + camera-parented directional light; GLB materials replaced by flat neutral greys (accent stays the only hue).
