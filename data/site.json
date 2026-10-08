@@ -390,5 +390,162 @@
       2093.35
     ]
   },
-  "attribution": "Map data © OpenStreetMap contributors"
+  "attribution": "Map data © OpenStreetMap contributors",
+  "siteGlb": {
+    "file": "assets/site.glb",
+    "bytes": 6616512,
+    "units": "m",
+    "up": "y",
+    "rootRotation": [
+      -0.7071067811865476,
+      0.0,
+      0.0,
+      0.7071067811865476
+    ],
+    "origin": "site-model (0, 0, 0) ft",
+    "groups": [
+      "buildings",
+      "TERRAIN_MESH",
+      "Bridges",
+      "Roads",
+      "Site"
+    ],
+    "faces": {
+      "buildings": 4286,
+      "TERRAIN_MESH": 1039,
+      "Bridges": 231059,
+      "Roads": 3795,
+      "Site": 52
+    },
+    "facesTotal": 240231,
+    "vertices": {
+      "buildings": 6913,
+      "TERRAIN_MESH": 633,
+      "Bridges": 299613,
+      "Roads": 3560,
+      "Site": 104
+    },
+    "colours": {
+      "buildings": "#B5B5B5",
+      "TERRAIN_MESH": "#F2F2F0",
+      "Bridges": "#D9D9D9",
+      "Roads": "#E4E4E2",
+      "Site": "#9A9A9A"
+    },
+    "extentFt": [
+      [
+        146.28,
+        226.95,
+        -44.38
+      ],
+      [
+        2381.74,
+        2022.05,
+        484.61
+      ]
+    ],
+    "extentM": [
+      [
+        44.586,
+        69.174,
+        -13.527
+      ],
+      [
+        725.954,
+        616.321,
+        147.709
+      ]
+    ],
+    "removedBuildingIds": [],
+    "removedCount": 0,
+    "excludedLayers": [
+      "Earth (Google 3D Tiles)",
+      "Setup::*",
+      "TPX_TERRAIN",
+      "Rail"
+    ],
+    "decimated": false
+  },
+  "towerOffset": [
+    466.993,
+    1.594,
+    -402.268
+  ],
+  "towerYawDeg": -89.0143,
+  "towerPlacement": {
+    "rule": "F_POD (tower GLB x 0..97.84 m N-S, x = 0 north; z 0..63.40 m, z = 0 east) centred on the Site polycurve's minimum-area rectangle; tower origin in site.glb scene metres = towerOffset; tower rotation.y = towerYawDeg; the context is moved by the inverse so the tower stays at the origin",
+    "siteRectFt": [
+      340.33,
+      197.7
+    ],
+    "siteRectCentreFt": [
+      1430.9,
+      1157.51
+    ],
+    "siteRectAngleDeg": 0.9857,
+    "groundFt": 5.23,
+    "fPodCornersModelFt": [
+      [
+        1532.13,
+        1319.78
+      ],
+      [
+        1537.65,
+        998.82
+      ],
+      [
+        1329.68,
+        995.24
+      ],
+      [
+        1324.16,
+        1316.2
+      ]
+    ],
+    "fPodInsideSite": false,
+    "fPodCornerOverhangM": [
+      1.605,
+      1.569,
+      2.282,
+      27.355
+    ],
+    "podiumCrossCheck": {
+      "PODIUM_SITE_LINE_SCHEME4": {
+        "sizeFt": [
+          200.0,
+          330.0
+        ],
+        "outerEdgeDistM": {
+          "north": 1.372,
+          "south": 1.372,
+          "east": 1.219,
+          "west": 1.219
+        },
+        "edgeMaxDistM": {
+          "north": 24.475,
+          "south": 1.372,
+          "east": 1.219,
+          "west": 24.475
+        }
+      },
+      "PODIUM_SLAB_EDGE_SCHEME4": {
+        "sizeFt": [
+          195.0,
+          325.0
+        ],
+        "outerEdgeDistM": {
+          "north": 0.61,
+          "south": 0.61,
+          "east": 1.981,
+          "west": 1.981
+        },
+        "edgeMaxDistM": {
+          "north": 24.841,
+          "south": 1.981,
+          "east": 1.981,
+          "west": 24.841
+        }
+      }
+    }
+  }
 }
