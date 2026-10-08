@@ -15,7 +15,7 @@ For Brad: <open items, or "none">
 
 ## For Brad (running list)
 
-1. Review time Fri 2026-10-09 `[BRAD TO CONFIRM]`.
+1. Review time: confirmed Fri 2026-10-09 09:00.
 2. GoDaddy CNAME `arch575` → `bradleymachado.github.io` after the S1 gate.
 3. Confirm or edit the 13 copy lines (S2 lists them here).
 4. Save `Core_Tower_V14_v1.3.3dm` (triggers S8).
@@ -31,6 +31,13 @@ For Brad: <open items, or "none">
 | 13 | Level name "Holodeck" (L17) | unconfirmed |
 
 ---
+
+## 2026-10-08 · Plan revision v1.1 · Fable (strategy conversation) · STATUS: done
+Measured: review time confirmed by Brad = Fri 2026-10-09 09:00. Live target moved to tonight 23:00 (hard limit Thu 07:30); S6–S7 move to tonight.
+Outputs: `docs/Arch575Site_Plan_v1.1.md` (v1.0 in `docs/_superseded/`), `docs/prompts/Brad_GoDaddy_CNAME.md`, CHANGELOG `plan-v1.1`; mirrors in `<ROOT>\03_Design\05_Presentation\Web\` (.md + .pdf).
+Images: none.
+Deviations: none.
+For Brad: run the GoDaddy walkthrough prompt in the Claude app as soon as S1 reports the custom domain is set.
 
 ## 2026-10-08 12:04 · S0 Env Check · cs-exec-lite · STATUS: done
 Measured: Python 3.10.11 · imports rhino3dm 8.35.0, matplotlib 3.10.9, markdown 3.10.3, python-pptx 1.0.2 → `ok` · git 2.55.0.windows.5 · `gh auth status` logged in as `bradleymachado` (keyring; scopes gist, read:org, repo, workflow) · `gh repo view bradleymachado/arch575` PUBLIC, default branch `main` · `nslookup arch575.bradmachado.com` → Non-existent domain (expected). GLB `TowerModel_GLB_v1.0.glb` 11,108,308 bytes, glTF 2.0, Microsoft GLTF Exporter 2.8.3.97: nodes 26, meshes 12, primitives 12, materials 5, accessors 43, vertices 1,878; root node rotation `[-0.7071, 0, 0, 0.7071]` (z-up source → y-up scene); world-space POSITION extents x 0.000–97.841, y 0.000–219.456, z 0.000–63.398 (consistent with §1: x 0–98, y ≈ 220, z 0–63; y up). Raw accessor values are mesh-local and scaled; only the world-space figures compare to §1. Headless Edge: `https://bradmachado.com` → 1920×1080 PNG, 677,680 bytes.
