@@ -26,6 +26,8 @@ For Brad: <open items, or "none">
 9. Projector check: open the site, press `F`, confirm full screen, `Esc` (S6 row 6).
 10. Optional: hide prev/next buttons below 900 px (they cover the plan corner while scrolling); default keep.
 
+11. **Review notes for the build agent:** `docs/Arch575Site_ReviewNotes_v1.0.md` (tasks T1–T8, priority order). Read before the next subtask.
+
 ## Copy status (S2 fills, S6 checks)
 
 | # | Line | Status |
