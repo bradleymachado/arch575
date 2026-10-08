@@ -2,6 +2,12 @@
 
 Format: one section per tag, newest first. Site releases use `vMAJOR.MINOR.PATCH`; documentation milestones use `plan-vX.Y`.
 
+## plan-v1.3 — 2026-10-08
+
+- Entry intro added as S13 Map Data (Opus high: OpenStreetMap download, geo-registration of the site model by OSM way ids, monochrome city and corridor SVGs), S14 Site GLB (Opus high: site context GLB from `02_Site/Arch575_BlenderSite_RhinoModel_v2.0.3dm`, tower placement) and S15 Intro Sequence (Fable: map zoom to Chicago scale, grey-out with the Randolph corridor in accent, zoom to the corridor, cross-fade to a top-down 3D view, descent to the title camera). Runs right after S7; the reviewer comments (S10–S12) now wait for S15.
+- Site model moved from `Downloads\Site (1).3dm` to `02_Site\Arch575_BlenderSite_RhinoModel_v2.0.3dm` (168,187,546 bytes). Google 3D Tiles layer excluded from the website.
+- Prompts regenerated against plan v1.3; new `S13_MapData.md`, `S14_SiteGLB.md`, `S15_IntroSequence.md`; S7 hands off to S13; S15's handoff is conditional (S10 or S8). Plan v1.2 copied to `docs/_superseded/`.
+
 ## Unreleased (v1.0.0 candidate, awaiting copy confirmation) — 2026-10-08
 
 - Story slides (review T4): `data/story.json` (optional; without it the deck is the 12-slide build). Intro after the site slide: Thesis, Stacking (office 827,970 sf vs 812,500 sf target, 305 keys), Ground floor; outro after the levels: two massing views (greyscale copies of the 10/05 placeholders in `assets/story/`) and a closing slide repeating the title. Deck now 18 slides. New `tpl-text`, slide kinds `text` and `image` in `js/app.js`; tower shows on text slides (cols 7–12, no highlight), hidden on image slides.
