@@ -18,7 +18,7 @@ For Brad: <open items, or "none">
 1. Review time: confirmed Fri 2026-10-09 09:00.
 2. ~~GoDaddy CNAME `arch575` → `bradleymachado.github.io` after the S1 gate.~~ Done 2026-10-08; HTTPS enforced, live.
 3. Confirm or edit the 13 copy lines (S2 lists them here).
-4. Save `Core_Tower_V14_v1.3.3dm` (triggers S8).
+4. ~~Save `Core_Tower_V14_v1.3.3dm` (triggers S8).~~ Saved 17:07 by Claude via the Rhino MCP; S8 done as v0.4.0.
 5. Pink area on Office 2 = SV-4 + lobby as back of house: confirm.
 6. For S10–S12 (reviewer comments, conditional): Cloudflare Account ID + API token saved as `C:\Users\User\Projects\arch575\_local\cf.env` before 22:00. Walkthrough: `docs/prompts/Brad_Cloudflare_Token.md`.
 7. Reviewer names: free text (default) unless you want a fixed list.
@@ -45,6 +45,12 @@ For Brad: <open items, or "none">
 | 13 | Level name "Holodeck" (L17) | unconfirmed |
 
 ---
+
+## 2026-10-08 17:20 · S8 Plans v1.3 Model · Opus 5.5 (direct conversation) · STATUS: done
+Measured: `Core_Tower_V14_v1.3.3dm` written 17:07 (33,987 objects) via Rhino MCP save_doc. `Core_V13_PlanFurnished_v1.3.py --nogen L1,L2` first pass: L06-L15 and L18-L32 keys gained HOTEL + AMENITY (exec offices named SUITE / unmatched fell to HOTEL / AMENITY grey) and L17 / L34 showed generated terrace furniture over the model fit-out. Fix: `Core_V13_PlanFurnished_v1.4.py` (L1/L2 rooms -> OFFICE; VERSION v1.4) run with `--nogen L1,L2,V,W`: 10 SVGs, legend keys per level equal to v1.3 (scripted), no duplicate furniture on L06-L15, L17, L18-L32, L34 (visual), L34 pool fill present. Plate / core table values not recomputed (still from LevelDeck v1.3). Live `data/levels.json` serves v1.4 paths.
+Outputs: `<ROOT>\05_Analysis_Tools\Core_V13_PlanFurnished_v1.4.py`; `<ROOT>\03_Design\05_Presentation\MidReview\PlanFurnished_V14_v1.4_nogenVW\` (used), `...\PlanFurnished_V14_v1.3b\` and `...\PlanFurnished_V14_v1.4\` (intermediate passes); repo `assets/plans/*_v1.4.svg`, `legend_v1.4.json`, `data/levels.json`, `tools/build_levels.py`, `tools/Core_V13_PlanFurnished_v1.4.py`, CHANGELOG v0.4.0; commit f83debe. No tag (v1.0.0 still gated on copy).
+Deviations: run from a cloud clone, not C:\Users\User\Projects\arch575 - that local clone must `git pull` before the next subtask. L34 west / perimeter deck has no model furniture with generators off.
+For Brad: none blocking.
 
 ## 2026-10-08 16:51 · S6 Review · cs-exec-high (Opus 5.5, direct conversation) · STATUS: done (gated on copy confirmation)
 Measured: `tools/review_s6.py` (levels.json + headless-Edge `--dump-dom` of `_local/s6_check.html`, 1920×1080 frame stepped through all 12 slides): number diff **0 mismatches** (levels.json vs a literal copy of §1: labels, names, subs, programs, boxes, y ranges incl. `HOT_SPLIT` 193.6077, 23 rows, 8 programs, accent, orbit, camera; rendered DOM: 88 numbers on the 10 level slides, all from §1 or the `Fig. nn` / `1 in = 40 ft` / scale-bar furniture). `[BRACKETS]` on screen: 0. Computed styles over every element: chromatic colours only `#B0431F` and `#EFD9D2` (key swatch); five samples: header eyebrow `rgb(176,67,31)`, level label `rgb(23,23,21)`, first key swatch bg `rgb(176,67,31)`, data cell `rgb(23,23,21)`, figcaption `rgb(152,151,143)`, nav button `rgb(23,23,21)` on `rgb(252,252,250)`. Radius / shadow / gradient / non-left text on slides: 0 each. Plan SVGs: text + marker elements 0 in all 10; hues accent + tints only, except L18–L32 (`#7F8C99`, 40 hairline strokes 0.17 px, see row 18). L18–L32 NOSTOP: 6 `#F0F0F0` shaft fills with X, key row "Elevator, no stop". Phone deep-links (390×844 real frames): slide top 337–338 px = tower band bottom 338 px on #03 #04 #05 #08 #12. Live: `https://arch575.bradmachado.com/` 200 (Pages build `ac30770` = HEAD before this run, `https_enforced` true), `http://` 301 → https, unknown path 404; `https://bradmachado.com/` 200 title unchanged, `www` 301 → apex as before; `/about/` 200. `css/style.css` byte-identical to the main repo raw file. `Tower_LevelDeck_v1.7.pptx` present (121,432,756 bytes).
