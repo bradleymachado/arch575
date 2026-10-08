@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """build_levels.py - emit data/levels.json for arch575.bradmachado.com from the deck script's LEVELS table.
 
-Content source: <ROOT>\\05_Analysis_Tools\\MidReview_LevelDeck_v1.3.py (LEVELS, PROG, KEY_ORDER), loaded with importlib.
+Content source: <ROOT>\\05_Analysis_Tools\\MidReview_LevelDeck_v1.4.py (LEVELS, PROG, KEY_ORDER), loaded with importlib.
 It imports MidReview_LevelDeck_v1.2.py (F_OFF1/F_OFF2/F_HOT/F_POD/HOT_SPLIT/ORBIT) and python-pptx, so run from a
 Python that has python-pptx, lxml and Pillow (3.10.11 on this machine).
 Legend: <ROOT>\\03_Design\\05_Presentation\\MidReview\\PlanFurnished_V14_v1.2\\legend_v1.2.json (keys per level).
@@ -13,7 +13,7 @@ Usage (from the repo root):  python tools/build_levels.py [--no-assets]
 import sys, os, json, shutil, importlib.util
 
 ROOT = r"C:\Users\User\OneDrive - University of Illinois - Urbana\Architecture\2026 Fall - Arch 575"
-DECK = os.path.join(ROOT, r"05_Analysis_Tools\MidReview_LevelDeck_v1.3.py")
+DECK = os.path.join(ROOT, r"05_Analysis_Tools\MidReview_LevelDeck_v1.4.py")
 LEGEND = os.path.join(ROOT, r"03_Design\05_Presentation\MidReview\PlanFurnished_V14_v1.2\legend_v1.2.json")
 GLB = os.path.join(ROOT, r"03_Design\05_Presentation\Web\Assets\TowerModel_GLB_v1.0.glb")
 SITE = os.path.join(ROOT, r"03_Design\05_Presentation\TechReport1_Process\TR1_v2_cover_ssw.jpg")

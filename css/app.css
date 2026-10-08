@@ -45,7 +45,7 @@ html, body { height: 100%; }
 
 .deck-header__count {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 0.16em;
   color: var(--color-muted);
   font-variant-numeric: tabular-nums;
@@ -233,11 +233,11 @@ html, body { height: 100%; }
   width: 50%;
   text-align: left;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.16em;
-  color: var(--color-faint);
+  color: var(--color-muted);
   padding: 9px 0 8px;
   vertical-align: baseline;
 }
@@ -273,7 +273,7 @@ html, body { height: 100%; }
 
 .key__label {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--color-muted);
@@ -319,13 +319,13 @@ html, body { height: 100%; }
 
 .plan__scale text {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 13px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  fill: var(--color-faint);
+  fill: var(--color-muted);
 }
 
-.slide figcaption { margin-top: 8px; }
+.slide figcaption { margin-top: 8px; font-size: 13px; color: var(--color-muted); }   /* projector legibility (review T3) */
 
 /* --------------------------------------------------------------------------
    Prev / next buttons, bottom right

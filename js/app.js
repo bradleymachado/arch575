@@ -233,7 +233,7 @@ function updateScale(fig) {
   const ft = SCALE_STEPS.find((f) => f * pxPerFt <= maxPx) ?? SCALE_STEPS[SCALE_STEPS.length - 1];
   const L = Math.round(ft * pxPerFt);
   const y = 16;
-  const nx = L + 72;
+  const nx = L + 92;              // clears the 13 px "200 ft" label
   const w = Math.max(boxW, nx + 40);
   svg.setAttribute('viewBox', `0 0 ${w} 24`);
   svg.setAttribute('width', String(w));
@@ -242,7 +242,7 @@ function updateScale(fig) {
     `<text x="${L + 8}" y="${y + 1}">${ft} ft</text>` +
     `<path class="sb-fill" d="M${nx},${y - 4} L${nx + 10},${y - 8} V${y} Z"/>` +
     `<path class="sb" d="M${nx + 10},${y - 4}.5 H${nx + 28}"/>` +
-    `<text x="${nx + 34}" y="${y + 1}">N</text>`;
+    `<text x="${nx + 36}" y="${y + 1}">N</text>`;
 }
 
 function updateScales() {
