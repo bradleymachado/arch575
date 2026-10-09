@@ -1,4 +1,4 @@
-# composite_views_v1.1 — This section is intended to use a finished Blender/ComfyUI render when present, else place the Google Earth frames behind the transparent
+# composite_views_v1.2 — This section is intended to use a finished Blender/ComfyUI render when present, else place the Google Earth frames behind the transparent
 # Rhino interior captures (03_Design\05_Presentation\Views\735WRandolph_<key>_Capture_v1.0.png) and write
 # the deck images assets/views/View_<key>_v1.0.jpg (plus a mirror in the Views folder), then add one image
 # slide per view to data/story.json (outro, before the massing images) with the Google attribution.
@@ -62,30 +62,32 @@ def composite(key, stem, dry):
     return name, f"{key}: {fg.size[0]}x{fg.size[1]} capture over {os.path.basename(earth)} -> assets/views/{name}"
 
 
+AFTER = {"O1-L10-E": "L06-L15", "O1-L10-W": "L06-L15", "O2-L25-E": "L18-L32", "O2-L25-W": "L18-L32",
+         "Hotel-L41-E": "L35-L41", "Hotel-L41-W": "L35-L41", "L45-SSW": "L42-L47", "L45-W": "L42-L47",
+         "Terrace-L17-E": "L17", "Pool-L34-SSW": "L34"}
+
+
 def add_slides(done, dry):
+    """story.json 'views': one image slide per view, placed by js/app.js directly after the level in AFTER
+    (Brad 2026-10-09 01:40). Figure numbers are assigned at render time by js/app.js. Any copy of a view that
+    is still in the outro is removed."""
     d = json.load(open(STORY, encoding="utf-8"))
-    outro = d.setdefault("outro", [])
-    existing = {s.get("src") for s in outro}
-    first_massing = next((i for i, s in enumerate(outro) if "massing" in str(s.get("src", ""))), len(outro))
+    views = d.setdefault("views", [])
+    have = {v.get("src") for v in views}
     inserted = 0
     for key, stem, label, name, caption in VIEW_SET:
         fn = done.get(key)
         if not fn:
             continue
         src = f"assets/views/{fn}"
-        if src in existing:
+        d["outro"] = [s for s in d.get("outro", []) if s.get("src") != src]
+        if src in have:
             continue
-        outro.insert(first_massing + inserted, {
-            "kind": "image", "src": src, "label": label, "name": name, "sub": "",
-            "lines": [], "caption": f"{caption} · {ATTRIB}",
-        })
+        views.append({"kind": "image", "src": src, "after": AFTER[key], "label": label, "name": name, "sub": "",
+                      "lines": [], "caption": f"{caption} · {ATTRIB}"})
         inserted += 1
-    # Figure numbers continue after the level plans across every outro image slide (views, then massing)
-    fig = FIG_START
-    for sl in outro:
-        if sl.get("kind") == "image":
-            sl["fig"] = fig
-            fig += 1
+    order = [k for k, *_ in VIEW_SET]
+    views.sort(key=lambda v: next((i for i, k in enumerate(order) if v["src"].endswith(f"View_{k}_v1.0.jpg")), 99))
     if not dry:
         with open(STORY, "w", encoding="utf-8", newline="\n") as f:
             json.dump(d, f, indent=1, ensure_ascii=False); f.write("\n")

@@ -117,26 +117,6 @@
  "outro": [
   {
    "kind": "image",
-   "src": "assets/views/View_O2-L25-E_v1.0.jpg",
-   "label": "L25 · Office 2",
-   "name": "Looking east to the Loop",
-   "sub": "",
-   "lines": [],
-   "caption": "View from Office 2, L25, east · Imagery © Google",
-   "fig": 18
-  },
-  {
-   "kind": "image",
-   "src": "assets/views/View_L45-SSW_v1.0.jpg",
-   "label": "L45 · Hotel B",
-   "name": "Suite, looking south-southwest",
-   "sub": "",
-   "lines": [],
-   "caption": "View from a suite, L45, south-southwest · Imagery © Google",
-   "fig": 19
-  },
-  {
-   "kind": "image",
    "src": "assets/story/massing-sw.jpg",
    "label": "Massing",
    "name": "From the southwest",
@@ -175,5 +155,27 @@
    }
   }
  ],
- "_merged": "2026-10-09 00:00 Brad: Thesis slide removed; its heading and lines moved onto the Stacking slide (callouts kept)."
+ "_merged": "2026-10-09 00:00 Brad: Thesis slide removed; its heading and lines moved onto the Stacking slide (callouts kept).",
+ "views": [
+  {
+   "kind": "image",
+   "src": "assets/views/View_O2-L25-E_v1.0.jpg",
+   "after": "L18-L32",
+   "label": "L25 · Office 2",
+   "name": "Looking east to the Loop",
+   "sub": "",
+   "lines": [],
+   "caption": "View from Office 2, L25, east · Imagery © Google"
+  },
+  {
+   "kind": "image",
+   "src": "assets/views/View_L45-SSW_v1.0.jpg",
+   "after": "L42-L47",
+   "label": "L45 · Hotel B",
+   "name": "Suite, looking south-southwest",
+   "sub": "",
+   "lines": [],
+   "caption": "View from a suite, L45, south-southwest · Imagery © Google"
+  }
+ ]
 }

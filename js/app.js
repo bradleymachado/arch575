@@ -443,14 +443,27 @@ function build(data) {
   // Title and site go before the tower wrapper (phone: tower sticks from here down)
   deckEl.insertBefore(frag, towerWrap);
 
+  // Figures run on from the sketch slides through plans, the view slides placed after their level
+  // (story.views[].after = level key; Brad 2026-10-09 01:40) and the outro images
+  let fig = introFigs;
+  const views = story.views || [];
   data.levels.forEach((level, k) => {
-    const el = renderLevel(level, k + 1 + introFigs, data);
+    fig += 1;
+    const el = renderLevel(level, fig, data);
     slides.push({ index: slides.length, kind: 'level', level, levelIndex: k, el });
     deckEl.append(el);
+    for (const t of views.filter((v) => v.after === level.key)) {
+      fig += 1;
+      const r = renderStory({ ...t, kind: 'image', fig }, data);
+      if (!r) continue;
+      r.el.classList.add('slide--view');
+      slides.push({ index: slides.length, kind: r.kind, level: null, levelIndex: -1, el: r.el });
+      deckEl.append(r.el);
+    }
   });
 
   for (const t of story.outro || []) {
-    const r = renderStory(t, data);
+    const r = renderStory(t.kind === 'image' ? { ...t, fig: ++fig } : t, data);
     if (!r) continue;
     r.el.classList.add('slide--outro');
     slides.push({ index: slides.length, kind: r.kind, level: null, levelIndex: -1, el: r.el });
