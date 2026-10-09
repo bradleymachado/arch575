@@ -32,6 +32,37 @@ SITE_TEXT = {"label": "Site", "name": "735 W. Randolph St.", "sub": "West Loop, 
              "lines": ["Randolph to Washington.", "Kennedy Expressway to the east.", "Gateway to Restaurant Row."]}
 MAX_EDGE, JPEG_Q = 2400, 85
 
+# Podium L01-L03 (Brad 2026-10-08; L04 not shown): line plans from the team's PDFs, not in the deck script's LEVELS table,
+# inserted after B1. SVGs from <ROOT>\05_Analysis_Tools\Podium_PlanSVG_v1.0.py (1 in = 40 ft, north right).
+# Floor-to-floor [18, 12, 12, 12] ft per Core_V14_Build_v1.3; L05 at z 54 ft = y 17.5, so y = z * 17.5 / 54.
+# box = the B1 / podium footprint. No program key: the plans carry no program fills.
+_Y = 17.5 / 54.0
+PODIUM = [
+    {"key": "L01", "label": "L01", "name": "Ground", "sub": "+ Randolph",
+     "description": "Grand lobby, Randolph restaurant and kitchen, loading dock, bike storage, employee entrance.",
+     "rows": [["Elevation", "+0 ft"], ["Floor to floor", "18 ft"]],
+     "program": "", "box": [0.0, 97.8, 0.0, 63.4], "y": [0.0, round(18 * _Y, 4)], "keys": [],
+     "plan": "assets/plans/PlanPodium_L01_v1.0.svg"},
+    {"key": "L02", "label": "L02", "name": "Mezzanine", "sub": "+ Parking",
+     "description": "Lobby mezzanine and pavilion lounge; first parking deck and ramps.",
+     "rows": [["Elevation", "+18 ft"], ["Floor to floor", "12 ft"]],
+     "program": "", "box": [0.0, 97.8, 0.0, 63.4], "y": [round(18 * _Y, 4), round(30 * _Y, 4)], "keys": [],
+     "plan": "assets/plans/PlanPodium_L02_v1.0.svg"},
+    {"key": "L03", "label": "L03", "name": "Parking", "sub": "Podium deck",
+     "description": "Parking around the core, ramped deck to deck.",
+     "rows": [["Elevation", "+30 ft"], ["Floor to floor", "12 ft"]],
+     "program": "", "box": [0.0, 97.8, 0.0, 63.4], "y": [round(30 * _Y, 4), round(42 * _Y, 4)], "keys": [],
+     "plan": "assets/plans/PlanPodium_L03_v1.0.svg"},
+]
+
+
+def insert_podium(levels):
+    """Insert PODIUM after B1 (replacing any earlier copy)."""
+    keys = {p["key"] for p in PODIUM} | {"L03-L04"}
+    out = [lv for lv in levels if lv["key"] not in keys]
+    i = next((k for k, lv in enumerate(out) if lv["key"] == "B1"), -1) + 1
+    return out[:i] + [dict(p) for p in PODIUM] + out[i:]
+
 
 def load_deck(path):
     """Load the deck script as a module without running its __main__ block."""
@@ -58,7 +89,7 @@ def build(deck, legend):
     return {
         "title": TITLE, "site": SITE_TEXT, "accent": ACCENT,
         "orbitDeg": float(deck.ORBIT), "camera": CAMERA,
-        "programs": programs, "levels": levels,
+        "programs": programs, "levels": insert_podium(levels),
     }
 
 

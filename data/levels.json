@@ -99,6 +99,96 @@
    "plan": "assets/plans/PlanColor_B1_v1.4.svg"
   },
   {
+   "key": "L01",
+   "label": "L01",
+   "name": "Ground",
+   "sub": "+ Randolph",
+   "description": "Grand lobby, Randolph restaurant and kitchen, loading dock, bike storage, employee entrance.",
+   "rows": [
+    [
+     "Elevation",
+     "+0 ft"
+    ],
+    [
+     "Floor to floor",
+     "18 ft"
+    ]
+   ],
+   "program": "",
+   "box": [
+    0.0,
+    97.8,
+    0.0,
+    63.4
+   ],
+   "y": [
+    0.0,
+    5.8333
+   ],
+   "keys": [],
+   "plan": "assets/plans/PlanPodium_L01_v1.0.svg"
+  },
+  {
+   "key": "L02",
+   "label": "L02",
+   "name": "Mezzanine",
+   "sub": "+ Parking",
+   "description": "Lobby mezzanine and pavilion lounge; first parking deck and ramps.",
+   "rows": [
+    [
+     "Elevation",
+     "+18 ft"
+    ],
+    [
+     "Floor to floor",
+     "12 ft"
+    ]
+   ],
+   "program": "",
+   "box": [
+    0.0,
+    97.8,
+    0.0,
+    63.4
+   ],
+   "y": [
+    5.8333,
+    9.7222
+   ],
+   "keys": [],
+   "plan": "assets/plans/PlanPodium_L02_v1.0.svg"
+  },
+  {
+   "key": "L03",
+   "label": "L03",
+   "name": "Parking",
+   "sub": "Podium deck",
+   "description": "Parking around the core, ramped deck to deck.",
+   "rows": [
+    [
+     "Elevation",
+     "+30 ft"
+    ],
+    [
+     "Floor to floor",
+     "12 ft"
+    ]
+   ],
+   "program": "",
+   "box": [
+    0.0,
+    97.8,
+    0.0,
+    63.4
+   ],
+   "y": [
+    9.7222,
+    13.6111
+   ],
+   "keys": [],
+   "plan": "assets/plans/PlanPodium_L03_v1.0.svg"
+  },
+  {
    "key": "L05",
    "label": "L05",
    "name": "Function",
