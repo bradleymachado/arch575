@@ -1,4 +1,4 @@
-# composite_views_v1.0 — This section is intended to place the Google Earth frames behind the transparent
+# composite_views_v1.1 — This section is intended to use a finished Blender/ComfyUI render when present, else place the Google Earth frames behind the transparent
 # Rhino interior captures (03_Design\05_Presentation\Views\735WRandolph_<key>_Capture_v1.0.png) and write
 # the deck images assets/views/View_<key>_v1.0.jpg (plus a mirror in the Views folder), then add one image
 # slide per view to data/story.json (outro, before the massing images) with the Google attribution.
@@ -31,10 +31,21 @@ ATTRIB = "Imagery © Google"
 
 
 def composite(key, stem, dry):
+    # A finished Blender (or ComfyUI) render wins: highest *_Render_v1.N.png in the Views folder, used as is
+    import glob, re
+    renders = sorted(glob.glob(os.path.join(VIEWS, f"735WRandolph_{key}_Render_v1.*.png")),
+                     key=lambda f: int(re.search(r"_v1\.(\d+)\.png$", f).group(1)))
+    if renders:
+        name = f"View_{key}_v1.0.jpg"
+        if not dry:
+            os.makedirs(OUT, exist_ok=True)
+            im = Image.open(renders[-1]).convert("RGB")
+            im.save(os.path.join(OUT, name), quality=88, optimize=True, progressive=True)
+        return name, f"{key}: render {os.path.basename(renders[-1])} -> assets/views/{name}"
     cap = os.path.join(VIEWS, f"735WRandolph_{key}_Capture_v1.0.png")
     earth = os.path.join(EARTH, f"735WRandolph_{stem}_View_v1.1.jpg")
     if not os.path.exists(cap):
-        return None, f"{key}: no capture yet ({cap})"
+        return None, f"{key}: no render or capture yet"
     if not os.path.exists(earth):
         return None, f"{key}: no Earth frame ({earth})"
     fg = Image.open(cap).convert("RGBA")
