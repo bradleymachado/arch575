@@ -17,7 +17,7 @@ For Brad: <open items, or "none">
 
 1. Review time: confirmed Fri 2026-10-09 09:00.
 2. ~~GoDaddy CNAME `arch575` → `bradleymachado.github.io` after the S1 gate.~~ Done 2026-10-08; HTTPS enforced, live.
-3. Confirm or edit the 13 copy lines (S2 lists them here).
+3. ~~Confirm or edit the 13 copy lines (S2 lists them here).~~ All 18 rows confirmed by Brad 2026-10-08 18:40 ("I accept"); `v1.0.0` tagged.
 4. ~~Save `Core_Tower_V14_v1.3.3dm` (triggers S8).~~ Saved 17:07 by Claude via the Rhino MCP; S8 done as v0.4.0.
 5. Pink area on Office 2 = SV-4 + lobby as back of house: confirm.
 6. For S10–S12 (reviewer comments, conditional): Cloudflare Account ID + API token saved as `C:\Users\User\Projects\arch575\_local\cf.env` before 22:00. Walkthrough: `docs/prompts/Brad_Cloudflare_Token.md`.
@@ -26,7 +26,7 @@ For Brad: <open items, or "none">
 9. Projector check: open the site, press `F`, confirm full screen, `Esc` (S6 row 6).
 10. Optional: hide prev/next buttons below 900 px (they cover the plan corner while scrolling); default keep.
 
-12. Copy gate now 18 rows (table below): L16/L33 carry the review's proposed wording; rows 14–18 are the new story slides. Reply "all confirmed" or row + wording; edits go in `data/story.json` / deck script v1.4.
+12. ~~12. Copy gate now 18 rows (table below): L16/L33 carry the review's proposed wording; rows 14–18 are the new story slides. Reply "all confirmed" or row + wording; edits go in `data/story.json` / deck script v1.4.~~ Confirmed 18:40.
 13. L05 area: table 35,143 sf (plan title, 157 × 224) vs model slab boundary 45,720 sf (polygon includes the terraces). Keep 35,143 (default) or say which.
 14. T5 interior views over Google Earth: not started; needs the Rhino MCP (camera + ViewCaptureToFile), which the build session did not have.
 15. T6 plan fills: default no change tonight (full accent on the level's program).
@@ -37,39 +37,51 @@ For Brad: <open items, or "none">
 18. Site model moved to `02_Site\Arch575_BlenderSite_RhinoModel_v2.0.3dm`; the hidden Google 3D Tiles layer stays out of the website unless you say otherwise.
 19. After S15: play the intro twice on your screen (once with `I`) and report (S15 gate).
 20. S16 site-access layer keeps the diagram's mode colours on that slide and the ground decal (one-hue exception, review notes T9 default); say if you want greys + accent instead. Station names, walk times and the loading route come back as `[BRACKETS]` with the agent's checks.
-21. The 18-row copy gate below still blocks `v1.0.0`: reply "all confirmed" or row + wording.
+21. ~~21. The 18-row copy gate below still blocks `v1.0.0`: reply "all confirmed" or row + wording.~~ Confirmed 18:40.
 
 ## Copy status (S2 fills, S6 checks)
 
 | # | Line | Status |
 |---|---|---|
-| 1 | Title: West Loop Gateway · Mixed-use tower, 735 W. Randolph St. · ARCH 575 mid-review, Fall 2026 | unconfirmed |
-| 2 | Site: 735 W. Randolph St. · West Loop, Chicago · Randolph to Washington. Kennedy Expressway to the east. Gateway to Restaurant Row. | unconfirmed |
-| 3 | B1 Basement, Plant: "Building plant and services below the podium." | unconfirmed |
-| 4 | L05 Function, + Conference: "Ballroom, boardrooms and event terraces." | unconfirmed |
-| 5 | L06–15 Office 1, Typical: "Open floor plate around a central core." | unconfirmed |
-| 6 | L16 Mechanical 1: "Transfer and booster pumps." (was "Fan rooms and heat exchangers."; review T1) | unconfirmed (new wording) |
-| 7 | L17 Holodeck: "Spa, pilates, juice bar and coworking." | unconfirmed |
-| 8 | L18–32 Office 2, Executive: "Window suites, associates and front desk." | unconfirmed |
-| 9 | L33 Mechanical 2: "Transfer and booster pumps; rooftop-bound systems." (was "Substation, water and cooling towers."; review T1) | unconfirmed (new wording) |
-| 10 | L34 Hotel Clubhouse, + Pool: "Cafe bar, lounge and pool deck." | unconfirmed |
-| 11 | L35–41 Hotel A: "Guest floors, 23 keys." | unconfirmed |
-| 12 | L42–47 Hotel B: "Guest floors, 24 keys." | unconfirmed |
-| 13 | Level name "Holodeck" (L17) | unconfirmed |
-| 14 | Thesis heading: "The gateway lot from the Loop into Fulton Market." (MidReview plan D5) | unconfirmed |
-| 15 | Thesis lines: "Class A+ amenity-driven office: coworking, outdoor floors, the L17 spa, pilates and juice bar." / "The ground feeds Restaurant Row: two Randolph restaurants, a bar, a patio over Randolph." / "A convention center on the podium." / "The hotel diversifies income." (D5) | unconfirmed |
-| 16 | Stacking heading: "Office below, hotel above." + table labels (Office 1 · L06–15, Office 2 · L18–32, Office total, Office target, Hotel · L35–47) | unconfirmed |
-| 17 | Ground floor heading: "One grand lobby." + lines "Hotel entrance on Halsted, with the drop-off." / "Office entrance on Washington." / "The office rises at once to a mezzanine for its banks and turnstiles." / "The hotel stays at grade to its cars." (D6) | unconfirmed |
-| 18 | Massing slides: "From the southwest", "From the north-northeast" (10/05 placeholder views, greyscale; keep or drop) | unconfirmed |
+| 1 | Title: West Loop Gateway · Mixed-use tower, 735 W. Randolph St. · ARCH 575 mid-review, Fall 2026 | confirmed 2026-10-08 18:40 (Brad: "I accept") |
+| 2 | Site: 735 W. Randolph St. · West Loop, Chicago · Randolph to Washington. Kennedy Expressway to the east. Gateway to Restaurant Row. | confirmed 2026-10-08 18:40 (Brad: "I accept") |
+| 3 | B1 Basement, Plant: "Building plant and services below the podium." | confirmed 2026-10-08 18:40 (Brad: "I accept") |
+| 4 | L05 Function, + Conference: "Ballroom, boardrooms and event terraces." | confirmed 2026-10-08 18:40 (Brad: "I accept") |
+| 5 | L06–15 Office 1, Typical: "Open floor plate around a central core." | confirmed 2026-10-08 18:40 (Brad: "I accept") |
+| 6 | L16 Mechanical 1: "Transfer and booster pumps." (was "Fan rooms and heat exchangers."; review T1) | confirmed 2026-10-08 18:40 (Brad: "I accept") |
+| 7 | L17 Holodeck: "Spa, pilates, juice bar and coworking." | confirmed 2026-10-08 18:40 (Brad: "I accept") |
+| 8 | L18–32 Office 2, Executive: "Window suites, associates and front desk." | confirmed 2026-10-08 18:40 (Brad: "I accept") |
+| 9 | L33 Mechanical 2: "Transfer and booster pumps; rooftop-bound systems." (was "Substation, water and cooling towers."; review T1) | confirmed 2026-10-08 18:40 (Brad: "I accept") |
+| 10 | L34 Hotel Clubhouse, + Pool: "Cafe bar, lounge and pool deck." | confirmed 2026-10-08 18:40 (Brad: "I accept") |
+| 11 | L35–41 Hotel A: "Guest floors, 23 keys." | confirmed 2026-10-08 18:40 (Brad: "I accept") |
+| 12 | L42–47 Hotel B: "Guest floors, 24 keys." | confirmed 2026-10-08 18:40 (Brad: "I accept") |
+| 13 | Level name "Holodeck" (L17) | confirmed 2026-10-08 18:40 (Brad: "I accept") |
+| 14 | Thesis heading: "The gateway lot from the Loop into Fulton Market." (MidReview plan D5) | confirmed 2026-10-08 18:40 (Brad: "I accept") |
+| 15 | Thesis lines: "Class A+ amenity-driven office: coworking, outdoor floors, the L17 spa, pilates and juice bar." / "The ground feeds Restaurant Row: two Randolph restaurants, a bar, a patio over Randolph." / "A convention center on the podium." / "The hotel diversifies income." (D5) | confirmed 2026-10-08 18:40 (Brad: "I accept") |
+| 16 | Stacking heading: "Office below, hotel above." + table labels (Office 1 · L06–15, Office 2 · L18–32, Office total, Office target, Hotel · L35–47) | confirmed 2026-10-08 18:40 (Brad: "I accept") |
+| 17 | Ground floor heading: "One grand lobby." + lines "Hotel entrance on Halsted, with the drop-off." / "Office entrance on Washington." / "The office rises at once to a mezzanine for its banks and turnstiles." / "The hotel stays at grade to its cars." (D6) | confirmed 2026-10-08 18:40 (Brad: "I accept") |
+| 18 | Massing slides: "From the southwest", "From the north-northeast" (10/05 placeholder views, greyscale; keep or drop) | confirmed 2026-10-08 18:40 (Brad: "I accept") |
 
 ---
+
+## 2026-10-08 18:40 · Brad decisions (copy gate, footprint) · Fable (strategy conversation) · STATUS: done
+Measured: Brad replied "I accept" to (a) the S14 tower-footprint overhang (tower.glb 321 × 208 ft on the 338 × 198 ft lot: 1.2–2.3 m over the line, NW corner in the notch) and (b) the 18 copy lines. Interpretation recorded here; Brad can revert (b) by saying so.
+Outputs: copy-status table all rows confirmed; running-list items 3, 12, 21 closed; S14 For Brad (1) closed; `CHANGELOG.md` Unreleased → `v1.0.0`; annotated tag `v1.0.0` on the live HEAD (S6 passed, copy confirmed); log mirrored to `<ROOT>_Design_Presentation\Web\`.
+Images: none.
+Deviations: v1.0.0 is tagged by the strategy conversation, not by the running S15 session (plan §4 order: whichever is running when Brad confirms; this one was). Post-review: export the V14 massing and re-run S14 step 4.
+For Brad: none.
+
+## 2026-10-08 18:35 · S14 circle-back · orchestrator (Opus 5.5) · STATUS: done
+Files verified: tools/build_site_glb.py, assets/site.glb (6,616,512 B), data/site.json (towerOffset, towerYawDeg, siteGlb), 3 S14 captures in Web\Process.
+Decisions without input: S14 checks 4/5 FAIL on input geometry (F_POD 208 ft E-W vs Site 198 ft / podium line 200 ft); no S14b escalation, since no executor can change the tower footprint. Placement accepted as centred on the Site rectangle (overhang 1.2-2.3 m) → revert: rerun S14 step 4 once Brad confirms the footprint, 5 min.
+Next: S15 Intro Sequence on cs-exec-top.
 
 ## 2026-10-08 18:29 · S14 Site GLB · cs-exec-high (Opus 5.5) · STATUS: done (checks 4 and 5 fail on input geometry)
 Measured: see Values in the report below.
 Outputs: `tools/build_site_glb.py`, `assets/site.glb`, `data/site.json`; commit `1522c79` `site: context GLB, tower placement` (not pushed).
 Images: `<ROOT>\03_Design\05_Presentation\Web\Process\Arch575Site_S14_CheckPage_v1.0.png` (environment), `...\Arch575Site_S14_SiteContext_v1.0.png`, `...\Arch575Site_S14_TopDown_v1.0.png` (clean output).
 Deviations: see report.
-For Brad: (1) F_POD (tower.glb 321 x 208 ft) is wider than both the site model `Site` polygon (198 ft E-W) and the master podium site line (200 ft): confirm the tower.glb footprint or accept the 1.2-1.6 m overhang. (2) For S15: the S13 `siteModelExtentFt` (and `#sitebox`) is the untrimmed terrain-surface box; site.glb geometry spans x 146-2382, y 227-2022 ft. Align the SVG and the 3D context by coordinates (`transform.modelFtToMap`), not by the visible GLB box, or re-render the maps with `siteGlb.extentFt`.
+For Brad: (1) F_POD (tower.glb 321 x 208 ft) is wider than both the site model `Site` polygon (198 ft E-W) and the master podium site line (200 ft): confirm the tower.glb footprint or accept the 1.2-1.6 m overhang. → Brad 18:40: accepted; the overhang stays for the review, the V14 massing is swapped in afterwards. (2) For S15: the S13 `siteModelExtentFt` (and `#sitebox`) is the untrimmed terrain-surface box; site.glb geometry spans x 146-2382, y 227-2022 ft. Align the SVG and the 3D context by coordinates (`transform.modelFtToMap`), not by the visible GLB box, or re-render the maps with `siteGlb.extentFt`.
 
 Report:
 ```
