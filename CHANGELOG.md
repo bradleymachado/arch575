@@ -9,6 +9,11 @@ Format: one section per tag, newest first. Site releases use `vMAJOR.MINOR.PATCH
 - Camera (Brad, 22:39): `SITE_VIEW` yaw 110° (20° east of south), pitch −30°, target = centre of the Site polygon, distance fitted so N Halsted St sits at the left third and the Kennedy Expressway at the right edge, principal point 8 % right of centre (`setFull(on, 'viewport', {biasX})`) so the text column stays clear.
 - `tools/build_site_glb.py` v1.1: the context is written as named nodes `b_skybridge` (OSM 131998285), `b_restaurantrow` (footprint centroid within 40 m of W Randolph St between N Halsted St and the west edge of the model; 39 buildings), `buildings`, `r_randolph` / `r_halsted` / `r_washington` (ribbon meshes from the OSM carriageway centrelines, 24 / 24 / 20 m wide, 0.4 m above the road surface, mitred joins; Brad 22:39, replacing recoloured road faces), `roads` (the whole Roads mesh), `TERRAIN_MESH`, `Bridges`, `Site`. Placement, extents, units and face total unchanged. `data/site.json` gains `features` and `siteLoop` (frame lines in model ft, ribbon widths).
 - Street ribbons render as flat accent with `polygonOffset`, hidden when idle, outside the context fade; a flat accent plate of the Site polygon sits under the ghost (`SITE_FILL`).
+- Slide 02 merged with the slide 05 removal below (deck 17 slides without the podium session's work) and the stacking callouts (`story.json` `callouts`, `app.js` / `app.css`) that were uncommitted in the checkout.
+
+## Unreleased — 2026-10-08 22:45
+
+- Story slide "Ground floor — One grand lobby." removed from the intro (Brad: remove slide 5). Entry kept under `_removed` in `data/story.json`; deck is 17 slides; hash links after #04 shift down by one.
 
 ## plan-v1.4 — 2026-10-08
 
