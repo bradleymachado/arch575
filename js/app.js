@@ -9,7 +9,9 @@
                active slide as the page scrolls.
 
    Navigation: Left/Right, Up/Down (slides mode), Space (Shift+Space back),
-   PageUp/PageDown, Home, End, F (fullscreen), prev/next buttons, swipe
+   PageUp/PageDown, Home, End, F (fullscreen), I (replay the entry intro,
+   js/intro.js: plays once on load at #01, any key or click skips it,
+   prefers-reduced-motion shows its final frame), prev/next buttons, swipe
    (slides mode), URL hash #01..#nn (deep link and back button).
 
    Public API for js/tower.js (S5):
@@ -415,6 +417,7 @@ function toggleFullscreen() {
 
 window.addEventListener('keydown', (e) => {
   if (e.altKey || e.ctrlKey || e.metaKey) return;
+  if (window.intro?.state === 'playing') return;   // S15: the first key only skips the intro (js/intro.js)
   const t = e.target;
   if (t && /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) return;
   const slides = deck.mode === 'slides';
@@ -440,6 +443,9 @@ window.addEventListener('keydown', (e) => {
     case 'f':
     case 'F':
       toggleFullscreen(); break;
+    case 'i':
+    case 'I':
+      window.intro?.replay(); break;      // S15: replay the entry intro (js/intro.js) from #01
     default:
       break;
   }

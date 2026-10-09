@@ -4,6 +4,8 @@ ARCH 575 mid-review presentation (Fall 2026): West Loop Gateway, a mixed-use off
 
 Static site: title, site, and ten levels. Each level shows a rotating three.js tower with that level highlighted, a furnished floor plan, and a short data table.
 
+Entry intro (slide 01, `js/intro.js` + `css/intro.css`): a 12.8 s sequence plays once on load. A monochrome OpenStreetMap city sheet (`assets/map-city.svg`) zooms to Chicago scale, the map greys out while Randolph St draws in the accent from Michigan Ave to the site model, the view zooms to the corridor (`assets/map-corridor.svg`) with a mono caption, then the map cross-fades to a top-down three.js view of the site context (`assets/site.glb`, placed by `data/site.json`) at the same framing and the camera descends to the title view with the tower standing on the site. Any key or click skips to the final frame, `I` replays it, `prefers-reduced-motion` shows the final frame only, and below 900 px only the map stages play in a 40vh band. The site context stays around the tower on slide 01 and fades out over 900 ms on leaving it. Map data © OpenStreetMap contributors.
+
 ## Run locally (also the offline mode for the review)
 
 ```

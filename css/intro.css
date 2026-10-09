@@ -1,0 +1,95 @@
+/* ==========================================================================
+   arch575.bradmachado.com — css/intro.css   (intro_v1.0, S15)
+   This section is intended to style the entry sequence overlay (js/intro.js):
+   the two map SVGs stacked full-viewport below the running header, the mono
+   caption and OpenStreetMap attribution, and the full-viewport tower canvas
+   on slide 01 with the title text above it. Tokens from css/style.css only;
+   accent stays the single hue; no shadows, rounded corners or gradients.
+   ========================================================================== */
+
+#intro {
+  position: fixed;
+  top: var(--deck-header-h);
+  left: 0; right: 0; bottom: 0;
+  z-index: 15;                 /* above the slides, below the header and nav (20) */
+  background: var(--color-bg);
+  overflow: hidden;
+}
+
+#intro[hidden] { display: none; }
+
+.intro__maps {
+  position: absolute;
+  inset: 0;
+}
+
+.intro__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* The SVGs' own attribution text is replaced by one HTML line (below) */
+.intro__svg #attribution { display: none; }
+
+.intro__meta {
+  position: absolute;
+  left: var(--side-margin);
+  bottom: 24px;
+  font-family: var(--font-mono);
+  line-height: 1.5;
+}
+
+.intro__caption {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--color-ink);
+  opacity: 0;
+  white-space: nowrap;
+}
+
+.intro__attribution {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+/* Slide 01: the canvas fills the viewport behind the title text (js/tower.js
+   keeps the projection relative to the grid box, so the tower stays in
+   cols 7-12 and the site context fills the rest) */
+@media (min-width: 900px) {
+  .deck__tower.is-full {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    height: auto;
+    min-height: 0;
+  }
+
+  .slide--title.is-active {
+    position: relative;
+    z-index: 2;
+  }
+
+  body.is-intro .slide--title .slide__text { opacity: 0; }
+}
+
+/* Phone: the map stages play in a 40vh band at the top; no 3D stage */
+@media (max-width: 899.98px) {
+  #intro {
+    top: 0;
+    bottom: auto;
+    height: var(--tower-h-phone);
+    border-bottom: var(--rule-thin) solid var(--color-hairline);
+  }
+
+  .intro__meta {
+    left: var(--side-margin-mobile);
+    bottom: 12px;
+  }
+
+  .intro__caption { font-size: 11px; }
+}

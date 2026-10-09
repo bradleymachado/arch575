@@ -403,6 +403,7 @@ html, body { height: 100%; }
 @media (prefers-reduced-motion: no-preference) {
   .slide { transition: opacity 200ms ease, visibility 0s linear 200ms; }
   .slide.is-active { transition: opacity 200ms ease, visibility 0s; }
+  .slide--title .slide__text { transition: opacity 500ms ease; }   /* S15: title text after the intro */
   html { scroll-behavior: smooth; }
 }
 

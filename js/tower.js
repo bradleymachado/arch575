@@ -24,6 +24,22 @@
      .distance       camera distance from the look-at point
      .clamp          [yMin, yMax] allowed look-at heights at the current size
      .show(levelIndex, instant)  drive without the deck (check pages)
+
+   S15 (tower_v1.0 additions). This section is intended to load assets/site.glb
+   into the same scene as a 'context' group at the inverse of the tower
+   placement (data/site.json towerOffset / towerYawDeg, so the tower stays at
+   the origin), fade the context in on slide 01 and out over 900 ms on leaving
+   it, and let js/intro.js drive the camera during the entry sequence:
+     .siteReady / .contextReady   Promises (site.json parsed / site.glb in the scene or failed)
+     .context        { status: 'none'|'loading'|'ready'|'failed', opacity, desired }
+     .setContext(visible, ms)     fade the context (loads it on first request, >= 900 px only)
+     .setFull(on)    #tower-wrap fills the viewport (class is-full); the projection stays
+                     relative to the wrapper's grid box (setViewOffset), so the tower lands
+                     exactly where the box camera puts it and the context fills the rest
+     .box            that grid box {left, top, width, height} in viewport px
+     .setCamera({yawDeg, pitchDeg, distance, target:[x,y,z]} | null)  camera override
+     .titleView()    the deck's title camera in the same form
+     .project(v3) -> {x, y} viewport px;  .modelFtToScene(X, Y, Z) site-model ft -> scene
    ========================================================================== */
 
 import * as THREE from 'three';
@@ -32,6 +48,12 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 const GLB_URL = 'assets/tower.glb';
 const DATA_URL = 'data/levels.json';
 const FALLBACK_URL = 'assets/tower-fallback.png';
+const SITE_URL = 'data/site.json';     // S15: tower placement in the site model
+const CTX_URL = 'assets/site.glb';     // S15: site context (buildings, terrain, bridges, roads, site band)
+const CTX_FADE_MS = 900;
+const FT = 0.3048;
+const UNLIT = /^(TERRAIN_MESH|Roads)$/; // flat ground groups: unlit, so the terrain triangulation does not read
+const mqSlides = window.matchMedia('(min-width: 900px)');
 
 const FOV = 28;            // deg, vertical
 const PAD = 0.5;           // highlight box pad in x and z (glTF units)
@@ -54,10 +76,22 @@ const state = {
   clamp: [0, 0],
   levels: [],
   readyMs: 0,
+  // S15
+  pitch: 0,
+  override: null,      // { yawDeg, pitchDeg, distance, target: [x, y, z] } while the intro drives the camera
+  full: false,         // #tower-wrap fills the viewport (slide 01 at >= 900 px)
+  box: null,           // the wrapper's grid box in viewport px (projection reference)
+  ctx: { status: 'none', desired: false, opacity: 0, group: null, mats: [], anim: null },
+  site: null,
 };
 
 let resolveReady;
 const ready = new Promise((res) => { resolveReady = res; });
+let resolveSite, resolveContext;
+const siteReady = new Promise((res) => { resolveSite = res; });
+const contextReady = new Promise((res) => { resolveContext = res; });
+let ctxInv = null;     // site.glb scene -> tower frame (inverse of the tower placement)
+const hooks = {};      // filled by main(): requestFrame, resize, loadContext, fadeContext
 
 const tower = {
   ready,
@@ -71,6 +105,35 @@ const tower = {
   get readyMs() { return state.readyMs; },
   yawFor: () => 0,
   show: () => {},
+  // S15 intro API (usable before the GLB is in the scene; main() applies the stored state)
+  get pitch() { return state.override ? state.override.pitchDeg : state.pitch; },
+  get context() { return { status: state.ctx.status, opacity: state.ctx.opacity, desired: state.ctx.desired }; },
+  get full() { return state.full; },
+  get box() { return state.box ? { ...state.box } : null; },
+  get site() { return state.site; },
+  siteReady,
+  contextReady,
+  setFull(on) {
+    state.full = !!on;
+    wrap?.classList.toggle('is-full', state.full);
+    hooks.resize?.();
+  },
+  setCamera(view) {
+    state.override = view ? { ...view, target: [...view.target] } : null;
+    hooks.requestFrame?.();
+  },
+  setContext(visible, ms = CTX_FADE_MS) {
+    state.ctx.desired = !!visible;
+    if (visible) hooks.loadContext?.();
+    hooks.fadeContext?.(ms);
+  },
+  loadContext() { hooks.loadContext?.(); return contextReady; },
+  titleView: () => null,
+  project: () => null,
+  modelFtToScene(X, Y, Z) {
+    if (!ctxInv) return null;
+    return new THREE.Vector3(X * FT, Z * FT, -Y * FT).applyMatrix4(ctxInv);
+  },
 };
 window.tower = tower;
 
@@ -186,6 +249,25 @@ async function main() {
   const pitch = data.camera.pitchDeg;
   const orbit = data.orbitDeg;
   tower.yawFor = (i) => yaw0 + orbit * i;
+  state.pitch = pitch;
+
+  // S15: tower placement in the site model (small fetch, not awaited before the tower)
+  const siteJson = fetch(SITE_URL)
+    .then((r) => (r.ok ? r.json() : null))
+    .catch(() => null)
+    .then((site) => {
+      state.site = site;
+      if (site?.towerOffset) {
+        const place = new THREE.Matrix4().compose(
+          new THREE.Vector3(...site.towerOffset),
+          new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), site.towerYawDeg * DEG),
+          new THREE.Vector3(1, 1, 1),
+        );
+        ctxInv = place.invert();
+      }
+      resolveSite(site);
+      return site;
+    });
 
   // Highlight boxes: plan box +- pad in x and z, the level's y range, plus a
   // 0.02 offset outside every face so the box clears the facade and slabs.
@@ -236,9 +318,9 @@ async function main() {
 
   const target = new THREE.Vector3().copy(centre);
 
-  function place(cam, tgt, yawDeg, dist) {
+  function place(cam, tgt, yawDeg, dist, pitchDeg = pitch) {
     const az = yawDeg * DEG;
-    const p = pitch * DEG;
+    const p = pitchDeg * DEG;
     cam.position.set(
       tgt.x + dist * Math.cos(p) * Math.sin(az),
       tgt.y - dist * Math.sin(p),
@@ -301,14 +383,105 @@ async function main() {
   let rafId = 0;
   let anim = null;
 
+  // Camera placement: the intro's override when set, else the deck state
+  function aim() {
+    const o = state.override;
+    if (o) {
+      target.set(o.target[0], o.target[1], o.target[2]);
+      place(camera, target, o.yawDeg, o.distance, o.pitchDeg);
+    } else {
+      target.set(centre.x, state.targetY, centre.z);
+      place(camera, target, state.yaw, state.distance);
+    }
+  }
+
   function render() {
-    target.set(centre.x, state.targetY, centre.z);
-    place(camera, target, state.yaw, state.distance);
+    aim();
     renderer.render(scene, camera);
   }
 
+  /* ---- S15: site context ------------------------------------------------ */
+
+  function applyCtxOpacity(k) {
+    const c = state.ctx;
+    c.opacity = k;
+    c.group.visible = k > 0;
+    for (const m of c.mats) {
+      const t = k < 1;
+      if (m.transparent !== t) { m.transparent = t; m.needsUpdate = true; }
+      m.opacity = k;
+    }
+  }
+
+  function fadeContext(ms = CTX_FADE_MS) {
+    const c = state.ctx;
+    if (c.status !== 'ready') return;
+    const to = c.desired ? 1 : 0;
+    if (ms <= 0 || reducedMotion() || c.opacity === to) {
+      c.anim = null;
+      applyCtxOpacity(to);
+      requestFrame();
+      return;
+    }
+    c.anim = { t0: performance.now(), from: c.opacity, to, ms };
+    requestFrame();
+  }
+
+  async function loadContext() {
+    const c = state.ctx;
+    if (c.status !== 'none') return;
+    if (!mqSlides.matches) return;              // below 900 px only the map stages play: no 6.6 MB context
+    c.status = 'loading';
+    await siteJson;
+    if (!ctxInv) { c.status = 'failed'; console.warn('tower: site.json has no towerOffset; no context'); resolveContext(null); return; }
+    let g;
+    try {
+      g = await new GLTFLoader().loadAsync(CTX_URL);
+    } catch (err) {
+      c.status = 'failed';
+      console.warn(`tower: site.glb failed (${err.message || err}); no context`);
+      resolveContext(null);
+      return;
+    }
+    const group = new THREE.Group();
+    group.name = 'context';
+    group.add(g.scene);
+    group.applyMatrix4(ctxInv);                  // tower stays at the origin; the site moves around it
+    const mats = new Map();
+    g.scene.traverse((o) => {
+      if (!o.isMesh) return;
+      const src = o.material;
+      if (!mats.has(src)) {
+        const color = src.color ? src.color.clone() : new THREE.Color(0xd9d9d9);
+        const m = UNLIT.test(o.name)
+          ? new THREE.MeshBasicMaterial({ color, side: THREE.DoubleSide })
+          : new THREE.MeshStandardMaterial({ color, roughness: 0.95, metalness: 0, flatShading: true, side: THREE.DoubleSide });
+        m.name = `context:${o.name}`;
+        mats.set(src, m);
+      }
+      o.material = mats.get(src);
+    });
+    for (const src of mats.keys()) src.dispose?.();
+    c.group = group;
+    c.mats = [...mats.values()];
+    c.opacity = 0;
+    group.visible = false;
+    scene.add(group);
+    c.status = 'ready';
+    resolveContext(group);
+    fadeContext(CTX_FADE_MS);
+  }
+  hooks.loadContext = loadContext;
+  hooks.fadeContext = fadeContext;
+
   function frame() {
     rafId = 0;
+    const c = state.ctx;
+    if (c.anim) {
+      const k = Math.min(1, (performance.now() - c.anim.t0) / c.anim.ms);
+      applyCtxOpacity(c.anim.from + (c.anim.to - c.anim.from) * k);
+      if (k >= 1) c.anim = null;
+    }
     if (anim) {
       const k = Math.min(1, (performance.now() - anim.t0) / TWEEN_MS);
       const e = easeInOutCubic(k);
@@ -321,12 +494,40 @@ async function main() {
       }
     }
     render();
-    if (anim) requestFrame();
+    if (anim || state.ctx.anim) requestFrame();
   }
 
   function requestFrame() {
     if (!rafId) rafId = requestAnimationFrame(frame);
   }
+  hooks.requestFrame = requestFrame;
+  tower.renderNow = () => { render(); };        // synchronous frame (captures under virtual time)
+
+  tower.titleView = () => ({
+    yawDeg: tower.yawFor(0),
+    pitchDeg: pitch,
+    distance: state.distance,
+    target: [centre.x, targetYFor(-1), centre.z],
+  });
+
+  tower.vec3 = (x, y, z) => new THREE.Vector3(x, y, z);
+
+  // World-space bounds of the context group (checks)
+  tower.contextBounds = () => {
+    const g = state.ctx.group;
+    if (!g) return null;
+    g.updateMatrixWorld(true);
+    const b = new THREE.Box3().setFromObject(g);
+    return { min: b.min.toArray(), max: b.max.toArray() };
+  };
+
+  // Viewport px of a scene point under the current camera placement
+  tower.project = (v) => {
+    aim();
+    const p = v.clone().project(camera);
+    const r = canvas.getBoundingClientRect();
+    return { x: r.left + ((p.x + 1) / 2) * r.width, y: r.top + ((1 - p.y) / 2) * r.height, z: p.z };
+  };
 
   function setActive(levelIndex) {
     state.active = levelIndex;
@@ -355,17 +556,39 @@ async function main() {
 
   /* ---- size ------------------------------------------------------------- */
 
+  // The wrapper's grid box while it is fixed full-viewport (class is-full):
+  // drop the class, measure, put it back (one synchronous layout, no paint).
+  function boxRect() {
+    wrap.classList.remove('is-full');
+    const r = wrap.getBoundingClientRect();
+    wrap.classList.add('is-full');
+    return r;
+  }
+
   function resize() {
     const w = wrap.clientWidth;
     const h = wrap.clientHeight;
     if (!w || !h) return;
     renderer.setSize(w, h, false);
-    camera.aspect = w / h;
+    const fixed = state.full && getComputedStyle(wrap).position === 'fixed';
+    const box = fixed ? boxRect() : null;
+    if (box && box.width > 0 && box.height > 0) {
+      // Project as if the canvas were still the grid box; the viewport extends it
+      camera.aspect = box.width / box.height;
+      camera.setViewOffset(box.width, box.height, -box.left, -box.top, w, h);
+      state.box = { left: box.left, top: box.top, width: box.width, height: box.height };
+    } else {
+      camera.aspect = w / h;
+      camera.clearViewOffset();
+      const r = canvas.getBoundingClientRect();
+      state.box = { left: r.left, top: r.top, width: w, height: h };
+    }
     camera.updateProjectionMatrix();
     refit();
     if (!anim) state.targetY = targetYFor(state.active);
     requestFrame();
   }
+  hooks.resize = resize;
 
   new ResizeObserver(resize).observe(wrap);
   resize();
@@ -378,10 +601,21 @@ async function main() {
     deck.on('change', (index, slide) => {
       show(slide.levelIndex, first);
       first = false;
+      // S15: slide 01 = full-viewport canvas with the site context; elsewhere the
+      // context fades out over 900 ms and the canvas returns to its grid box
+      const title = index === 0;
+      tower.setFull(title && mqSlides.matches);
+      tower.setContext(title);
+    });
+    mqSlides.addEventListener('change', () => {
+      const title = deck.index === 0;
+      tower.setFull(title && mqSlides.matches);
+      if (title) tower.setContext(true, 0);
     });
   } else {
     show(-1, true);
   }
+  if (state.ctx.desired) loadContext();        // requested by the intro before the scene existed
   resolveReady();
 }
 
