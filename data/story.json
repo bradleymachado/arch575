@@ -93,12 +93,22 @@
   },
   {
    "kind": "image",
+   "src": "assets/story/Building_Section_Web_v1.0.jpg",
+   "label": "Section",
+   "name": "Building section",
+   "sub": "",
+   "lines": [],
+   "fig": 3,
+   "caption": "Building section, B1 to L49"
+  },
+  {
+   "kind": "image",
    "src": "assets/sketches/Facade_PerspSketch_Web_v1.1.jpg",
    "label": "Sketch",
    "name": "Hotel entrance, exterior",
    "sub": "",
    "lines": [],
-   "fig": 3,
+   "fig": 4,
    "caption": "Hotel entrance, exterior"
   },
   {
@@ -108,7 +118,7 @@
    "name": "Hotel entrance, interior",
    "sub": "",
    "lines": [],
-   "fig": 4,
+   "fig": 5,
    "caption": "Hotel entrance, interior"
   }
  ],
