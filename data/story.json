@@ -115,31 +115,7 @@
    ]
   }
  ],
- "outro": [
-  {
-   "kind": "image",
-   "src": "assets/story/massing-sw.jpg",
-   "label": "Massing",
-   "name": "From the southwest",
-   "sub": "",
-   "lines": [],
-   "fig": 20,
-   "caption": "Massing from the southwest"
-  },
-  {
-   "kind": "image",
-   "src": "assets/story/massing-nne.jpg",
-   "label": "Massing",
-   "name": "From the north-northeast",
-   "sub": "",
-   "lines": [],
-   "fig": 21,
-   "caption": "Massing from the north-northeast"
-  },
-  {
-   "kind": "closing"
-  }
- ],
+ "outro": [],
  "_removed": [
   {
    "removed": "2026-10-08 22:45 CT, Brad: remove slide 5",
@@ -187,6 +163,14 @@
    "sub": "",
    "lines": [],
    "caption": "View from the outdoor terrace, L17, east · Imagery © Google"
+  },
+  {
+   "kind": "model",
+   "src": "assets/structure.glb",
+   "after": "L42-L47",
+   "eyebrow": "Supplemental",
+   "heading": "Structural framing",
+   "lines": []
   }
  ]
 }

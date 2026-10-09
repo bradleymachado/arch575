@@ -249,6 +249,11 @@ html, body { height: 100%; }
 .data.text__data td { font-size: 20px; }
 .data.text__data th { width: auto; white-space: nowrap; padding-right: 24px; letter-spacing: 0.08em; }
 
+/* Supplemental model slides (story.json views[].kind 'model', Brad 2026-10-09): text cols 1-4,
+   the supplemental GLB (structure) in the tower canvas, cols 5-12 */
+.slide--model .slide__text { grid-column: 1 / 5; }
+.deck[data-kind="model"] .deck__tower { grid-column: 5 / 13; }
+
 /* Text slide with an aside image (story.json text.aside, Brad 2026-10-09): text cols 1-4,
    tower + callouts cols 5-9, the aside (building section) cols 10-12 with its Fig. caption */
 .slide--text.has-aside .slide__text { grid-column: 1 / 5; }

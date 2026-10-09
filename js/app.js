@@ -344,6 +344,12 @@ function renderStory(t, data) {
   if (t.kind === 'text') return { kind: 'text', el: renderText(t) };
   if (t.kind === 'image') return { kind: 'image', el: renderImage(t) };
   if (t.kind === 'image-pair') return { kind: 'image', el: renderPair(t) };   // tower hidden as on image slides
+  if (t.kind === 'model') {                       // supplemental GLB in place of the tower (js/tower.js showModel)
+    const el = renderText({ eyebrow: t.eyebrow || t.label || '', heading: t.heading || t.name || '', lines: t.lines || [], rows: t.rows || [] });
+    el.classList.add('slide--model');
+    el.dataset.model = t.src;
+    return { kind: 'model', el };
+  }
   if (t.kind === 'closing') return { kind: 'title', el: renderTitle(data.title) };
   return null;
 }
@@ -482,10 +488,11 @@ function build(data) {
     slides.push({ index: slides.length, kind: 'level', level, levelIndex: k, el });
     deckEl.append(el);
     for (const t of views.filter((v) => v.after === level.key)) {
-      fig += 1;
-      const r = renderStory({ ...t, kind: 'image', fig }, data);
+      const isModel = t.kind === 'model';
+      if (!isModel) fig += 1;
+      const r = renderStory(isModel ? t : { ...t, kind: 'image', fig }, data);
       if (!r) continue;
-      r.el.classList.add('slide--view');
+      r.el.classList.add(isModel ? 'slide--supplemental' : 'slide--view');
       slides.push({ index: slides.length, kind: r.kind, level: null, levelIndex: -1, el: r.el });
       deckEl.append(r.el);
     }

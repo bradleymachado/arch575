@@ -736,6 +736,38 @@ async function main() {
   }
   tower.show = show;
 
+  /* ---- Supplemental models (Brad 2026-10-09): a second GLB in the tower's frame shown in place of the tower
+     on 'model' slides (e.g. assets/structure.glb). Same camera as a whole-tower view; loaded on first request. */
+  const models = {};
+  let modelShown = null;
+  async function loadModel(url) {
+    if (models[url]) return models[url];
+    const p = (async () => {
+      const g = await new GLTFLoader().loadAsync(url);
+      g.scene.traverse((o) => {
+        if (!o.isMesh) return;
+        if (!o.geometry.attributes.normal) o.geometry.computeVertexNormals();
+        const dark = /concrete/i.test(o.name) || /concrete/i.test(o.material?.name || '');
+        o.material = new THREE.MeshStandardMaterial({ color: dark ? 0x9a9a9a : 0xb5b5b5, roughness: 0.95, metalness: 0, flatShading: true });
+      });
+      g.scene.name = `model:${url}`;
+      g.scene.visible = false;
+      scene.add(g.scene);
+      return g.scene;
+    })();
+    models[url] = p;
+    return p;
+  }
+  tower.showModel = async function (url) {
+    modelShown = url;
+    for (const k of Object.keys(models)) { const m = await models[k]; if (m && k !== url) m.visible = false; }
+    if (!url) { gltf.scene.visible = true; boxes.visible = true; requestFrame(); return; }
+    const m = await loadModel(url);
+    if (modelShown !== url) return;                 // slide changed while loading
+    gltf.scene.visible = false; boxes.visible = false; m.visible = true;
+    requestFrame();
+  };
+
   /* ---- size ------------------------------------------------------------- */
 
   // The wrapper's grid box while it is fixed full-viewport (class is-full):
@@ -800,6 +832,7 @@ async function main() {
     deck.on('change', (index, slide) => {
       show(slide.levelIndex, first);
       first = false;
+      tower.showModel(slide.kind === 'model' ? slide.el.dataset.model : null);
       // S17: js/siteloop.js owns the canvas on slide 02 and the 01 <-> 02 moves (one continuous shot)
       if (window.siteloop?.handles?.(index, slide)) return;
       // S15: slide 01 = full-viewport canvas with the site context; elsewhere the
