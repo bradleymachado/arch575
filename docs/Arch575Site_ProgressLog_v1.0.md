@@ -38,6 +38,7 @@ For Brad: <open items, or "none">
 19. After S15: play the intro twice on your screen (once with `I`) and report (S15 gate).
 20. S16 site-access layer keeps the diagram's mode colours on that slide and the ground decal (one-hue exception, review notes T9 default); say if you want greys + accent instead. Station names, walk times and the loading route come back as `[BRACKETS]` with the agent's checks.
 21. ~~21. The 18-row copy gate below still blocks `v1.0.0`: reply "all confirmed" or row + wording.~~ Confirmed 18:40.
+22. After S17: check slide 02 (loop + ghost tower; `I` restarts it). Defaults, one line each to change: 2 s per feature, 8 s on the site, loops (say "play once" to hold on the site instead); Restaurant Row = the whole footprints along Randolph from Halsted to the model's west edge. S16 and S10–S12 are post-review backlog now.
 
 ## Copy status (S2 fills, S6 checks)
 
@@ -70,6 +71,13 @@ Outputs: copy-status table all rows confirmed; running-list items 3, 12, 21 clos
 Images: none.
 Deviations: v1.0.0 is tagged by the strategy conversation, not by the running S15 session (plan §4 order: whichever is running when Brad confirms; this one was). Post-review: export the V14 massing and re-run S14 step 4.
 For Brad: none.
+
+## 2026-10-08 22:10 · Plan revision v1.4 · Fable (strategy conversation) · STATUS: done
+Measured: n/a (plan revision). Brad 22:00: slide 02 as a looping "gif": greyed-out look, Randolph St → Restaurant Row fronts → Halsted → Washington → Skybridge → the site, staying on the site; then "have it end with our ghost tower on the site".
+Outputs: `docs/Arch575Site_Plan_v1.4.md` (D9, §1 'Site loop timing', §2, §4 order, S16 post-review, S17 Site Loop, §5, §7 items 15–16); `docs/prompts/S17_SiteLoop.md`; `CHANGELOG.md` plan-v1.4; v1.3 → `docs/_superseded/`; mirrors `<ROOT>\03_Design\05_Presentation\Web\Arch575Site_Plan_v1.4.md/.pdf`.
+Images: none.
+Deviations: S16 skipped by its own cut-off (21:30); S10–S12 off (no `_local/cf.env` by 22:00); both are post-review backlog. The orchestrator session is on hold at the S15 gate; S17 runs from the strategy conversation on cs-exec-top.
+For Brad: item 22 below (slide 02 defaults).
 
 ## 2026-10-08 19:30 · S15 Intro Sequence · cs-exec-top (Fable 5.1) · STATUS: done (gate open: Brad plays it)
 Measured: see Values in the report below. Stage log (headless Edge, real-time run, performance.now()): total 12,826 ms (plan 12,800). Cut frame: SVG `#sitebox` vs projected 3D site-model extent max 1.0 px = 0.052 % of 1920 px (0.91 px = 0.048 % at 1896 px). Final camera yaw 31.95 / pitch −7.74, context opacity 1. Context fade on leaving #01: 1 → 0.53 at 450 ms → 0 at 1,150 ms; back on #01 → 1. 18 slides, counter `01 / 18`, 0 console errors.

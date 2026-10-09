@@ -2,6 +2,11 @@
 
 Format: one section per tag, newest first. Site releases use `vMAJOR.MINOR.PATCH`; documentation milestones use `plan-vX.Y`.
 
+## plan-v1.4 — 2026-10-08
+
+- S17 Site Loop (Fable) added from Brad's 22:00 request: slide 02 (≥ 900 px) shows the greyed-out site context in the three.js scene and cycles Randolph St, Restaurant Row, Halsted St, Washington Blvd and the Skybridge to the accent (2 s each), ending on the site band with the tower as a ghost (translucent fill, ink edges), 8 s hold, looping. Not a `.gif` file; a GIF of one cycle is exported for the PowerPoint backup when the tooling allows. `assets/site.glb` is rebuilt with named feature nodes from the OSM way ids and centrelines; placement unchanged. Tag `v1.2.0`.
+- S16 site-access layer and S10–S12 reviewer comments moved to the post-review backlog (S16's 21:30 cut-off passed; no `_local/cf.env` by 22:00). Order §4, schedule §5 and the S16 handoff updated; `docs/prompts/S17_SiteLoop.md` new; plan v1.3 copied to `docs/_superseded/`.
+
 ## v1.1.0 — 2026-10-08
 
 - Entry intro (S15): `js/intro.js` stage machine on `requestAnimationFrame` (ease-in-out-cubic): A city sheet zoom 2.5 s (starts 1.5× wider than Chicago scale, the sheet fades in), hold 1.0 s; B `#rest` → 0.3, `#randolph` draws by `stroke-dashoffset`, `#sitebox` in ink, 1.0 s; C zoom to the corridor (Michigan Ave → site box fills the width, city → corridor sheet cross-fade, caption `Randolph St · Michigan Ave → 735 W Randolph · 1.2 mi`) 2.5 s, hold 1.5 s; D map → canvas cross-fade 0.8 s then a 3.0 s yaw/pitch/distance/target tween from a straight-down camera over the map frame to the title camera; title text 0.5 s. Total 12.8 s. Both sheets share one map frame (`data/site.json`); each gets a matrix on `g#map` from its viewBox fit. HTML caption + attribution line (mono 13 / 11 px) replace the sheets' own `#attribution` text. `css/intro.css`.
