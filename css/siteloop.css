@@ -1,0 +1,56 @@
+/* ==========================================================================
+   arch575.bradmachado.com — css/siteloop.css   (siteloop_v1.0, S17)
+   This section is intended to style slide 02 while the feature loop runs
+   (body.is-siteloop, >= 900 px): the full-viewport tower canvas is shown on
+   the site slide, the site photo is hidden, the slide text moves to the left
+   columns above the canvas (the site sits in the right third of the view),
+   and the mono caption + attribution block sits bottom-left as the intro's.
+   Tokens from css/style.css only; accent stays the single hue; no shadows,
+   rounded corners or gradients.
+   ========================================================================== */
+
+#siteloop {
+  position: fixed;
+  left: var(--side-margin);
+  bottom: 24px;
+  z-index: 3;
+  font-family: var(--font-mono);
+  line-height: 1.5;
+  pointer-events: none;
+}
+
+#siteloop[hidden] { display: none; }
+
+.siteloop__caption {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--color-ink);
+  opacity: 0;
+  white-space: nowrap;
+  min-height: 1.5em;
+}
+
+.siteloop__attribution {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+@media (min-width: 900px) {
+  /* app.css hides the canvas on the site slide; the loop shows it full-viewport */
+  body.is-siteloop .deck[data-kind="site"] .deck__tower.is-full { visibility: visible; }
+
+  body.is-siteloop .slide--site.is-active {
+    position: relative;
+    z-index: 2;
+  }
+
+  body.is-siteloop .slide--site.is-active .slide__site { visibility: hidden; }
+
+  body.is-siteloop .slide--site.is-active .slide__text {
+    grid-column: 1 / 5;
+    grid-row: 1;                /* share row 1 with the hidden figure (else auto-placement adds a row below) */
+    align-self: start;          /* top-left, clear of the caption block bottom-left */
+  }
+}

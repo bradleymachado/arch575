@@ -40,6 +40,28 @@
      .setCamera({yawDeg, pitchDeg, distance, target:[x,y,z]} | null)  camera override
      .titleView()    the deck's title camera in the same form
      .project(v3) -> {x, y} viewport px;  .modelFtToScene(X, Y, Z) site-model ft -> scene
+
+   S17 (tower_v1.1 additions). This section is intended to give js/siteloop.js
+   what the slide 02 feature loop needs: the context nodes by name (the S17
+   site.glb carries b_skybridge, b_restaurantrow, buildings, r_randolph,
+   r_halsted, r_washington, roads, TERRAIN_MESH, Bridges, Site), a whole-
+   viewport projection mode for the full canvas, and the ghost tower:
+     .setFull(on, mode, {biasX})   mode 'box' (default, S15: projection relative to the
+                          grid box) or 'viewport' (the whole viewport is the frame; biasX
+                          shifts the principal point right by that fraction of the width)
+     .contextNodes()      { name: Mesh } for the context group (null before it loads)
+     .contextGroup        the context Group (children in site.glb scene space)
+     .ghostMode(on)       swap the tower's materials for one translucent pale fill
+                          (opacity 0.30 x level, depthWrite off) + EdgesGeometry lines
+                          in ink (opacity 0.5 x level); level starts at 0 (tower hidden);
+                          off restores the S5 neutral materials at once
+     .setGhost(on, ms)    tween the ghost level to 1 / 0 over ms (turns ghost mode on)
+     .ghostSetLevel(k)    set the level directly (the loop drives it per frame)
+     .setSolid(k)         the solid tower's opacity level 1..0 (the 01 <-> 02 dissolve)
+     .setGhostEdges(k)    the ghost edges alone (02 -> 01: edges fade as the solid tower returns)
+     .setProjectionMix(k) viewport mode: 0 = grid-box projection, 1 = whole viewport (01 <-> 02 tween)
+     The deck handler defers to window.siteloop.handles(index, slide) for slide 02 and the 02 -> 01 move.
+     .ghost               { on, level, opacity, edgeOpacity, edges }
    ========================================================================== */
 
 import * as THREE from 'three';
@@ -52,7 +74,8 @@ const SITE_URL = 'data/site.json';     // S15: tower placement in the site model
 const CTX_URL = 'assets/site.glb';     // S15: site context (buildings, terrain, bridges, roads, site band)
 const CTX_FADE_MS = 900;
 const FT = 0.3048;
-const UNLIT = /^(TERRAIN_MESH|Roads)$/; // flat ground groups: unlit, so the terrain triangulation does not read
+const UNLIT = /^(TERRAIN_MESH|Roads|roads)$/; // flat ground nodes: unlit, so the terrain triangulation does not read
+const RIBBON = /^r_(randolph|halsted|washington)$/;   // S17 street ribbons: accent, hidden until the loop raises them
 const mqSlides = window.matchMedia('(min-width: 900px)');
 
 const FOV = 28;            // deg, vertical
@@ -83,6 +106,14 @@ const state = {
   box: null,           // the wrapper's grid box in viewport px (projection reference)
   ctx: { status: 'none', desired: false, opacity: 0, group: null, mats: [], anim: null },
   site: null,
+  // S17
+  fullMode: 'box',     // 'box' | 'viewport' (see setFull)
+  viewBias: 0,
+  projMix: 1,          // viewport mode: 0 = the grid-box projection (as 'box'), 1 = the whole viewport (tween 01 <-> 02)
+  solid: 1,            // tower materials' opacity level (1 solid, 0 invisible)
+  boxCache: null,      // { w, h, box } grid box measured at the last resize
+  solidMats: [],
+  ghost: { on: false, level: 0, anim: null, fill: null, edges: [], saved: null, built: false },
 };
 
 let resolveReady;
@@ -113,11 +144,36 @@ const tower = {
   get site() { return state.site; },
   siteReady,
   contextReady,
-  setFull(on) {
+  setFull(on, mode = 'box', { biasX = 0, mix = 1 } = {}) {
     state.full = !!on;
+    state.fullMode = mode === 'viewport' ? 'viewport' : 'box';
+    state.viewBias = +biasX || 0;              // viewport mode: principal point shifted right by this fraction of the width
+    state.projMix = Math.min(1, Math.max(0, +mix));
     wrap?.classList.toggle('is-full', state.full);
     hooks.resize?.();
   },
+  // S17
+  get fullMode() { return state.fullMode; },
+  get projMix() { return state.projMix; },
+  get solid() { return state.solid; },
+  setProjectionMix(k) { state.projMix = Math.min(1, Math.max(0, +k || 0)); hooks.applyProjection?.(); hooks.requestFrame?.(); },
+  setSolid(level) { hooks.setSolid?.(Math.min(1, Math.max(0, +level || 0))); },
+  setGhostEdges(level) { hooks.setGhostEdges?.(Math.min(1, Math.max(0, +level || 0))); },
+  get ghost() {
+    const g = state.ghost;
+    return { on: g.on, level: g.level, opacity: +(GHOST_OPACITY * g.level).toFixed(4), edgeOpacity: +(GHOST_EDGE_OPACITY * g.level).toFixed(4), edges: g.edges.length };
+  },
+  get contextGroup() { return state.ctx.group; },   // children sit in site.glb scene space (m, y up, z = -north)
+  contextNodes() {
+    const g = state.ctx.group;
+    if (!g) return null;
+    const out = {};
+    g.traverse((o) => { if (o.isMesh && !o.userData.overlay) out[o.name] = o; });
+    return out;
+  },
+  ghostMode(on) { hooks.ghostMode?.(!!on); },
+  setGhost(on, ms = GHOST_MS) { hooks.setGhost?.(!!on, ms); },
+  ghostSetLevel(level) { hooks.ghostSetLevel?.(Math.min(1, Math.max(0, +level || 0))); },
   setCamera(view) {
     state.override = view ? { ...view, target: [...view.target] } : null;
     hooks.requestFrame?.();
@@ -176,6 +232,13 @@ function webglAvailable() {
    geometry and material assignments are kept.
    -------------------------------------------------------------------------- */
 
+const GHOST_FILL = 0xe4e4e2;       // S17 ghost: pale fill (palette grey), opacity GHOST_OPACITY
+const GHOST_OPACITY = 0.30;
+const GHOST_EDGE = 0x171715;       // ink edges
+const GHOST_EDGE_OPACITY = 0.5;
+const GHOST_EDGE_ANGLE = 20;       // EdgesGeometry threshold, degrees
+const GHOST_MS = 800;
+
 const GREYS = [
   [/chipboard/i, 0x9a9a9a, 1],
   [/concrete/i,  0xb5b5b5, 1],
@@ -208,6 +271,7 @@ function neutralise(root) {
     for (const k of ['map', 'normalMap', 'metalnessMap', 'roughnessMap', 'emissiveMap', 'alphaMap']) src[k]?.dispose?.();
     src.dispose?.();
   }
+  state.solidMats = [...cache.values()].map((m) => { m.userData.baseOpacity = m.opacity; return m; });
 }
 
 /* --------------------------------------------------------------------------
@@ -397,7 +461,9 @@ async function main() {
 
   function render() {
     aim();
+    const a0 = performance.now();
     renderer.render(scene, camera);
+    tower.lastRenderMs = performance.now() - a0;
   }
 
   /* ---- S15: site context ------------------------------------------------ */
@@ -448,9 +514,21 @@ async function main() {
     group.add(g.scene);
     group.applyMatrix4(ctxInv);                  // tower stays at the origin; the site moves around it
     const mats = new Map();
+    const ribbons = [];
     g.scene.traverse((o) => {
       if (!o.isMesh) return;
       const src = o.material;
+      if (RIBBON.test(o.name)) {
+        // S17: street ribbon 0.4 m above the road, flat accent, no depth write, polygon offset (never z-fights);
+        // invisible until js/siteloop.js drives its opacity; not part of the context fade
+        const m = new THREE.MeshBasicMaterial({ color: accent, transparent: true, opacity: 0, depthWrite: false, side: THREE.DoubleSide, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 });
+        m.name = `ribbon:${o.name}`;
+        o.material = m;
+        o.visible = false;
+        o.renderOrder = 1;
+        ribbons.push(src);
+        return;
+      }
       if (!mats.has(src)) {
         const color = src.color ? src.color.clone() : new THREE.Color(0xd9d9d9);
         const m = UNLIT.test(o.name)
@@ -462,6 +540,7 @@ async function main() {
       o.material = mats.get(src);
     });
     for (const src of mats.keys()) src.dispose?.();
+    for (const src of ribbons) src.dispose?.();
     c.group = group;
     c.mats = [...mats.values()];
     c.opacity = 0;
@@ -474,6 +553,102 @@ async function main() {
   hooks.loadContext = loadContext;
   hooks.fadeContext = fadeContext;
 
+  /* ---- S17: ghost tower ------------------------------------------------- */
+
+  const ghostObjects = [];                     // meshes of the tower GLB
+  gltf.scene.traverse((o) => { if (o.isMesh) ghostObjects.push(o); });
+
+  function buildGhost() {
+    const g = state.ghost;
+    if (g.built) return;
+    g.fill = new THREE.MeshBasicMaterial({ color: GHOST_FILL, transparent: true, opacity: 0, depthWrite: false });
+    g.fill.name = 'ghost:fill';
+    const edgeMat = new THREE.LineBasicMaterial({ color: GHOST_EDGE, transparent: true, opacity: 0 });
+    edgeMat.name = 'ghost:edges';
+    for (const o of ghostObjects) {
+      const lines = new THREE.LineSegments(new THREE.EdgesGeometry(o.geometry, GHOST_EDGE_ANGLE), edgeMat);
+      lines.name = `ghost-edges:${o.name}`;
+      lines.visible = false;
+      lines.renderOrder = 2;
+      o.add(lines);                            // follows the mesh transform
+      g.edges.push(lines);
+    }
+    g.edgeMat = edgeMat;
+    g.built = true;
+  }
+
+  function applyGhostLevel(level) {
+    const g = state.ghost;
+    g.level = level;
+    if (!g.on) return;
+    g.fill.opacity = GHOST_OPACITY * level;
+    g.edgeMat.opacity = GHOST_EDGE_OPACITY * level;
+    const vis = level > 0;
+    gltf.scene.visible = vis;
+    for (const l of g.edges) l.visible = vis;
+  }
+
+  function ghostMode(on) {
+    const g = state.ghost;
+    if (on === g.on) return;
+    if (on) {
+      buildGhost();
+      g.saved = ghostObjects.map((o) => o.material);
+      for (const o of ghostObjects) o.material = g.fill;
+      g.on = true;
+      g.anim = null;
+      applyGhostLevel(0);                      // hidden until setGhost(true)
+    } else {
+      ghostObjects.forEach((o, i) => { o.material = g.saved?.[i] ?? o.material; });
+      for (const l of g.edges) l.visible = false;
+      gltf.scene.visible = state.solid > 0;
+      g.on = false;
+      g.anim = null;
+      g.level = 0;
+      g.saved = null;
+    }
+    requestFrame();
+  }
+
+  function setGhost(on, ms) {
+    const g = state.ghost;
+    if (!g.on) ghostMode(true);
+    const to = on ? 1 : 0;
+    if (ms <= 0 || reducedMotion() || g.level === to) {
+      g.anim = null;
+      applyGhostLevel(to);
+      requestFrame();
+      return;
+    }
+    g.anim = { t0: performance.now(), from: g.level, to, ms };
+    requestFrame();
+  }
+  hooks.ghostMode = ghostMode;
+  hooks.setGhost = setGhost;
+  hooks.ghostSetLevel = (level) => { if (!state.ghost.on) ghostMode(true); state.ghost.anim = null; applyGhostLevel(level); requestFrame(); };
+
+  // S17: the solid tower's opacity level (the 01 <-> 02 dissolve); depthWrite off below 1
+  hooks.setSolid = (level) => {
+    state.solid = level;
+    for (const m of state.solidMats) {
+      const base = m.userData.baseOpacity ?? 1;
+      m.opacity = base * level;
+      const t = level < 1 || base < 1;
+      if (m.transparent !== t) { m.transparent = t; m.needsUpdate = true; }
+      m.depthWrite = level >= 1;
+    }
+    if (!state.ghost.on) gltf.scene.visible = level > 0;
+    requestFrame();
+  };
+  // S17: ghost edges on their own (the 02 -> 01 return: edges fade while the solid tower comes back)
+  hooks.setGhostEdges = (level) => {
+    const g = state.ghost;
+    buildGhost();
+    g.edgeMat.opacity = GHOST_EDGE_OPACITY * level;
+    for (const l of g.edges) l.visible = level > 0;
+    requestFrame();
+  };
+
   function frame() {
     rafId = 0;
     const c = state.ctx;
@@ -481,6 +656,12 @@ async function main() {
       const k = Math.min(1, (performance.now() - c.anim.t0) / c.anim.ms);
       applyCtxOpacity(c.anim.from + (c.anim.to - c.anim.from) * k);
       if (k >= 1) c.anim = null;
+    }
+    const g = state.ghost;
+    if (g.anim) {
+      const k = Math.min(1, (performance.now() - g.anim.t0) / g.anim.ms);
+      applyGhostLevel(g.anim.from + (g.anim.to - g.anim.from) * easeInOutCubic(k));
+      if (k >= 1) g.anim = null;
     }
     if (anim) {
       const k = Math.min(1, (performance.now() - anim.t0) / TWEEN_MS);
@@ -494,7 +675,7 @@ async function main() {
       }
     }
     render();
-    if (anim || state.ctx.anim) requestFrame();
+    if (anim || state.ctx.anim || state.ghost.anim) requestFrame();
   }
 
   function requestFrame() {
@@ -511,6 +692,7 @@ async function main() {
   });
 
   tower.vec3 = (x, y, z) => new THREE.Vector3(x, y, z);
+  tower.projection = () => ({ aspect: +camera.aspect.toFixed(4), fov: camera.fov, view: camera.view ? { ...camera.view } : null, size: [wrap.clientWidth, wrap.clientHeight], full: state.full, mode: state.fullMode, mix: state.projMix, bias: state.viewBias, override: state.override, box: state.box });
 
   // World-space bounds of the context group (checks)
   tower.contextBounds = () => {
@@ -565,25 +747,42 @@ async function main() {
     return r;
   }
 
+  // Projection while the wrapper is full-viewport: 'box' = as if the canvas were still the grid box (S15);
+  // 'viewport' = the whole viewport, principal point shifted by viewBias; projMix blends the two (01 <-> 02 tween)
+  function applyProjection() {
+    const w = wrap.clientWidth;
+    const h = wrap.clientHeight;
+    if (!w || !h) return false;
+    const fixed = state.full && getComputedStyle(wrap).position === 'fixed';
+    // the grid box is measured once per resize (boxRect forces a layout); per-frame mix changes reuse it
+    if (fixed && (!state.boxCache || state.boxCache.w !== w || state.boxCache.h !== h)) { const b = boxRect(); state.boxCache = { w, h, box: { left: b.left, top: b.top, width: b.width, height: b.height } }; }
+    const box = fixed ? state.boxCache.box : null;
+    const boxP = box && box.width > 0 && box.height > 0 ? { fw: box.width, fh: box.height, ox: -box.left, oy: -box.top } : null;
+    const vpP = { fw: w, fh: h, ox: -(state.fullMode === 'viewport' ? state.viewBias : 0) * w, oy: 0 };
+    let P = vpP;
+    if (fixed && boxP) {
+      if (state.fullMode === 'box') P = boxP;
+      else {
+        const k = state.projMix;
+        P = { fw: boxP.fw + (vpP.fw - boxP.fw) * k, fh: boxP.fh + (vpP.fh - boxP.fh) * k, ox: boxP.ox + (vpP.ox - boxP.ox) * k, oy: boxP.oy + (vpP.oy - boxP.oy) * k };
+      }
+    }
+    camera.aspect = P.fw / P.fh;
+    if (P === vpP && !P.ox) camera.clearViewOffset(); else camera.setViewOffset(P.fw, P.fh, P.ox, P.oy, w, h);
+    if (fixed && boxP && state.fullMode === 'box') state.box = { left: box.left, top: box.top, width: box.width, height: box.height };
+    else { const r = canvas.getBoundingClientRect(); state.box = { left: r.left, top: r.top, width: w, height: h }; }
+    camera.updateProjectionMatrix();
+    return true;
+  }
+  hooks.applyProjection = applyProjection;
+
   function resize() {
     const w = wrap.clientWidth;
     const h = wrap.clientHeight;
     if (!w || !h) return;
     renderer.setSize(w, h, false);
-    const fixed = state.full && getComputedStyle(wrap).position === 'fixed';
-    const box = fixed ? boxRect() : null;
-    if (box && box.width > 0 && box.height > 0) {
-      // Project as if the canvas were still the grid box; the viewport extends it
-      camera.aspect = box.width / box.height;
-      camera.setViewOffset(box.width, box.height, -box.left, -box.top, w, h);
-      state.box = { left: box.left, top: box.top, width: box.width, height: box.height };
-    } else {
-      camera.aspect = w / h;
-      camera.clearViewOffset();
-      const r = canvas.getBoundingClientRect();
-      state.box = { left: r.left, top: r.top, width: w, height: h };
-    }
-    camera.updateProjectionMatrix();
+    state.boxCache = null;
+    if (!applyProjection()) return;
     refit();
     if (!anim) state.targetY = targetYFor(state.active);
     requestFrame();
@@ -601,6 +800,8 @@ async function main() {
     deck.on('change', (index, slide) => {
       show(slide.levelIndex, first);
       first = false;
+      // S17: js/siteloop.js owns the canvas on slide 02 and the 01 <-> 02 moves (one continuous shot)
+      if (window.siteloop?.handles?.(index, slide)) return;
       // S15: slide 01 = full-viewport canvas with the site context; elsewhere the
       // context fades out over 900 ms and the canvas returns to its grid box
       const title = index === 0;
@@ -609,6 +810,7 @@ async function main() {
     });
     mqSlides.addEventListener('change', () => {
       const title = deck.index === 0;
+      if (window.siteloop?.handles?.(deck.index, deck.slides[deck.index])) return;
       tower.setFull(title && mqSlides.matches);
       if (title) tower.setContext(true, 0);
     });

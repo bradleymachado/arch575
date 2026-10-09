@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/app.css">
 <link rel="stylesheet" href="/css/intro.css">
+<link rel="stylesheet" href="/css/siteloop.css">
 <link rel="preload" href="data/levels.json" as="fetch" crossorigin="anonymous">
 </head>
 <body>
@@ -23,7 +24,7 @@
 </header>
 
 <main class="deck" id="deck" data-kind="title">
-  <!-- Slides 01 (title) and 02 (site) are inserted here by js/app.js -->
+  <!-- Slides 01 (title) and 02 (site) are inserted here by js/app.js; on 02 the canvas below runs the site loop (js/siteloop.js) -->
   <div class="deck__tower" id="tower-wrap" aria-hidden="true">
     <canvas id="tower"></canvas>
   </div>
@@ -70,6 +71,7 @@
       <div class="text__lines" data-f="lines"></div>
       <table class="data text__data"><tbody data-f="rows"></tbody></table>
     </div>
+    <div class="callouts" data-f="callouts" aria-hidden="true"></div>
   </section>
 </template>
 
@@ -97,5 +99,6 @@
 <script type="module" src="/js/app.js"></script>
 <script type="module" src="/js/tower.js"></script>
 <script type="module" src="/js/intro.js"></script>
+<script type="module" src="/js/siteloop.js"></script>
 </body>
 </html>

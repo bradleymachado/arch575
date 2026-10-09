@@ -11,7 +11,8 @@
    Navigation: Left/Right, Up/Down (slides mode), Space (Shift+Space back),
    PageUp/PageDown, Home, End, F (fullscreen), I (replay the entry intro,
    js/intro.js: plays once on load at #01, any key or click skips it,
-   prefers-reduced-motion shows its final frame), prev/next buttons, swipe
+   prefers-reduced-motion shows its final frame; on #02 I restarts the site
+   loop, js/siteloop.js, S17), prev/next buttons, swipe
    (slides mode), URL hash #01..#nn (deep link and back button).
 
    Public API for js/tower.js (S5):
@@ -171,8 +172,131 @@ function renderText(t) {
     tbody.append(tr);
   }
   if (!(t.rows || []).length) tbody.parentElement.remove();
+  renderCallouts(el, t.callouts);
   return el;
 }
+
+// Callouts (story 'text' slides, review 2026-10-08): one label per tower zone with a
+// hairline leader to the zone's left silhouette, projected from the live model
+// (window.tower.project). Phone (< 900 px) shows them as a ruled list instead.
+const SVG_NS = 'http://www.w3.org/2000/svg';
+const CALLOUT_GAP = 16;     // px between label and leader start, and leader end and tower
+const CALLOUT_MIN_DY = 72;  // px minimum vertical spacing between labels (label block ~50 px)
+
+function calloutNode(tag, c) {
+  const n = document.createElement(tag);
+  n.className = c.accent ? 'callout callout--accent' : 'callout';
+  const a = document.createElement('span');
+  a.className = 'callout__label';
+  a.textContent = c.label;
+  const b = document.createElement('span');
+  b.className = 'callout__value';
+  b.textContent = c.value;
+  n.append(a, b);
+  return n;
+}
+
+function renderCallouts(el, callouts) {
+  const layer = field(el, 'callouts');
+  if (!callouts || !callouts.length) { layer.remove(); return; }
+  el.classList.add('has-callouts');
+  const svg = document.createElementNS(SVG_NS, 'svg');
+  svg.setAttribute('class', 'callouts__svg');
+  const list = document.createElement('ul');
+  list.className = 'callouts__list';
+  for (const c of callouts) {
+    layer.append(calloutNode('div', c));
+    list.append(calloutNode('li', c));
+    const cls = c.accent ? 'is-accent' : '';
+    const path = document.createElementNS(SVG_NS, 'path');
+    const dot = document.createElementNS(SVG_NS, 'circle');
+    dot.setAttribute('r', '3');
+    if (cls) { path.setAttribute('class', cls); dot.setAttribute('class', cls); }
+    svg.append(path, dot);
+  }
+  layer.prepend(svg);
+  field(el, 'lines').after(list);
+  el._callouts = callouts;
+}
+
+// Left-most projected corner of the zone (union of the named levels) at its mid height
+// yRange (optional, scene units) overrides the height, for zones that are not a level
+// (the platform: L05 footprint, ground to the L05 slab)
+function calloutAnchor(keys, yRange) {
+  const t = window.tower;
+  const b = keys
+    .map((k) => state.data.levels.findIndex((l) => l.key === k))
+    .map((i) => t.levels?.[i])
+    .filter(Boolean);
+  if (!b.length) return null;
+  const B = b.map((l) => l.bounds);
+  const x0 = Math.min(...B.map((v) => v.x0)), x1 = Math.max(...B.map((v) => v.x1));
+  const z0 = Math.min(...B.map((v) => v.z0)), z1 = Math.max(...B.map((v) => v.z1));
+  const y = yRange
+    ? (yRange[0] + yRange[1]) / 2
+    : (Math.min(...B.map((v) => v.y0)) + Math.max(...B.map((v) => v.y1))) / 2;
+  const V = b[0].mesh.position.constructor;   // THREE.Vector3 without importing three here
+  let best = null;
+  for (const [x, z] of [[x0, z0], [x0, z1], [x1, z0], [x1, z1]]) {
+    const p = t.project(new V(x, y, z));
+    if (!best || p.x < best.x) best = p;
+  }
+  return best;
+}
+
+function layoutCallouts(slideEl) {
+  const callouts = slideEl._callouts;
+  const layer = field(slideEl, 'callouts');
+  if (!callouts || !layer) return;
+  const anchors = deck.mode === 'slides' && window.tower?.status === 'ready'
+    ? callouts.map((c) => calloutAnchor(c.levels, c.y)) : [];
+  if (anchors.length !== callouts.length || anchors.some((a) => !a)) {
+    layer.classList.remove('is-ready');
+    return;
+  }
+  const box = slideEl.getBoundingClientRect();
+  const colX = (field(slideEl, 'heading').getBoundingClientRect().right - box.left) + 48;
+  // Label centred on its anchor height, pushed apart top-down to keep the spacing
+  const ys = [];
+  let prev = -Infinity;
+  for (const i of anchors.map((a, k) => k).sort((p, q) => anchors[p].y - anchors[q].y)) {
+    ys[i] = Math.max(anchors[i].y - box.top, prev + CALLOUT_MIN_DY);
+    prev = ys[i];
+  }
+  const items = layer.querySelectorAll('.callout');
+  const paths = layer.querySelectorAll('path');
+  const dots = layer.querySelectorAll('circle');
+  items.forEach((item, i) => {
+    const y = ys[i];
+    item.style.transform = `translate(${colX}px, ${y}px) translateY(-50%)`;
+    const sx = colX + item.offsetWidth + CALLOUT_GAP;
+    const ax = anchors[i].x - box.left - CALLOUT_GAP;
+    const ay = anchors[i].y - box.top;
+    // Horizontal leader; a label pushed off its anchor height finishes with a 45 deg run
+    const knee = Math.max(sx, ax - Math.abs(ay - y));
+    paths[i].setAttribute('d', `M${sx},${y} H${knee} L${ax},${ay}`);
+    dots[i].setAttribute('cx', ax);
+    dots[i].setAttribute('cy', ay);
+  });
+  layer.classList.add('is-ready');
+}
+
+// Follow the camera tween (900 ms in js/tower.js) after a slide change, and any resize
+let calloutRaf = 0;
+function trackCallouts(ms = 1100) {
+  cancelAnimationFrame(calloutRaf);
+  const slide = state.slides[state.index];
+  if (!slide || !slide.el._callouts) return;
+  const t0 = performance.now();
+  const step = () => {
+    layoutCallouts(slide.el);
+    if (performance.now() - t0 < ms) calloutRaf = requestAnimationFrame(step);
+  };
+  step();
+}
+window.addEventListener('deck:change', () => trackCallouts());
+window.addEventListener('resize', () => trackCallouts(300));
+window.addEventListener('load', () => window.tower?.ready?.then(() => trackCallouts()));   // tower.js loads after this module
 
 function renderImage(t) {
   const el = clone('tpl-site');
@@ -445,7 +569,9 @@ window.addEventListener('keydown', (e) => {
       toggleFullscreen(); break;
     case 'i':
     case 'I':
-      window.intro?.replay(); break;      // S15: replay the entry intro (js/intro.js) from #01
+      // S17: on #02 I restarts the site loop (js/siteloop.js); elsewhere it replays the entry intro from #01
+      if (window.siteloop?.active) window.siteloop.restart(); else window.intro?.replay();
+      break;
     default:
       break;
   }

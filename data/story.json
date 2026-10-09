@@ -17,23 +17,65 @@
    "eyebrow": "Stacking",
    "heading": "Office below, hotel above.",
    "lines": [],
-   "rows": [
-    ["Office 1 · L06–15", "10 × 39,930 sf"],
-    ["Office 2 · L18–32", "15 × 28,578 sf"],
-    ["Office total", "827,970 sf"],
-    ["Office target", "812,500 sf · 101.9 %"],
-    ["Hotel · L35–47", "13 floors · 305 keys"]
-   ]
-  },
-  {
-   "kind": "text",
-   "eyebrow": "Ground floor",
-   "heading": "One grand lobby.",
-   "lines": [
-    "Hotel entrance on Halsted, with the drop-off.",
-    "Office entrance on Washington.",
-    "The office rises at once to a mezzanine for its banks and turnstiles.",
-    "The hotel stays at grade to its cars."
+   "callouts": [
+    {
+     "levels": [
+      "L35-L41",
+      "L42-L47"
+     ],
+     "label": "Hotel · L35–47",
+     "value": "13 floors · 305 keys"
+    },
+    {
+     "levels": [
+      "L34"
+     ],
+     "label": "Clubhouse · L34",
+     "value": "Cafe bar, lounge, pool deck",
+     "accent": true
+    },
+    {
+     "levels": [
+      "L18-L32"
+     ],
+     "label": "Office 2 · L18–32",
+     "value": "15 × 28,578 sf"
+    },
+    {
+     "levels": [
+      "L17"
+     ],
+     "label": "Holodeck · L17",
+     "value": "Spa, pilates, juice bar, coworking",
+     "accent": true
+    },
+    {
+     "levels": [
+      "L06-L15"
+     ],
+     "label": "Office 1 · L06–15",
+     "value": "10 × 39,930 sf"
+    },
+    {
+     "levels": [
+      "L05"
+     ],
+     "label": "Conference center · L05",
+     "value": "Ballroom, boardrooms, event terraces",
+     "accent": true
+    },
+    {
+     "levels": [
+      "L05"
+     ],
+     "y": [
+      0,
+      17.5
+     ],
+     "label": "Platform · L01–04",
+     "value": "Grand lobby, Randolph restaurants, parking",
+     "accent": true
+    }
    ]
   }
  ],
@@ -58,6 +100,24 @@
    "fig": 12,
    "caption": "Massing from the north-northeast"
   },
-  { "kind": "closing" }
+  {
+   "kind": "closing"
+  }
+ ],
+ "_removed": [
+  {
+   "removed": "2026-10-08 22:45 CT, Brad: remove slide 5",
+   "slide": {
+    "kind": "text",
+    "eyebrow": "Ground floor",
+    "heading": "One grand lobby.",
+    "lines": [
+     "Hotel entrance on Halsted, with the drop-off.",
+     "Office entrance on Washington.",
+     "The office rises at once to a mezzanine for its banks and turnstiles.",
+     "The hotel stays at grade to its cars."
+    ]
+   }
+  }
  ]
 }
