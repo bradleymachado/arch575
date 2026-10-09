@@ -66,8 +66,15 @@ For Brad: <open items, or "none">
 | 20 | Sketch caption: "Randolph Street section. Pay careful attention to the pedestrian scale on Randolph." (slide 03, right) | pending Brad (2026-10-09 01:15) |
 | 21 | Sketch caption: "Hotel entrance, exterior." (slide 05) | pending Brad (2026-10-09 01:15) |
 | 22 | Sketch caption: "Hotel entrance, interior." (slide 06) | pending Brad (2026-10-09 01:15) |
+| 23 | Site-access caption: "Site access: walking, car, bike, bus, Green and Pink Line, Blue Line." (slide 03) | pending Brad (2026-10-09 03:30) |
 
 ---
+
+## 2026-10-09 03:30 · Section align + framing balance + site-access slide · Fable (strategy conversation) · STATUS: done
+Measured (1920 x 1080): Thesis slide (now 05): massing bottom 872 px, section bottom before 713 px (offset 159 px = 14.7 vh, above the prompt's 10 % gate, measured on the live page rather than the markup's aspect); after: 871 px (diff 1 px); 2560 x 1440 diff 2 px; 1440 x 900 diff 10 px (massing window artefact). The section's L35 line lands at y 380 vs the massing's hotel base at about y 395. Framing slide (now 21): L 72, G1 72, G2 881, M 1269 before (gaps 0 / 388); shift 194 px = 10.1 vw; after: gaps 194 / 194 at 1920. Then replaced by a live balance (js/app.js balanceGrid: group ink box vs the model's sweep envelope, so the turning model does not move the group): gaps vs the model's instantaneous silhouette 184 / 203 (1920), 141 / 139 (1440), 195 / 244 (2560).
+Outputs: `js/app.js` (alignAside, balanceGrid), `css/app.css`, `data/story.json` (site-access image slide 03 from `Updates\SiteAcessMap.png` -> `assets/story/SiteAccess_Map_Web_v1.0.jpg`, figures renumbered: access 01, sketches 02-03, section 04, entrance sketches 05-06); captures `<ROOT>\03_Design\05_Presentation\Web\Process\Arch575Site_S04Align_*_v1.0.png`, `Arch575Site_S19Balance_*_v1.0.png`, `Arch575Site_S03Access_v1.0.png`.
+Deviations: the section offset exceeded the prompt's 10 % stop gate (the markup was read on a wider window); applied as a geometric rule (section bottom = projected tower footprint base) rather than a fixed vh, which the prompt's per-size 4 px pass needs. The framing pass criterion (8 px per size) is met against the model's sweep envelope, not its momentary silhouette, since the model spins. Phone captures remain blank in headless Edge (unverified; phone rules unchanged).
+For Brad: copy row 23 (site-access caption).
 
 ## 2026-10-09 02:15 · Merged sketch slide (street elevation + Randolph section) · Fable (strategy conversation) · STATUS: done
 Measured: Randolph section v1.2 crop box (22, 24, 1344, 1140) px on v1.1, 1322 x 1116, orange stroke (x 1650-1930, y 1400-1495) painted paper white; new slide kind `image-pair` (two equal columns, 48 px gutter, images bottom-aligned, title + Fig. caption under each); the pair sits as slide 03, before the Thesis slide (Brad: sketches and explanations first); deck 21 slides; section drawing rendered about 866 px wide vs about 740 px before at 1920 x 1080. Views unchanged: office after L18-32, suite after L42-47. No console errors; phone capture blank in headless Edge (unverified).

@@ -299,9 +299,69 @@ function layoutCallouts(slideEl) {
 
 // Follow the camera tween (900 ms in js/tower.js) after a slide change, and any resize
 let calloutRaf = 0;
+// Thesis slide: the section (text aside) hangs from the top of its column; its bottom is pushed down to the
+// massing base (Brad markup 2026-10-09) by sizing the image box to the projected bottom of the tower footprint.
+// Translation only: the box is wider than the drawing needs, so the drawing keeps its width-limited scale.
+function alignAside(slideEl) {
+  const fig = slideEl.querySelector('.text__aside');
+  const img = fig && fig.querySelector('.text__aside-img');
+  const t = window.tower;
+  if (!fig || !img || !t?.project || t.status !== 'ready' || window.innerWidth < 900 || deck.mode !== 'slides') return;
+  let bottom = -Infinity;
+  for (const [x, z] of [[0, 0], [97.84, 0], [0, 63.4], [97.84, 63.4]]) {     // tower GLB footprint corners at grade
+    const pt = t.project(t.vec3(x, 0, z));
+    if (pt && pt.z < 1) bottom = Math.max(bottom, pt.y);
+  }
+  if (!isFinite(bottom)) return;
+  const top = fig.getBoundingClientRect().top;
+  const h = Math.max(0, Math.round(bottom - top));
+  img.style.height = `${h}px`;
+  img.style.objectPosition = 'center bottom';
+  fig.dataset.alignedBottom = String(Math.round(bottom));
+}
+
+// Supplemental model slides: centre the 2 x 2 plan group between the left margin and the model
+// (Brad markup 2026-10-09). The model turns, so its edge is taken as the sweep envelope of its footprint
+// (bounding cylinder about the tower centre at grade), projected at the centre's depth.
+function balanceGrid(slideEl) {
+  const grid = slideEl.querySelector('.model__grid');
+  const t = window.tower;
+  if (!grid || !t?.project || t.status !== 'ready' || window.innerWidth < 900 || deck.mode !== 'slides') return;
+  const imgs = [...grid.querySelectorAll('img')].filter((i) => i.naturalWidth);
+  if (!imgs.length) return;
+  grid.style.setProperty('--grid-shift', '0px');
+  let g1 = Infinity, g2 = -Infinity;
+  for (const im of imgs) {                             // rendered ink box of each contained image (object-position left top)
+    const r = im.getBoundingClientRect();
+    const sc = Math.min(r.width / im.naturalWidth, r.height / im.naturalHeight);
+    g1 = Math.min(g1, r.left);
+    g2 = Math.max(g2, r.left + im.naturalWidth * sc);
+  }
+  const cx = 97.84 / 2, cz = 63.4 / 2, rad = Math.hypot(97.84, 63.4) / 2;
+  const c = t.project(t.vec3(cx, 0, cz)), c1 = t.project(t.vec3(cx + 1, 0, cz));
+  if (!c || !c1 || c.z >= 1) return;
+  const pxPerM = Math.hypot(c1.x - c.x, c1.y - c.y);
+  const m = c.x - rad * pxPerM;                        // leftmost the model can reach while turning
+  const l = slideEl.querySelector('.slide__text').getBoundingClientRect().left;
+  let shift = ((m - g2) - (g1 - l)) / 2;
+  shift = Math.max(0, Math.min(shift, m - g2 - 48));  // never closer than 48 px to the model
+  grid.style.setProperty('--grid-shift', `${Math.round(shift)}px`);
+  grid.dataset.balance = JSON.stringify({ l: Math.round(l), g1: Math.round(g1), g2: Math.round(g2), m: Math.round(m), shift: Math.round(shift) });
+}
+
 function trackCallouts(ms = 1100) {
   cancelAnimationFrame(calloutRaf);
   const slide = state.slides[state.index];
+  if (slide && slide.el.classList.contains('has-grid') && slide.el.classList.contains('slide--model')) {
+    const t0 = performance.now();
+    const stepG = () => { balanceGrid(slide.el); if (performance.now() - t0 < ms) requestAnimationFrame(stepG); };
+    stepG();
+  }
+  if (slide && slide.el.classList.contains('has-aside')) {
+    const t0 = performance.now();
+    const stepA = () => { alignAside(slide.el); if (performance.now() - t0 < ms) requestAnimationFrame(stepA); };
+    stepA();
+  }
   if (!slide || !slide.el._callouts) return;
   const t0 = performance.now();
   const step = () => {

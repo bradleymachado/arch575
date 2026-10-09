@@ -275,6 +275,11 @@ html, body { height: 100%; }
 .model__item img { width: 100%; height: 100%; min-height: 0; object-fit: contain; object-position: left top; display: block; }
 .model__item figcaption { margin-top: 6px; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; color: var(--color-muted); text-transform: uppercase; }
 .deck[data-kind="model"][data-grid="1"] .deck__tower { grid-column: 7 / 13; grid-row: 1 / 3; }
+/* Framing plans centred between the left margin and the 3D model (Brad markup 2026-10-09): measured at 1920 x 1080,
+   group 72-881 px, model geometry from 1269 px -> shift 194 px = 10.1 vw; translate only, phone unchanged */
+@media (min-width: 900px) {
+  .slide--model.has-grid .model__grid { transform: translateX(var(--grid-shift, 10.1vw)); }   /* js/app.js balanceGrid() sets --grid-shift */
+}
 
 /* Grid slides (story.json views[].kind 'grid', Brad 2026-10-09: environment): text + data rows cols 1-3,
    2 x 2 image grid cols 4-12, no tower */
@@ -304,11 +309,12 @@ html, body { height: 100%; }
 }
 .text__aside-img {
   width: 100%;
-  height: 100%;
+  height: 100%;                 /* js/app.js alignAside() sets the height so the drawing's bottom meets the massing base */
   min-height: 0;
   object-fit: contain;
   object-position: top center;
   display: block;
+  align-self: start;
 }
 .text__aside figcaption { margin-top: 8px; }
 
