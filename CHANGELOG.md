@@ -2,6 +2,10 @@
 
 Format: one section per tag, newest first. Site releases use `vMAJOR.MINOR.PATCH`; documentation milestones use `plan-vX.Y`.
 
+## Unreleased — 2026-10-09 08:45
+
+- New slide 07 (`story.intro`, kind `image-pair`, label "Deconfliction"), immediately after the hotel entrance sketches (slide 06): office / hotel deconfliction — model view (`assets/story/Ground_DeconflictionModel_Web_v1.0.jpg`, 1755 × 1319, from Brad's chat PNG) and marker sketch (`assets/sketches/Ground_DeconflictionSketch_Web_v1.0.jpg`, 1996 × 1292; chat photo rotated 90° CCW, paper flat-fielded to white, cropped to the drawing + 60 px). Fig. 07 / 08; plan and view figures shift +2. Captions pending Brad. Deck 25 slides; hash links from #07 on shift by one.
+
 ## Unreleased — 2026-10-09 03:30
 
 - Slide 01: QR code to https://arch575.bradmachado.com/ under the eyebrow, visible modules on the column-2 line of the title text block (Brad's markup), `assets/qr/QR_Arch575Deck_v1.0.svg`, ink on the page white, 22vh (150–320 px), caption "Scan · arch575.bradmachado.com"; fades in with the title text; hidden below 900 px.

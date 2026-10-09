@@ -123,6 +123,25 @@
      "caption": "Hotel entrance, interior"
     }
    ]
+  },
+  {
+   "_source": "Brad 2026-10-09 08:38: 'place these immediately following slide 6 ... This is the office hotel deconfliction.' Model view (chat PNG) and marker sketch (chat photo, rotated 90 CCW, paper flat-fielded to white). Captions pending Brad.",
+   "kind": "image-pair",
+   "label": "Deconfliction",
+   "items": [
+    {
+     "src": "assets/story/Ground_DeconflictionModel_Web_v1.0.jpg",
+     "name": "Office / hotel deconfliction, model",
+     "fig": 7,
+     "caption": "Office / hotel deconfliction, model view"
+    },
+    {
+     "src": "assets/sketches/Ground_DeconflictionSketch_Web_v1.0.jpg",
+     "name": "Office / hotel deconfliction, sketch",
+     "fig": 8,
+     "caption": "Office / hotel deconfliction: hotel lobby on Halsted, office lobby on Washington"
+    }
+   ]
   }
  ],
  "outro": [
