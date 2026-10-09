@@ -64,6 +64,11 @@
    "key": "MEP",
    "label": "MEP",
    "color": "#3A3A3A"
+  },
+  {
+   "key": "SERVICE",
+   "label": "Service elevators",
+   "color": "#B0431F"
   }
  ],
  "levels": [
@@ -87,7 +92,7 @@
      "85.3 %"
     ]
    ],
-   "program": "MEP",
+   "program": "SERVICE",
    "box": [
     0.0,
     97.8,
@@ -99,12 +104,13 @@
     0.0
    ],
    "keys": [
+    "SERVICE",
     "CIRCULATION",
     "NOSTOP",
     "BOH",
     "MEP"
    ],
-   "plan": "assets/plans/PlanColor_B1_v1.4.svg"
+   "plan": "assets/plans/PlanColor_B1_v1.5.svg"
   },
   {
    "key": "L01",
@@ -134,7 +140,7 @@
     5.8333
    ],
    "keys": [],
-   "plan": "assets/plans/PlanPodium_L01_v1.0.svg"
+   "plan": "assets/plans/PlanPodium_L01_v1.1.svg"
   },
   {
    "key": "L02",

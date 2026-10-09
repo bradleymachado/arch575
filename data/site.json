@@ -393,7 +393,7 @@
   "attribution": "Map data © OpenStreetMap contributors",
   "siteGlb": {
     "file": "assets/site.glb",
-    "bytes": 6626432,
+    "bytes": 6626428,
     "units": "m",
     "up": "y",
     "rootRotation": [
