@@ -57,6 +57,9 @@ PODIUM = [
 ]
 
 
+EXCLUDE = {"B1", "L16", "L33"}   # Brad 2026-10-09 01:50: basement and mechanical floors are not slides
+
+
 def insert_podium(levels):
     """Insert PODIUM after B1 (replacing any earlier copy)."""
     keys = {p["key"] for p in PODIUM} | {"L03-L04"}
@@ -77,6 +80,8 @@ def build(deck, legend):
     programs = [{"key": k, "label": deck.PROG[k][0], "color": COLOURS[k]} for k in deck.KEY_ORDER]
     levels = []
     for key, label, name, sub, desc, rows, prog, box, (y0, y1) in deck.LEVELS:
+        if key in EXCLUDE:   # Brad 2026-10-09 01:50: no basement or mechanical-floor slides
+            continue
         keys = [k for k in deck.KEY_ORDER if k in legend[key]]
         levels.append({
             "key": key, "label": label, "name": name, "sub": sub, "description": desc,

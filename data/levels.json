@@ -74,46 +74,6 @@
  ],
  "levels": [
   {
-   "key": "B1",
-   "label": "B1",
-   "name": "Basement",
-   "sub": "Plant",
-   "description": "Building plant and services below the podium.",
-   "rows": [
-    [
-     "Plate",
-     "43,378 sf"
-    ],
-    [
-     "Core",
-     "6,386 sf"
-    ],
-    [
-     "Efficiency",
-     "85.3 %"
-    ]
-   ],
-   "program": "SERVICE",
-   "box": [
-    0.0,
-    97.8,
-    0.0,
-    63.4
-   ],
-   "y": [
-    -5.0,
-    0.0
-   ],
-   "keys": [
-    "SERVICE",
-    "CIRCULATION",
-    "NOSTOP",
-    "BOH",
-    "MEP"
-   ],
-   "plan": "assets/plans/PlanColor_B1_v1.6.svg"
-  },
-  {
    "key": "L01",
    "label": "L01",
    "name": "Ground",
@@ -288,45 +248,6 @@
    "plan": "assets/plans/PlanColor_L06-L15_v1.5.svg"
   },
   {
-   "key": "L16",
-   "label": "L16",
-   "name": "Mechanical 1",
-   "sub": "",
-   "description": "Transfer and booster pumps.",
-   "rows": [
-    [
-     "Plate",
-     "39,930 sf"
-    ],
-    [
-     "Core",
-     "6,386 sf"
-    ],
-    [
-     "Efficiency",
-     "84.0 %"
-    ]
-   ],
-   "program": "MEP",
-   "box": [
-    7.9,
-    97.8,
-    0.3,
-    39.9
-   ],
-   "y": [
-    77.9,
-    80.4
-   ],
-   "keys": [
-    "CIRCULATION",
-    "NOSTOP",
-    "BOH",
-    "MEP"
-   ],
-   "plan": "assets/plans/PlanColor_L16_v1.5.svg"
-  },
-  {
    "key": "L17",
    "label": "L17",
    "name": "Holodeck",
@@ -410,45 +331,6 @@
     "MEP"
    ],
    "plan": "assets/plans/PlanColor_L18-L32_v1.5.svg"
-  },
-  {
-   "key": "L33",
-   "label": "L33",
-   "name": "Mechanical 2",
-   "sub": "",
-   "description": "Transfer and booster pumps; rooftop-bound systems.",
-   "rows": [
-    [
-     "Plate",
-     "28,578 sf"
-    ],
-    [
-     "Core",
-     "4,466 sf"
-    ],
-    [
-     "Efficiency",
-     "84.4 %"
-    ]
-   ],
-   "program": "MEP",
-   "box": [
-    27.7,
-    97.8,
-    0.3,
-    39.9
-   ],
-   "y": [
-    158.5,
-    161.0
-   ],
-   "keys": [
-    "CIRCULATION",
-    "NOSTOP",
-    "BOH",
-    "MEP"
-   ],
-   "plan": "assets/plans/PlanColor_L33_v1.5.svg"
   },
   {
    "key": "L34",
