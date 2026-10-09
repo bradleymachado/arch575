@@ -43,7 +43,7 @@ PODIUM = [
      "description": "Grand lobby, Randolph restaurant and kitchen, loading dock, bike storage, employee entrance.",
      "rows": [["Elevation", "+0 ft"], ["Floor to floor", "18 ft"]],
      "program": "", "box": [0.0, 97.8, 0.0, 63.4], "y": [0.0, round(18 * _Y, 4)], "keys": [],
-     "plan": "assets/plans/PlanPodium_L01_v1.1.svg"},
+     "plan": "assets/plans/PlanPodium_L01_v1.2.svg"},
     {"key": "L02", "label": "L02", "name": "Mezzanine", "sub": "+ Parking",
      "description": "Lobby mezzanine and pavilion lounge; first parking deck and ramps.",
      "rows": [["Elevation", "+18 ft"], ["Floor to floor", "12 ft"]],
