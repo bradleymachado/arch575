@@ -6,17 +6,12 @@
    "eyebrow": "Thesis",
    "heading": "The gateway lot from the Loop into Fulton Market.",
    "lines": [
+    "Office below, hotel above.",
     "Class A+ amenity-driven office: coworking, outdoor floors, the L17 spa, pilates and juice bar.",
     "The ground feeds Restaurant Row: two Randolph restaurants, a bar, a patio over Randolph.",
     "A convention center on the podium.",
     "The hotel diversifies income."
-   ]
-  },
-  {
-   "kind": "text",
-   "eyebrow": "Stacking",
-   "heading": "Office below, hotel above.",
-   "lines": [],
+   ],
    "callouts": [
     {
      "levels": [
@@ -119,5 +114,6 @@
     ]
    }
   }
- ]
+ ],
+ "_merged": "2026-10-09 00:00 Brad: Thesis slide removed; its heading and lines moved onto the Stacking slide (callouts kept)."
 }
