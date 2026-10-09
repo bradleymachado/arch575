@@ -65,6 +65,12 @@ For Brad: <open items, or "none">
 
 ---
 
+## 2026-10-08 23:30 · S17 Site Loop — commit, merge, push · Opus 5.5 (conversation 4.13, taking over the stalled S17 run) · STATUS: done (gate open: Brad checks slide 02)
+Measured: Brad 23:14: slide 2 "fully reverted back to the original" and did not transition seamlessly from slide 1. Cause: the S17 run (loop, ghost tower, 1.5 s continuous 01 ↔ 02 camera tween) was complete in the local checkout but never committed or pushed, so the live site still served the photo slide; origin meanwhile had the slide 05 removal (0429518, a962e83). Re-tested the merged commit in a clean worktree (headless Edge, 1920×1080, `_local/s17_check.html`): 17 slides, counter `02 / 17`; no console errors; 01 → 02 tween 1,508 ms, 92 frames, context opacity never below 1; 02 → 01 tween 1,502 ms, ends on the title view (yaw 31.95°, full, box); loop stages at 0 / 2,402 / 4,803 / 7,204 / 9,606 / 12,007, ghost 14,408, reset 23,212, next cycle 23,813 ms. Earlier S17 values stand (23:09 report): GLB 6,626,432 B, placement and extents unchanged, `b_skybridge` 1 building, `b_restaurantrow` 39, ghost 0.30 / edges 0.5, reduced-motion static ghost, phone photo slide unchanged, 7 captures + GIF.
+Outputs: commits 95ceed1 (`site: slide 02 feature loop, ghost tower, continuous 01-02 shot; stacking callouts`), merge 7eaad40 (`story.json`: stacking callouts kept, Ground floor moved to `_removed`; CHANGELOG keeps v1.2.0 and the 22:45 entry); pushed to `origin/main`.
+Deviations: (1) The stacking callouts (`story.json` `callouts`, `app.js` / `app.css`) from another conversation were uncommitted in the same files and went in with S17; they replace the stacking table rows. (2) The podium-floors work (`data/levels.json`, `tools/build_levels.py`, `assets/plans/PlanPodium_*.svg`) was still being written at 23:17 and was left uncommitted for its own conversation. (3) Tag `v1.2.0`, PROJECT_LOG and mirrors not done here.
+For Brad: hard-refresh arch575.bradmachado.com (Ctrl+F5) after about a minute; on slide 01 let the intro finish (or press a key once to skip it), then → for the continuous move to slide 02.
+
 ## 2026-10-08 22:45 · Slide 05 removed · Opus 5.5 (review conversation) · STATUS: done
 Measured: Brad: "remove slide 5". Live slide 05 was the story slide "Ground floor — One grand lobby." Removed from `data/story.json` intro; entry kept under `_removed`. Deck 18 → 17 slides (headless check: `deck.count` 17, slide 05 now B1).
 Outputs: commit 0429518 (`story.json`, CHANGELOG Unreleased).
