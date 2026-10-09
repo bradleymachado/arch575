@@ -97,24 +97,22 @@
    }
   },
   {
-   "kind": "image",
-   "src": "assets/sketches/Facade_PerspSketch_Web_v1.1.jpg",
+   "kind": "image-pair",
    "label": "Sketch",
-   "name": "Hotel entrance, exterior",
-   "sub": "",
-   "lines": [],
-   "fig": 4,
-   "caption": "Hotel entrance, exterior"
-  },
-  {
-   "kind": "image",
-   "src": "assets/sketches/Ground_PerspSketch_Web_v1.2.jpg",
-   "label": "Sketch",
-   "name": "Hotel entrance, interior",
-   "sub": "",
-   "lines": [],
-   "fig": 5,
-   "caption": "Hotel entrance, interior"
+   "items": [
+    {
+     "src": "assets/sketches/Facade_PerspSketch_Web_v1.1.jpg",
+     "name": "Hotel entrance, exterior",
+     "fig": 4,
+     "caption": "Hotel entrance, exterior"
+    },
+    {
+     "src": "assets/sketches/Ground_PerspSketch_Web_v1.2.jpg",
+     "name": "Hotel entrance, interior",
+     "fig": 5,
+     "caption": "Hotel entrance, interior"
+    }
+   ]
   }
  ],
  "outro": [
