@@ -26,6 +26,7 @@ VIEW_SET = [
     ("Hotel-L41-W", "Hotel-L41-W", "L41 · Hotel A", "Guest room, looking west",       "View from a guest room, L41, west"),
     ("L45-SSW",    "L45-SSW",    "L45 · Hotel B",  "Suite, looking south-southwest", "View from a suite, L45, south-southwest"),
     ("L45-W",      "L45-W",      "L45 · Hotel B",  "Suite, looking west",            "View from a suite, L45, west"),
+    ("Terrace-L17-E", "Terrace-L17-E", "L17 · Holodeck", "Terrace, looking east to the Loop", "View from the outdoor terrace, L17, east"),
     ("Pool-L34-SSW", "Pool-L34-SSW", "L34 · Clubhouse", "Pool deck, looking south-southwest", "View from the pool deck, L34, south-southwest"),
 ]
 ATTRIB = "Imagery © Google"
