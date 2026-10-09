@@ -85,7 +85,7 @@ def build(deck, legend):
         keys = [k for k in deck.KEY_ORDER if k in legend[key]]
         levels.append({
             "key": key, "label": label, "name": name, "sub": sub, "description": desc,
-            "rows": [[lab, val] for lab, val in rows],
+            "rows": [[lab, val] for lab, val in rows if not (prog == "AMENITY" and lab == "Efficiency")],   # Brad 2026-10-09: amenity floors are not rentable
             "program": prog,
             "box": [round(v, 4) for v in box],
             "y": [round(y0, 4), round(y1, 4)],
