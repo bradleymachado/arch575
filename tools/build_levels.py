@@ -23,7 +23,8 @@ OUT = os.path.join(REPO, "data", "levels.json")
 
 # plan v1.1 section 1: program key colours (the level's own program takes the accent on screen)
 ACCENT = "#B0431F"
-COLOURS = {"OFFICE": "#B5B5B5", "HOTEL": "#B5B5B5", "AMENITY": "#B5B5B5", "OUTDOOR": "#EFD9D2",
+PLAN_ACCENT = "#E3BDB1"   # v1.5 plans: hero program fill = 35 % tint of the accent (key swatch); the tower keeps ACCENT
+COLOURS = {"OFFICE": "#B5B5B5", "HOTEL": "#B5B5B5", "AMENITY": "#B5B5B5", "OUTDOOR": "#F6E9E4",
            "CIRCULATION": "#FFFFFF", "NOSTOP": "#F0F0F0", "BOH": "#D9D9D9", "MEP": "#3A3A3A"}
 CAMERA = {"azDeg": 31.95, "pitchDeg": -7.74, "rollDeg": -4.11}
 TITLE = {"eyebrow": "ARCH 575 / Mid-review", "h1": "West Loop Gateway",
@@ -84,10 +85,10 @@ def build(deck, legend):
             "box": [round(v, 4) for v in box],
             "y": [round(y0, 4), round(y1, 4)],
             "keys": keys,
-            "plan": "assets/plans/PlanColor_%s_v1.4.svg" % key,
+            "plan": "assets/plans/PlanColor_%s_%s.svg" % (key, "v1.6" if key == "B1" else "v1.5"),
         })
     return {
-        "title": TITLE, "site": SITE_TEXT, "accent": ACCENT,
+        "title": TITLE, "site": SITE_TEXT, "accent": ACCENT, "planAccent": PLAN_ACCENT,
         "orbitDeg": float(deck.ORBIT), "camera": CAMERA,
         "programs": programs, "levels": insert_podium(levels),
     }

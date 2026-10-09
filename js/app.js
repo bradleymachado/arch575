@@ -347,7 +347,7 @@ function renderLevel(level, n, data) {
     const p = programs.get(k);
     if (!p) continue;
     const isAccent = k === level.program;
-    const color = isAccent ? data.accent : p.color;
+    const color = isAccent ? (data.planAccent || data.accent) : p.color;   // plan hero tint (v1.5 plans); the tower keeps data.accent
     const li = document.createElement('li');
     if (isAccent) li.className = 'key__item--accent';
     const sw = document.createElement('span');

@@ -1,0 +1,88 @@
+{
+ "B1": [
+  "BOH",
+  "CIRCULATION",
+  "SERVICE",
+  "NOSTOP",
+  "MEP"
+ ],
+ "L05": [
+  "AMENITY",
+  "OUTDOOR",
+  "CIRCULATION",
+  "BOH",
+  "MEP"
+ ],
+ "L06-L15": [
+  "OFFICE",
+  "CIRCULATION",
+  "BOH",
+  "NOSTOP",
+  "MEP"
+ ],
+ "L16": [
+  "MEP",
+  "CIRCULATION",
+  "BOH",
+  "NOSTOP"
+ ],
+ "L17": [
+  "AMENITY",
+  "OUTDOOR",
+  "CIRCULATION",
+  "NOSTOP",
+  "BOH",
+  "MEP"
+ ],
+ "L18-L32": [
+  "OFFICE",
+  "CIRCULATION",
+  "NOSTOP",
+  "BOH",
+  "MEP"
+ ],
+ "L33": [
+  "MEP",
+  "CIRCULATION",
+  "NOSTOP",
+  "BOH"
+ ],
+ "L34": [
+  "AMENITY",
+  "OUTDOOR",
+  "CIRCULATION",
+  "BOH",
+  "MEP"
+ ],
+ "L35-L41": [
+  "CIRCULATION",
+  "BOH",
+  "HOTEL",
+  "MEP"
+ ],
+ "L42-L47": [
+  "CIRCULATION",
+  "BOH",
+  "HOTEL",
+  "MEP"
+ ],
+ "_colours": {
+  "ACCENT": "#B0431F",
+  "HERO_TINT": 0.35,
+  "HERO_FILL": "#E3BDB1",
+  "OUTDOOR": "#F6E9E4",
+  "POOL": "#D7A18F",
+  "PEOPLE": {
+   "B1": 2,
+   "L05": 179,
+   "L06-L15": 148,
+   "L16": 2,
+   "L17": 182,
+   "L18-L32": 88,
+   "L33": 3,
+   "L34": 159,
+   "L35-L41": 17,
+   "L42-L47": 17
+  }
+ }
+}
