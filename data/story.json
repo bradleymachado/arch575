@@ -89,17 +89,12 @@
      "value": "Grand lobby, Randolph restaurants, parking",
      "accent": true
     }
-   ]
-  },
-  {
-   "kind": "image",
-   "src": "assets/story/Building_Section_Web_v1.0.jpg",
-   "label": "Section",
-   "name": "Building section",
-   "sub": "",
-   "lines": [],
-   "fig": 3,
-   "caption": "Building section, B1 to L49"
+   ],
+   "aside": {
+    "src": "assets/story/Building_Section_Web_v1.0.jpg",
+    "fig": 3,
+    "caption": "Building section, B1 to L49"
+   }
   },
   {
    "kind": "image",

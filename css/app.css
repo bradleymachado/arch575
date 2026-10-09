@@ -249,6 +249,31 @@ html, body { height: 100%; }
 .data.text__data td { font-size: 20px; }
 .data.text__data th { width: auto; white-space: nowrap; padding-right: 24px; letter-spacing: 0.08em; }
 
+/* Text slide with an aside image (story.json text.aside, Brad 2026-10-09): text cols 1-4,
+   tower + callouts cols 5-9, the aside (building section) cols 10-12 with its Fig. caption */
+.slide--text.has-aside .slide__text { grid-column: 1 / 5; }
+.deck[data-kind="text"][data-aside="1"] .deck__tower { grid-column: 6 / 10; height: 82%; align-self: center; }
+.slide--text.has-aside .callout { max-width: 230px; white-space: normal; }   /* long labels wrap instead of running into the tower */
+.text__aside {
+  grid-column: 10 / 13;
+  grid-row: 1;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  min-height: 0;
+  min-width: 0;
+  margin: 0;
+  align-self: stretch;
+}
+.text__aside-img {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+  object-position: top center;
+  display: block;
+}
+.text__aside figcaption { margin-top: 8px; }
+
 /* Callouts (story.json "callouts"): labels in a column right of the heading, 1 px leaders
    to each tower zone, positioned by js/app.js from the live model. Accent = shared floors. */
 .slide--text.has-callouts { position: relative; }
@@ -575,6 +600,8 @@ html, body { height: 100%; }
   .deck[data-kind="site"] .deck__tower,
   .deck[data-kind="image"] .deck__tower { visibility: visible; }
 
+  .text__aside { display: block; margin-top: 32px; }
+  .text__aside-img { height: auto; }
   .slide--pair { display: block; }
   .pair { display: block; }
   .pair__item { height: auto; display: block; }

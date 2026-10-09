@@ -172,6 +172,18 @@ function renderText(t) {
     tbody.append(tr);
   }
   if (!(t.rows || []).length) tbody.parentElement.remove();
+  // Optional aside image right of the tower (Brad 2026-10-09: the building section beside the stacking model)
+  const aside = field(el, 'aside');
+  if (t.aside && t.aside.src) {
+    const img = field(el, 'asideImg');
+    img.src = t.aside.src;
+    img.alt = t.aside.caption || '';
+    setText(el, 'asideCap', `Fig. ${pad2(t.aside.fig)} — ${t.aside.caption}.`);
+    aside.hidden = false;
+    el.classList.add('has-aside');
+  } else {
+    aside.remove();
+  }
   renderCallouts(el, t.callouts);
   return el;
 }
@@ -257,13 +269,15 @@ function layoutCallouts(slideEl) {
   const box = slideEl.getBoundingClientRect();
   const colX = (field(slideEl, 'heading').getBoundingClientRect().right - box.left) + 48;
   // Label centred on its anchor height, pushed apart top-down to keep the spacing
-  const ys = [];
-  let prev = -Infinity;
-  for (const i of anchors.map((a, k) => k).sort((p, q) => anchors[p].y - anchors[q].y)) {
-    ys[i] = Math.max(anchors[i].y - box.top, prev + CALLOUT_MIN_DY);
-    prev = ys[i];
-  }
   const items = layer.querySelectorAll('.callout');
+  const ys = [];
+  let prev = -Infinity, prevH = 0;
+  for (const i of anchors.map((a, k) => k).sort((p, q) => anchors[p].y - anchors[q].y)) {
+    // spacing = the taller of the fixed minimum and the previous label's real height + 20 (wrapped labels)
+    ys[i] = Math.max(anchors[i].y - box.top, prev + Math.max(CALLOUT_MIN_DY, prevH + 20));
+    prev = ys[i];
+    prevH = items[i] ? items[i].offsetHeight : 0;
+  }
   const paths = layer.querySelectorAll('path');
   const dots = layer.querySelectorAll('circle');
   items.forEach((item, i) => {
@@ -447,7 +461,7 @@ function build(data) {
   frag.append(siteEl);
 
   const story = data.story || { intro: [], outro: [] };
-  const introFigs = (story.intro || []).reduce((n, t) => n + (t.kind === 'image' ? 1 : t.kind === 'image-pair' ? t.items.length : 0), 0);   // sketch slides take Fig. 01.. before the plans
+  const introFigs = (story.intro || []).reduce((n, t) => n + (t.kind === 'image' ? 1 : t.kind === 'image-pair' ? t.items.length : t.kind === 'text' && t.aside ? 1 : 0), 0);   // sketch slides take Fig. 01.. before the plans
   for (const t of story.intro || []) {
     const r = renderStory(t, data);
     if (!r) continue;
@@ -536,6 +550,7 @@ function activate(i, { fromHash = false, fromScroll = false, replace = false, in
 
   state.slides.forEach((s, k) => s.el.classList.toggle('is-active', k === i));
   deckEl.dataset.kind = slide.kind;
+  deckEl.dataset.aside = slide.el.classList.contains('has-aside') ? '1' : '';   // text slide with a side image: tower in cols 5-9
   countEl.textContent = `${pad2(i + 1)} / ${pad2(n)}`;
   prevBtn.disabled = i === 0;
   nextBtn.disabled = i === n - 1;
