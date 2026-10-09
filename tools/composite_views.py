@@ -29,6 +29,7 @@ VIEW_SET = [
     ("Pool-L34-SSW", "Pool-L34-SSW", "L34 · Clubhouse", "Pool deck, looking south-southwest", "View from the pool deck, L34, south-southwest"),
 ]
 ATTRIB = "Imagery © Google"
+FIG_START = 14                       # the 13 level plans (B1, L01-L03, L05 ... L42-L47) are Fig. 01-13
 
 
 def composite(key, stem, dry):
@@ -78,7 +79,13 @@ def add_slides(done, dry):
             "lines": [], "caption": f"{caption} · {ATTRIB}",
         })
         inserted += 1
-    if not dry and inserted:
+    # Figure numbers continue after the level plans across every outro image slide (views, then massing)
+    fig = FIG_START
+    for sl in outro:
+        if sl.get("kind") == "image":
+            sl["fig"] = fig
+            fig += 1
+    if not dry:
         with open(STORY, "w", encoding="utf-8", newline="\n") as f:
             json.dump(d, f, indent=1, ensure_ascii=False); f.write("\n")
     return inserted

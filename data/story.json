@@ -77,12 +77,32 @@
  "outro": [
   {
    "kind": "image",
+   "src": "assets/views/View_O2-L25-E_v1.0.jpg",
+   "label": "L25 · Office 2",
+   "name": "Looking east to the Loop",
+   "sub": "",
+   "lines": [],
+   "caption": "View from Office 2, L25, east · Imagery © Google",
+   "fig": 14
+  },
+  {
+   "kind": "image",
+   "src": "assets/views/View_L45-SSW_v1.0.jpg",
+   "label": "L45 · Hotel B",
+   "name": "Suite, looking south-southwest",
+   "sub": "",
+   "lines": [],
+   "caption": "View from a suite, L45, south-southwest · Imagery © Google",
+   "fig": 15
+  },
+  {
+   "kind": "image",
    "src": "assets/story/massing-sw.jpg",
    "label": "Massing",
    "name": "From the southwest",
    "sub": "",
    "lines": [],
-   "fig": 11,
+   "fig": 16,
    "caption": "Massing from the southwest"
   },
   {
@@ -92,7 +112,7 @@
    "name": "From the north-northeast",
    "sub": "",
    "lines": [],
-   "fig": 12,
+   "fig": 17,
    "caption": "Massing from the north-northeast"
   },
   {
