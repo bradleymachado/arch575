@@ -312,9 +312,24 @@ function renderImage(t) {
   return el;
 }
 
+// 'image-pair' (Brad 2026-10-09): two images side by side, each with its title and Fig. caption below
+function renderPair(t) {
+  const el = clone('tpl-pair');
+  setText(el, 'label', t.label || '');
+  t.items.forEach((it, i) => {
+    const img = field(el, `img${i + 1}`);
+    img.src = it.src;
+    img.alt = it.caption;
+    setText(el, `name${i + 1}`, it.name);
+    setText(el, `caption${i + 1}`, `Fig. ${pad2(it.fig)} — ${it.caption}.`);
+  });
+  return el;
+}
+
 function renderStory(t, data) {
   if (t.kind === 'text') return { kind: 'text', el: renderText(t) };
   if (t.kind === 'image') return { kind: 'image', el: renderImage(t) };
+  if (t.kind === 'image-pair') return { kind: 'image', el: renderPair(t) };   // tower hidden as on image slides
   if (t.kind === 'closing') return { kind: 'title', el: renderTitle(data.title) };
   return null;
 }
@@ -432,7 +447,7 @@ function build(data) {
   frag.append(siteEl);
 
   const story = data.story || { intro: [], outro: [] };
-  const introFigs = (story.intro || []).filter((t) => t.kind === 'image').length;   // sketch slides take Fig. 01.. before the plans
+  const introFigs = (story.intro || []).reduce((n, t) => n + (t.kind === 'image' ? 1 : t.kind === 'image-pair' ? t.items.length : 0), 0);   // sketch slides take Fig. 01.. before the plans
   for (const t of story.intro || []) {
     const r = renderStory(t, data);
     if (!r) continue;

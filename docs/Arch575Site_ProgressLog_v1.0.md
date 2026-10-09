@@ -62,12 +62,19 @@ For Brad: <open items, or "none">
 | 16 | Stacking heading: "Office below, hotel above." + table labels (Office 1 · L06–15, Office 2 · L18–32, Office total, Office target, Hotel · L35–47) | confirmed 2026-10-08 18:40 (Brad: "I accept") |
 | 17 | Ground floor heading: "One grand lobby." + lines "Hotel entrance on Halsted, with the drop-off." / "Office entrance on Washington." / "The office rises at once to a mezzanine for its banks and turnstiles." / "The hotel stays at grade to its cars." (D6) | confirmed 2026-10-08 18:40 (Brad: "I accept") |
 | 18 | Massing slides: "From the southwest", "From the north-northeast" (10/05 placeholder views, greyscale; keep or drop) | confirmed 2026-10-08 18:40 (Brad: "I accept") |
-| 19 | Sketch caption: "Street elevation. Podium height respects the street; the hotel has 360° unobstructed views." (slide 04) | pending Brad (2026-10-09 01:15) |
-| 20 | Sketch caption: "Randolph Street section. Pay careful attention to the pedestrian scale on Randolph." (slide 05) | pending Brad (2026-10-09 01:15) |
-| 21 | Sketch caption: "Hotel entrance, exterior." (slide 06) | pending Brad (2026-10-09 01:15) |
-| 22 | Sketch caption: "Hotel entrance, interior." (slide 07) | pending Brad (2026-10-09 01:15) |
+| 19 | Sketch caption: "Street elevation. Podium height respects the street; the hotel has 360° unobstructed views." (slide 03, left) | pending Brad (2026-10-09 01:15) |
+| 20 | Sketch caption: "Randolph Street section. Pay careful attention to the pedestrian scale on Randolph." (slide 03, right) | pending Brad (2026-10-09 01:15) |
+| 21 | Sketch caption: "Hotel entrance, exterior." (slide 05) | pending Brad (2026-10-09 01:15) |
+| 22 | Sketch caption: "Hotel entrance, interior." (slide 06) | pending Brad (2026-10-09 01:15) |
 
 ---
+
+## 2026-10-09 02:15 · Merged sketch slide (street elevation + Randolph section) · Fable (strategy conversation) · STATUS: done
+Measured: Randolph section v1.2 crop box (22, 24, 1344, 1140) px on v1.1, 1322 x 1116, orange stroke (x 1650-1930, y 1400-1495) painted paper white; new slide kind `image-pair` (two equal columns, 48 px gutter, images bottom-aligned, title + Fig. caption under each); the pair sits as slide 03, before the Thesis slide (Brad: sketches and explanations first); deck 21 slides; section drawing rendered about 866 px wide vs about 740 px before at 1920 x 1080. Views unchanged: office after L18-32, suite after L42-47. No console errors; phone capture blank in headless Edge (unverified).
+Outputs: `assets/sketches/RandolphStreet_SectionSketch_Web_v1.2.jpg` (v1.1 kept), `index.html` (tpl-pair), `js/app.js` (renderPair, fig count), `css/app.css` (.pair), `data/story.json`; mirror `<ROOT>\03_Design\05_Presentation\Web\Assets\Sketches\...v1.2.jpg`; manifest v1.3.
+Images: `<ROOT>\03_Design\05_Presentation\Web\Process\Arch575Site_S03Pair_CheckPage_v1.0.png`, `Arch575Site_S03Pair_Last_v1.0.png`.
+Deviations: the brief's auto-detected crop box first came out at (0, 15, 1602, 1539) because the paper texture counted as ink; an ink-or-marker mask (luminance < 160 or saturation > 60, rows/cols > 8 px) gave (22, 24, 1344, 1140), within 28 px of the brief's expectation, so no stop. Hotel-entrance sketches stay after the Thesis slide (Brad asked for "them both" before slide 03).
+For Brad: say if the two hotel-entrance sketches should also move ahead of the Thesis slide.
 
 ## 2026-10-09 01:15 · Hand-sketch slides · Fable (strategy conversation) · STATUS: done (captions pending Brad)
 Measured: 4 image slides inserted after the Thesis slide (slides 04-07: street elevation, Randolph Street section, hotel entrance exterior, hotel entrance interior); deck 25 slides; figure numbers: sketches Fig. 01-04, level plans Fig. 05-17 (js/app.js offsets by the intro image count), views Fig. 18-19, massing Fig. 20-21.

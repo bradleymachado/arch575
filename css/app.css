@@ -180,6 +180,45 @@ html, body { height: 100%; }
 
 .slide--site .slide__text { grid-column: 9 / 13; }
 
+
+/* Image pair (story.json kind 'image-pair', Brad 2026-10-09): two equal columns, 48 px gutter,
+   images bottom-aligned on one baseline, title + Fig. caption below each; no frame, shadow or radius */
+.slide--pair {
+  grid-template-rows: auto minmax(0, 1fr);
+  align-content: start;
+}
+.pair__eyebrow { grid-column: 1 / -1; }
+.pair {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 48px;
+  min-height: 0;
+  align-items: end;
+}
+.pair__item {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto auto;
+  height: 100%;
+  min-height: 0;
+  margin: 0;
+}
+.pair__img {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+  object-position: center bottom;
+  display: block;
+}
+.pair__title {
+  margin-top: 16px;
+  font-size: clamp(22px, 1.8vw, 32px);
+  line-height: 1.15;
+  color: var(--color-ink);
+}
+.pair__item figcaption { margin-top: 8px; }
+
 /* --------------------------------------------------------------------------
    Story slides (data/story.json, review T4): text = title layout, image = site layout
    -------------------------------------------------------------------------- */
@@ -535,6 +574,12 @@ html, body { height: 100%; }
 
   .deck[data-kind="site"] .deck__tower,
   .deck[data-kind="image"] .deck__tower { visibility: visible; }
+
+  .slide--pair { display: block; }
+  .pair { display: block; }
+  .pair__item { height: auto; display: block; }
+  .pair__img { height: auto; }
+  .pair__item + .pair__item { margin-top: 32px; }
 
   .slide--title { min-height: 60vh; }
   .slide--title .slide__text {

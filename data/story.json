@@ -2,6 +2,24 @@
  "_source": "Review notes T4 (2026-10-08). Copy from 03_Design/05_Presentation/MidReview/ARCH575_MidReview_Plan_v1.0.md decisions D5 (thesis) and D6 (the hall); totals from levels.json rows, office target 812,500 gsf from V14Plates plan. All lines await Brad's confirmation (copy gate).",
  "intro": [
   {
+   "kind": "image-pair",
+   "label": "Sketch",
+   "items": [
+    {
+     "src": "assets/sketches/Tower_ContextElevationSketch_Web_v1.1.jpg",
+     "name": "Street elevation",
+     "fig": 1,
+     "caption": "Street elevation. Podium height respects the street; the hotel has 360° unobstructed views"
+    },
+    {
+     "src": "assets/sketches/RandolphStreet_SectionSketch_Web_v1.2.jpg",
+     "name": "Randolph Street section",
+     "fig": 2,
+     "caption": "Randolph Street section. Pay careful attention to the pedestrian scale on Randolph"
+    }
+   ]
+  },
+  {
    "kind": "text",
    "eyebrow": "Thesis",
    "heading": "The gateway lot from the Loop into Fulton Market.",
@@ -72,26 +90,6 @@
      "accent": true
     }
    ]
-  },
-  {
-   "kind": "image",
-   "src": "assets/sketches/Tower_ContextElevationSketch_Web_v1.1.jpg",
-   "label": "Sketch",
-   "name": "Street elevation",
-   "sub": "",
-   "lines": [],
-   "fig": 1,
-   "caption": "Street elevation. Podium height respects the street; the hotel has 360° unobstructed views"
-  },
-  {
-   "kind": "image",
-   "src": "assets/sketches/RandolphStreet_SectionSketch_Web_v1.1.jpg",
-   "label": "Sketch",
-   "name": "Randolph Street section",
-   "sub": "",
-   "lines": [],
-   "fig": 2,
-   "caption": "Randolph Street section. Pay careful attention to the pedestrian scale on Randolph"
   },
   {
    "kind": "image",
