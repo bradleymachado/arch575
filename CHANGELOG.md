@@ -2,7 +2,7 @@
 
 Format: one section per tag, newest first. Site releases use `vMAJOR.MINOR.PATCH`; documentation milestones use `plan-vX.Y`.
 
-## v0.5.0 — 2026-10-08
+## v1.1.0 — 2026-10-08
 
 - Entry intro (S15): `js/intro.js` stage machine on `requestAnimationFrame` (ease-in-out-cubic): A city sheet zoom 2.5 s (starts 1.5× wider than Chicago scale, the sheet fades in), hold 1.0 s; B `#rest` → 0.3, `#randolph` draws by `stroke-dashoffset`, `#sitebox` in ink, 1.0 s; C zoom to the corridor (Michigan Ave → site box fills the width, city → corridor sheet cross-fade, caption `Randolph St · Michigan Ave → 735 W Randolph · 1.2 mi`) 2.5 s, hold 1.5 s; D map → canvas cross-fade 0.8 s then a 3.0 s yaw/pitch/distance/target tween from a straight-down camera over the map frame to the title camera; title text 0.5 s. Total 12.8 s. Both sheets share one map frame (`data/site.json`); each gets a matrix on `g#map` from its viewBox fit. HTML caption + attribution line (mono 13 / 11 px) replace the sheets' own `#attribution` text. `css/intro.css`.
 - Hooks: plays once on load at `#01` (not on deep links); any key or click skips (capture-phase, the key does not navigate); `I` replays (`js/app.js`); `prefers-reduced-motion` → final frame; a 3 s asset guard shows the title if the sheets are not in; below 900 px only stages A–C play in a 40vh band at the top (no 3D stage, no context download). `?introat=A|B|C|cut|D|title` freezes a stage for captures; `#intro[data-log]` / `[data-measure]` carry the stage log and the cut-frame check.
