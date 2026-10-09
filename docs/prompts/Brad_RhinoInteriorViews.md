@@ -4,7 +4,7 @@ Brad runs this in a Claude desktop chat that has the Rhino MCP. The web conversa
 
 ```
 5.1 Interior View Captures
-Project: ARCH 575 — 735 W Randolph tower (Core_Tower_V14_v1.4.3dm, open in Rhino 8). Read only: never save, spawn or close a slot. Rhino MCP: list_slots first, then pass slot "aardvark" on every call. No computer use while Brad is at the machine; restore Brad's active viewport camera at the end.
+Project: ARCH 575 — 725 W Randolph tower (Core_Tower_V14_v1.4.3dm, open in Rhino 8). Read only: never save, spawn or close a slot. Rhino MCP: list_slots first, then pass slot "aardvark" on every call. No computer use while Brad is at the machine; restore Brad's active viewport camera at the end.
 Goal: eight perspective captures from inside the building with a TRANSPARENT background and the glazing hidden, so the web conversation can place the matching Google Earth frame (02_Site\Photos_Survey\735WRandolph_<view>_View_v1.1.jpg, 1456 x 816, camera at 41.8839 -87.6469, level horizon) behind each one.
 Views (key · floor · heading · eye height = floor z + 5 ft, model feet; floor z from the model's level data, fallback values given):
   1 O1-L10-E   · L10 open office   · east (target = eye + (+1000, 0, 0))  · eye z 154 ft

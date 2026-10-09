@@ -13,7 +13,7 @@
      step i (0..5) starts at i x 2400: rise 400, hold 2000, fall 400 overlapping
      the next rise.  Steps: Randolph St (r_randolph), Restaurant Row
      (b_restaurantrow), Halsted St (r_halsted), Washington Blvd (r_washington),
-     Skybridge (b_skybridge), 735 W Randolph (Site band).
+     Skybridge (b_skybridge), 725 W Randolph (Site band).
      ghost rise 800 after the site band (14400-15200), site hold 8000
      (15200-23200), reset to grey 600 (23200-23800), cycle 23800, LOOP.
      LOOP = false holds on the site + ghost at 23200.
@@ -58,7 +58,7 @@ const FEATURES = [
   { id: 'halsted', label: 'Halsted Street', node: 'r_halsted' },
   { id: 'washington', label: 'Washington Boulevard', node: 'r_washington' },
   { id: 'skybridge', label: 'Skybridge', node: 'b_skybridge' },
-  { id: 'site', label: '735 W Randolph', node: 'Site' },
+  { id: 'site', label: '725 W Randolph', node: 'Site' },
 ];
 const N = FEATURES.length;
 const SITE_START = (N - 1) * STEP_MS;                 // 12000

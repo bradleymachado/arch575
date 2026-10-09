@@ -1,6 +1,6 @@
 # arch575.bradmachado.com
 
-ARCH 575 mid-review presentation (Fall 2026): West Loop Gateway, a mixed-use office + hotel tower at 735 W. Randolph St., Chicago. Brad Machado, M.Arch, Illinois School of Architecture.
+ARCH 575 mid-review presentation (Fall 2026): West Loop Gateway, a mixed-use office + hotel tower at 725 W. Randolph St., Chicago. Brad Machado, M.Arch, Illinois School of Architecture.
 
 Static site: title, site, and ten levels. Each level shows a rotating three.js tower with that level highlighted, a furnished floor plan, and a short data table.
 

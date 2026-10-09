@@ -28,8 +28,8 @@ COLOURS = {"OFFICE": "#B5B5B5", "HOTEL": "#B5B5B5", "AMENITY": "#B5B5B5", "OUTDO
            "CIRCULATION": "#FFFFFF", "NOSTOP": "#F0F0F0", "BOH": "#D9D9D9", "MEP": "#3A3A3A"}
 CAMERA = {"azDeg": 31.95, "pitchDeg": -7.74, "rollDeg": -4.11}
 TITLE = {"eyebrow": "ARCH 575 / Mid-review", "h1": "West Loop Gateway",
-         "lines": ["Mixed-use tower, 735 W. Randolph St.", "ARCH 575 mid-review, Fall 2026"]}
-SITE_TEXT = {"label": "Site", "name": "735 W. Randolph St.", "sub": "West Loop, Chicago",
+         "lines": ["Mixed-use tower, 725 W. Randolph St.", "ARCH 575 mid-review, Fall 2026"]}
+SITE_TEXT = {"label": "Site", "name": "725 W. Randolph St.", "sub": "West Loop, Chicago",
              "lines": ["Randolph to Washington.", "Kennedy Expressway to the east.", "Gateway to Restaurant Row."]}
 MAX_EDGE, JPEG_Q = 2400, 85
 

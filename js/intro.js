@@ -137,7 +137,7 @@ async function loadAssets() {
   mapsEl.replaceChildren(city, corr);
   attributionEl.textContent = site.attribution || 'Map data © OpenStreetMap contributors';
   const miles = site.randolph?.toSiteCentreMiles ?? site.corridorMiles;
-  captionEl.textContent = `Randolph St · Michigan Ave → 735 W Randolph · ${miles.toFixed(1)} mi`;
+  captionEl.textContent = `Randolph St · Michigan Ave → 725 W Randolph · ${miles.toFixed(1)} mi`;
   st.assets = { city, corr, site };
   return st.assets;
 }
