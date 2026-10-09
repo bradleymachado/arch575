@@ -39,17 +39,17 @@ MAX_EDGE, JPEG_Q = 2400, 85
 # box = the B1 / podium footprint. No program key: the plans carry no program fills.
 _Y = 17.5 / 54.0
 PODIUM = [
-    {"key": "L01", "label": "L01", "name": "Ground", "sub": "+ Randolph",
+    {"key": "L01", "label": "L01", "north": "right", "name": "Ground", "sub": "+ Randolph",
      "description": "Grand lobby, Randolph restaurant and kitchen, loading dock, bike storage, employee entrance.",
      "rows": [["Elevation", "+0 ft"], ["Floor to floor", "18 ft"]],
      "program": "", "box": [0.0, 97.8, 0.0, 63.4], "y": [0.0, round(18 * _Y, 4)], "keys": [],
      "plan": "assets/plans/PlanPodium_L01_v1.2.svg"},
-    {"key": "L02", "label": "L02", "name": "Mezzanine", "sub": "+ Parking",
+    {"key": "L02", "label": "L02", "north": "right", "name": "Mezzanine", "sub": "+ Parking",
      "description": "Lobby mezzanine and pavilion lounge; first parking deck and ramps.",
      "rows": [["Elevation", "+18 ft"], ["Floor to floor", "12 ft"]],
      "program": "", "box": [0.0, 97.8, 0.0, 63.4], "y": [round(18 * _Y, 4), round(30 * _Y, 4)], "keys": [],
      "plan": "assets/plans/PlanPodium_L02_v1.0.svg"},
-    {"key": "L03", "label": "L03", "name": "Parking", "sub": "Podium deck",
+    {"key": "L03", "label": "L03", "north": "right", "name": "Parking", "sub": "Podium deck",
      "description": "Parking around the core, ramped deck to deck.",
      "rows": [["Elevation", "+30 ft"], ["Floor to floor", "12 ft"]],
      "program": "", "box": [0.0, 97.8, 0.0, 63.4], "y": [round(30 * _Y, 4), round(42 * _Y, 4)], "keys": [],

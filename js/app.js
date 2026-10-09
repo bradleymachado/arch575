@@ -541,6 +541,7 @@ function renderLevel(level, n, data) {
   // Plan, scale bar, caption
   const img = field(el, 'plan');
   img.src = level.plan;
+  if (level.north) img.closest('figure').dataset.north = level.north;
   img.alt = `Plan, ${level.label} ${level.name}`;
   img.decoding = 'async';
   setText(el, 'caption', `Fig. ${pad2(n)} — ${level.name}, 1 in = ${FT_PER_IN} ft.`);
@@ -588,8 +589,11 @@ function updateScale(fig) {
   svg.innerHTML =
     `<path class="sb" d="M0.5,${y - 6} V${y}.5 H${L + 0.5} V${y - 6}"/>` +
     `<text x="${L + 8}" y="${y + 1}">${ft} ft</text>` +
-    `<path class="sb-fill" d="M${nx},${y - 4} L${nx + 10},${y - 8} V${y} Z"/>` +
-    `<path class="sb" d="M${nx + 10},${y - 4}.5 H${nx + 28}"/>` +
+    (fig.dataset.north === 'right'                 // podium plans are drawn north right (Brad 2026-10-09); tower plans north left
+      ? `<path class="sb" d="M${nx},${y - 4}.5 H${nx + 18}"/>` +
+        `<path class="sb-fill" d="M${nx + 28},${y - 4} L${nx + 18},${y - 8} V${y} Z"/>`
+      : `<path class="sb-fill" d="M${nx},${y - 4} L${nx + 10},${y - 8} V${y} Z"/>` +
+        `<path class="sb" d="M${nx + 10},${y - 4}.5 H${nx + 28}"/>`) +
     `<text x="${nx + 36}" y="${y + 1}">N</text>`;
 }
 

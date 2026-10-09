@@ -101,7 +101,8 @@
     5.8333
    ],
    "keys": [],
-   "plan": "assets/plans/PlanPodium_L01_v1.2.svg"
+   "plan": "assets/plans/PlanPodium_L01_v1.2.svg",
+   "north": "right"
   },
   {
    "key": "L02",
@@ -131,7 +132,8 @@
     9.7222
    ],
    "keys": [],
-   "plan": "assets/plans/PlanPodium_L02_v1.0.svg"
+   "plan": "assets/plans/PlanPodium_L02_v1.0.svg",
+   "north": "right"
   },
   {
    "key": "L03",
@@ -161,7 +163,8 @@
     13.6111
    ],
    "keys": [],
-   "plan": "assets/plans/PlanPodium_L03_v1.0.svg"
+   "plan": "assets/plans/PlanPodium_L03_v1.0.svg",
+   "north": "right"
   },
   {
    "key": "L05",
