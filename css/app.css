@@ -291,6 +291,11 @@ html, body { height: 100%; }
 .slide--grid .text__lines p { font-size: 17px; }
 .slide--grid .text__data { max-width: none; }
 .slide--grid .data.text__data td, .slide--grid .data.text__data th { font-size: 15px; }
+/* Hand sketch under the data table (story.json views[].sketch, Brad 2026-10-09: environment): text column width,
+   48 px below the table's last rule, fills down to the bottom of the grid's lower captions; height governs */
+.text__sketch { flex: 1 1 0; min-height: 0; width: 100%; margin: 48px 0 0; display: grid; grid-template-rows: minmax(0, auto) auto; align-content: start; justify-items: start; }
+.text__sketch img { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; min-height: 0; object-fit: contain; object-position: left top; }
+.text__sketch figcaption { margin-top: 6px; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; color: var(--color-muted); text-transform: uppercase; }
 
 /* Text slide with an aside image (story.json text.aside, Brad 2026-10-09): text cols 1-4,
    tower + callouts cols 5-9, the aside (building section) cols 10-12 with its Fig. caption */
@@ -650,6 +655,8 @@ html, body { height: 100%; }
   .slide--grid { display: block; }
   .model__grid { display: grid; grid-template-rows: auto auto; margin-top: 24px; }
   .model__item img { height: auto; }
+  .text__sketch { display: block; margin-top: 32px; }
+  .text__sketch img { width: 100%; max-height: none; }
   .slide--pair { display: block; }
   .pair { display: block; }
   .pair__item { height: auto; display: block; }

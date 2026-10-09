@@ -259,7 +259,11 @@
      "src": "assets/story/environment/Shadow_Grid_v1.1.jpg",
      "name": "Ground-plane shadows, 09:00 / 12:00 / 15:00"
     }
-   ]
+   ],
+   "sketch": {
+    "src": "assets/sketches/Facade_GlassFinSketch_Web_v1.0.jpg",
+    "caption": "Glass fin detail, after Gannett / USA Today"
+   }
   }
  ]
 }

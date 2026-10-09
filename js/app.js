@@ -438,6 +438,16 @@ function renderStory(t, data) {
     } else if (grid) {
       grid.remove();
     }
+    if (t.sketch && t.sketch.src) {               // hand sketch under the data table, text column (Brad 2026-10-09: environment)
+      const fig = document.createElement('figure');
+      fig.className = 'text__sketch';
+      const img = document.createElement('img');
+      img.src = t.sketch.src; img.alt = t.sketch.caption || ''; img.loading = 'lazy';
+      const cap = document.createElement('figcaption');
+      cap.textContent = t.sketch.caption || '';
+      fig.append(img, cap);
+      el.querySelector('.slide__text').append(fig);
+    }
     return { kind: t.kind === 'grid' ? 'image' : 'model', el };   // a grid slide hides the tower like an image slide
   }
   if (t.kind === 'closing') return { kind: 'title', el: renderTitle(data.title) };
