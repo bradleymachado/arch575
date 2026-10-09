@@ -72,6 +72,46 @@
      "accent": true
     }
    ]
+  },
+  {
+   "kind": "image",
+   "src": "assets/sketches/Tower_ContextElevationSketch_Web_v1.1.jpg",
+   "label": "Sketch",
+   "name": "Street elevation",
+   "sub": "",
+   "lines": [],
+   "fig": 1,
+   "caption": "Street elevation. Podium height respects the street; the hotel has 360° unobstructed views"
+  },
+  {
+   "kind": "image",
+   "src": "assets/sketches/RandolphStreet_SectionSketch_Web_v1.1.jpg",
+   "label": "Sketch",
+   "name": "Randolph Street section",
+   "sub": "",
+   "lines": [],
+   "fig": 2,
+   "caption": "Randolph Street section. Pay careful attention to the pedestrian scale on Randolph"
+  },
+  {
+   "kind": "image",
+   "src": "assets/sketches/Facade_PerspSketch_Web_v1.1.jpg",
+   "label": "Sketch",
+   "name": "Hotel entrance, exterior",
+   "sub": "",
+   "lines": [],
+   "fig": 3,
+   "caption": "Hotel entrance, exterior"
+  },
+  {
+   "kind": "image",
+   "src": "assets/sketches/Ground_PerspSketch_Web_v1.2.jpg",
+   "label": "Sketch",
+   "name": "Hotel entrance, interior",
+   "sub": "",
+   "lines": [],
+   "fig": 4,
+   "caption": "Hotel entrance, interior"
   }
  ],
  "outro": [
@@ -83,7 +123,7 @@
    "sub": "",
    "lines": [],
    "caption": "View from Office 2, L25, east · Imagery © Google",
-   "fig": 14
+   "fig": 18
   },
   {
    "kind": "image",
@@ -93,7 +133,7 @@
    "sub": "",
    "lines": [],
    "caption": "View from a suite, L45, south-southwest · Imagery © Google",
-   "fig": 15
+   "fig": 19
   },
   {
    "kind": "image",
@@ -102,7 +142,7 @@
    "name": "From the southwest",
    "sub": "",
    "lines": [],
-   "fig": 16,
+   "fig": 20,
    "caption": "Massing from the southwest"
   },
   {
@@ -112,7 +152,7 @@
    "name": "From the north-northeast",
    "sub": "",
    "lines": [],
-   "fig": 17,
+   "fig": 21,
    "caption": "Massing from the north-northeast"
   },
   {

@@ -29,7 +29,7 @@ VIEW_SET = [
     ("Pool-L34-SSW", "Pool-L34-SSW", "L34 · Clubhouse", "Pool deck, looking south-southwest", "View from the pool deck, L34, south-southwest"),
 ]
 ATTRIB = "Imagery © Google"
-FIG_START = 14                       # the 13 level plans (B1, L01-L03, L05 ... L42-L47) are Fig. 01-13
+FIG_START = 18                       # 4 sketch slides (Fig. 01-04) + 13 level plans (Fig. 05-17) come first
 
 
 def composite(key, stem, dry):

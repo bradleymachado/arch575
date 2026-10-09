@@ -62,8 +62,19 @@ For Brad: <open items, or "none">
 | 16 | Stacking heading: "Office below, hotel above." + table labels (Office 1 · L06–15, Office 2 · L18–32, Office total, Office target, Hotel · L35–47) | confirmed 2026-10-08 18:40 (Brad: "I accept") |
 | 17 | Ground floor heading: "One grand lobby." + lines "Hotel entrance on Halsted, with the drop-off." / "Office entrance on Washington." / "The office rises at once to a mezzanine for its banks and turnstiles." / "The hotel stays at grade to its cars." (D6) | confirmed 2026-10-08 18:40 (Brad: "I accept") |
 | 18 | Massing slides: "From the southwest", "From the north-northeast" (10/05 placeholder views, greyscale; keep or drop) | confirmed 2026-10-08 18:40 (Brad: "I accept") |
+| 19 | Sketch caption: "Street elevation. Podium height respects the street; the hotel has 360° unobstructed views." (slide 04) | pending Brad (2026-10-09 01:15) |
+| 20 | Sketch caption: "Randolph Street section. Pay careful attention to the pedestrian scale on Randolph." (slide 05) | pending Brad (2026-10-09 01:15) |
+| 21 | Sketch caption: "Hotel entrance, exterior." (slide 06) | pending Brad (2026-10-09 01:15) |
+| 22 | Sketch caption: "Hotel entrance, interior." (slide 07) | pending Brad (2026-10-09 01:15) |
 
 ---
+
+## 2026-10-09 01:15 · Hand-sketch slides · Fable (strategy conversation) · STATUS: done (captions pending Brad)
+Measured: 4 image slides inserted after the Thesis slide (slides 04-07: street elevation, Randolph Street section, hotel entrance exterior, hotel entrance interior); deck 25 slides; figure numbers: sketches Fig. 01-04, level plans Fig. 05-17 (js/app.js offsets by the intro image count), views Fig. 18-19, massing Fig. 20-21.
+Outputs: `assets/sketches/*.jpg` (4, copied unchanged from `<ROOT>\03_Design\05_Presentation\Web\Assets\Sketches`), `data/story.json`, `js/app.js` (introFigs), `tools/composite_views.py` (FIG_START 18); manifest v1.2 in the Web folder; PROJECT_LOG entry.
+Images: `<ROOT>\03_Design\05_Presentation\Web\Process\Arch575Site_Sketch_Slide04_v1.0.png` … `_Slide08_`, `_SketchPhone_v1.0.png`.
+Deviations: the brief's anchor slide ("Ground floor" text slide) no longer exists (removed 2026-10-08); the group sits after the merged Thesis/Stacking slide instead. Transcription doubt: the elevation's neighbour label reads "730 W Randolph" to me, the manifest says "700 W Randolph"; neither is used in a caption.
+For Brad: confirm or edit copy rows 19-22 (sketch captions); say if the group should sit elsewhere (default: large to small scale, after Thesis).
 
 ## 2026-10-09 00:25 · Plan tint, doors, people (v1.5) · cs-exec-high (Opus) · STATUS: done
 - 2026-10-08 23:57 (PC clock) Step 0: started. Rhino MCP not available to this agent; renderer reads the saved Core_Tower_V14_v1.4.3dm with rhino3dm (unsaved Rhino edits not seen). MidReview_LevelDeck_v1.5.py and Tower_LevelDeck_v1.9.pptx already exist, so the deck script becomes v1.6 and the PowerPoint v1.10.

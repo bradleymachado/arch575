@@ -432,6 +432,7 @@ function build(data) {
   frag.append(siteEl);
 
   const story = data.story || { intro: [], outro: [] };
+  const introFigs = (story.intro || []).filter((t) => t.kind === 'image').length;   // sketch slides take Fig. 01.. before the plans
   for (const t of story.intro || []) {
     const r = renderStory(t, data);
     if (!r) continue;
@@ -443,7 +444,7 @@ function build(data) {
   deckEl.insertBefore(frag, towerWrap);
 
   data.levels.forEach((level, k) => {
-    const el = renderLevel(level, k + 1, data);
+    const el = renderLevel(level, k + 1 + introFigs, data);
     slides.push({ index: slides.length, kind: 'level', level, levelIndex: k, el });
     deckEl.append(el);
   });
