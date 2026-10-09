@@ -105,6 +105,11 @@ html, body { height: 100%; }
 
 .deck[data-kind="title"] .deck__tower,
 .deck[data-kind="text"]  .deck__tower { grid-column: 7 / 13; }
+/* Level slides (Brad, 2026-10-08 23:45): the tower sits under the text block
+   in cols 1-3, bottom 42 % of the column, smaller; the plan takes cols 4-12 */
+@media (min-width: 900px) {
+  .deck[data-kind="level"] .deck__tower { grid-column: 1 / 4; align-self: end; height: 42%; }
+}
 .deck[data-kind="site"]  .deck__tower,
 .deck[data-kind="image"] .deck__tower { visibility: hidden; }
 
@@ -387,7 +392,7 @@ html, body { height: 100%; }
 /* Plan figure: image hangs from the top-left; scale bar and caption sit
    directly under the rendered plan */
 .slide__plan {
-  grid-column: 7 / 13;
+  grid-column: 4 / 13;
   display: flex;
   flex-direction: column;
   min-height: 0;
