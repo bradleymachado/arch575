@@ -189,6 +189,53 @@
      "name": "Hotel"
     }
    ]
+  },
+  {
+   "kind": "grid",
+   "after": "L42-L47",
+   "eyebrow": "Supplemental",
+   "heading": "Environment",
+   "lines": [
+    "The south face takes three times the sun of the north.",
+    "With clear glass, disturbing glare reaches half of occupied hours; reflections fall on I-90 and Washington.",
+    "Clear glass, WWR 0.80, VT 0.60. Next: test the frit gradient."
+   ],
+   "rows": [
+    [
+     "Sun, S · E · W · N",
+     "1,036 · 744 · 746 · 337 kWh/m²"
+    ],
+    [
+     "Glare, Office 1 · 2 · Hotel",
+     "51 · 62 · 56 % of hours"
+    ],
+    [
+     "Reflection",
+     "up to 434 h/yr east, over I-90"
+    ],
+    [
+     "L28 terrace sun",
+     "282 days a year ≥ 2 h"
+    ]
+   ],
+   "images": [
+    {
+     "src": "assets/story/environment/Radiation_ByFacade_v1.0.jpg",
+     "name": "Annual incident radiation by facade, kWh/m²"
+    },
+    {
+     "src": "assets/story/environment/Glare_Plans_v1.0.jpg",
+     "name": "Occupied hours with DGP ≥ 0.40"
+    },
+    {
+     "src": "assets/story/environment/ReflectedSun_SitePlan_v1.0.jpg",
+     "name": "Reflected direct sun at street, h/yr"
+    },
+    {
+     "src": "assets/story/environment/Shadow_Grid_v1.1.jpg",
+     "name": "Ground-plane shadows, 09:00 / 12:00 / 15:00"
+    }
+   ]
   }
  ]
 }

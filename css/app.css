@@ -271,6 +271,17 @@ html, body { height: 100%; }
 .model__item figcaption { margin-top: 6px; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; color: var(--color-muted); text-transform: uppercase; }
 .deck[data-kind="model"][data-grid="1"] .deck__tower { grid-column: 7 / 13; grid-row: 1 / 3; }
 
+/* Grid slides (story.json views[].kind 'grid', Brad 2026-10-09: environment): text + data rows cols 1-3,
+   2 x 2 image grid cols 4-12, no tower */
+.slide--grid .slide__text { grid-column: 1 / 5; grid-row: 1; min-width: 0; }
+.slide--grid .model__grid { grid-column: 5 / 13; grid-row: 1; margin-top: 0; gap: 16px 40px; }
+.slide--grid .data.text__data th { white-space: normal; width: 42%; padding-right: 16px; }
+.slide--grid .text__h2 { font-size: clamp(32px, 2.8vw, 52px); }
+.slide--grid .text__lines { max-width: none; }
+.slide--grid .text__lines p { font-size: 17px; }
+.slide--grid .text__data { max-width: none; }
+.slide--grid .data.text__data td, .slide--grid .data.text__data th { font-size: 15px; }
+
 /* Text slide with an aside image (story.json text.aside, Brad 2026-10-09): text cols 1-4,
    tower + callouts cols 5-9, the aside (building section) cols 10-12 with its Fig. caption */
 .slide--text.has-aside .slide__text { grid-column: 1 / 5; }
@@ -625,6 +636,7 @@ html, body { height: 100%; }
   .text__aside { display: block; margin-top: 32px; }
   .text__aside-img { height: auto; }
   .slide--model.has-grid { display: block; }
+  .slide--grid { display: block; }
   .model__grid { display: grid; grid-template-rows: auto auto; margin-top: 24px; }
   .model__item img { height: auto; }
   .slide--pair { display: block; }

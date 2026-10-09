@@ -346,10 +346,10 @@ function renderStory(t, data) {
   if (t.kind === 'text') return { kind: 'text', el: renderText(t) };
   if (t.kind === 'image') return { kind: 'image', el: renderImage(t) };
   if (t.kind === 'image-pair') return { kind: 'image', el: renderPair(t) };   // tower hidden as on image slides
-  if (t.kind === 'model') {                       // supplemental GLB in place of the tower (js/tower.js showModel)
+  if (t.kind === 'model' || t.kind === 'grid') {  // supplemental GLB in place of the tower (js/tower.js showModel), or images only
     const el = renderText({ eyebrow: t.eyebrow || t.label || '', heading: t.heading || t.name || '', lines: t.lines || [], rows: t.rows || [], images: t.images });
-    el.classList.add('slide--model');
-    el.dataset.model = t.src;
+    el.classList.add(t.kind === 'grid' ? 'slide--grid' : 'slide--model');
+    if (t.src) el.dataset.model = t.src;
     const grid = field(el, 'grid');
     if (t.images && t.images.length) {           // 2 x 2 image grid left of the model (Brad 2026-10-09)
       for (const im of t.images) {
@@ -367,7 +367,7 @@ function renderStory(t, data) {
     } else if (grid) {
       grid.remove();
     }
-    return { kind: 'model', el };
+    return { kind: t.kind === 'grid' ? 'image' : 'model', el };   // a grid slide hides the tower like an image slide
   }
   if (t.kind === 'closing') return { kind: 'title', el: renderTitle(data.title) };
   return null;
@@ -507,7 +507,7 @@ function build(data) {
     slides.push({ index: slides.length, kind: 'level', level, levelIndex: k, el });
     deckEl.append(el);
     for (const t of views.filter((v) => v.after === level.key)) {
-      const isModel = t.kind === 'model';
+      const isModel = t.kind === 'model' || t.kind === 'grid';
       if (!isModel) fig += 1;
       const r = renderStory(isModel ? t : { ...t, kind: 'image', fig }, data);
       if (!r) continue;
