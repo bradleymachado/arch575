@@ -2,18 +2,19 @@
 
 Two desktop chats: the Rhino MCP chat exports the plates; the Blender MCP chat builds the room and renders. The web conversation picks the renders up from `03_Design\05_Presentation\Views\` (`tools/composite_views.py` accepts `*_Render_v1.0.png` as finished images) and adds the view slides. Optional ComfyUI pass after the render, never instead of it.
 
-Order tonight: view 7 (L45 suite SSW) first as the pilot, then 3 (L25 east). The other six only if time allows.
+Order tonight (Brad 01:05): 1 L45 suite SSW (pilot) · 2 L25 executive office east · 3 L34 pool deck / patio SSW (needs one new Earth frame, see D). The other views only if time allows.
 
 ## A — Rhino chat (5 min)
 
 ```
 5.1a Plate export for Blender
 Project: ARCH 575 — Core_Tower_V14_v1.4.3dm open in Rhino 8. Read only; list_slots first, slot "aardvark" on every call; never save, spawn or close.
-Export, for L45 and L25, the geometry Blender needs for one interior view each: slab outline, core walls, partitions / demising walls, glazing line and mullion grid of that floor, the ceiling slab above, and any 3D furniture blocks on the floor. Select by level layers; _-Export selected as OBJ (feet, Y up off, Z up, polygons, materials off) to
+Export, for L45, L25 and L34, the geometry Blender needs for one view each (L34 = the clubhouse floor with its pool deck / perimeter terrace, including the deck slab edge, parapet or guardrail line and the pool outline): slab outline, core walls, partitions / demising walls, glazing line and mullion grid of that floor, the ceiling slab above, and any 3D furniture blocks on the floor. Select by level layers; _-Export selected as OBJ (feet, Y up off, Z up, polygons, materials off) to
   C:\Users\User\OneDrive - University of Illinois - Urbana\Architecture\2026 Fall - Arch 575\03_Design\05_Presentation\Views\Plate_L45_v1.0.obj
   C:\Users\User\OneDrive - University of Illinois - Urbana\Architecture\2026 Fall - Arch 575\03_Design\05_Presentation\Views\Plate_L25_v1.0.obj
-Report: floor z and ceiling z of each level (ft), the plate's bounding box (ft, model axes X east Y north, footprint corner at origin), the corner suite on L45 that faces south-southwest (its room outline corners), and the executive office on L25 facing east. Restore the viewport. One dated PROJECT_LOG.md entry.
-STOP - report the two file paths and the room corners before I continue.
+  C:\Users\User\OneDrive - University of Illinois - Urbana\Architecture\2026 Fall - Arch 575\03_Design\05_Presentation\Views\Plate_L34_v1.0.obj
+Report: floor z and ceiling z of each level (ft), the plate's bounding box (ft, model axes X east Y north, footprint corner at origin), the corner suite on L45 that faces south-southwest (its room outline corners), the executive office on L25 facing east, and the L34 deck: its outline corners, which edge faces south-southwest toward the Loop, and the pool outline. Restore the viewport. One dated PROJECT_LOG.md entry.
+STOP - report the three file paths and the room / deck corners before I continue.
 ```
 
 ## B — Blender chat (45–60 min for the pilot)
@@ -31,7 +32,18 @@ Build:
 STOP - report the render path and the camera values before I continue.
 ```
 
-Then repeat for L25 with `Plate_L25_v1.0.obj`, the executive office facing east, the frame `735WRandolph_O2-L25-E_View_v1.1.jpg`, heading 90 deg, file `735WRandolph_O2-L25-E_Render_v1.0.png`.
+Then repeat for L25 with `Plate_L25_v1.0.obj`, the executive office facing east, the frame `735WRandolph_O2-L25-E_View_v1.1.jpg`, heading 90 deg, file `735WRandolph_O2-L25-E_Render_v1.0.png`. Office build: corner executive office with a desk and two guest chairs, a credenza, a small round meeting table at the window, glass front to the corridor; same material rules.
+
+Then the patio, L34, with `Plate_L34_v1.0.obj`, the frame `735WRandolph_Pool-L34-SSW_View_v1.1.jpg` (from D below), heading 202.5 deg, file `735WRandolph_Pool-L34-SSW_Render_v1.0.png`. Patio build: the deck slab with a 1.1 m glass guardrail on the edge (no mullions; the view is open air), the pool outline as water (glass-like, 1.2 m deep), loungers in pairs along the pool, a bar counter with stools under the clubhouse soffit at the inner edge, two planters; camera on the deck at eye height looking south-southwest over the guardrail, the pool entering from the left, the skyline filling the top half. The Earth frame plane and sun as in step 3; the frame is an exterior shot, so no glazing in front of it.
+
+## D — Google Earth chat (2 min): one new frame for the patio
+
+```
+One frame, same rules as the eight 18:31 views (no UI words, 1456 x 816, Imagery © Google watermark kept):
+https://earth.google.com/web/@41.8839,-87.6469,343.5a,1d,60y,202.5h,90t,0r
+(L34 deck floor 528.2 ft + 5 ft eye = 162.5 m above grade 181 m = 343.5 m ASL; heading 202.5 south-southwest, level.)
+Save as C:\Users\User\OneDrive - University of Illinois - Urbana\Architecture\2026 Fall - Arch 575\02_Site\Photos_Survey\735WRandolph_Pool-L34-SSW_View_v1.1.jpg
+```
 
 ## C — Optional ComfyUI pass (10 min per image)
 
