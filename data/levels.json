@@ -75,8 +75,16 @@
    "description": "Building plant and services below the podium.",
    "rows": [
     [
-     "Area",
+     "Plate",
      "43,378 sf"
+    ],
+    [
+     "Core",
+     "6,386 sf"
+    ],
+    [
+     "Efficiency",
+     "85.3 %"
     ]
    ],
    "program": "MEP",
@@ -196,8 +204,16 @@
    "description": "Ballroom, boardrooms and event terraces.",
    "rows": [
     [
-     "Area",
+     "Plate",
      "35,143 sf"
+    ],
+    [
+     "Core",
+     "6,386 sf"
+    ],
+    [
+     "Efficiency",
+     "81.8 %"
     ]
    ],
    "program": "AMENITY",
@@ -272,8 +288,16 @@
    "description": "Transfer and booster pumps.",
    "rows": [
     [
-     "Area",
+     "Plate",
      "39,930 sf"
+    ],
+    [
+     "Core",
+     "6,386 sf"
+    ],
+    [
+     "Efficiency",
+     "84.0 %"
     ]
    ],
    "program": "MEP",
@@ -303,8 +327,16 @@
    "description": "Spa, pilates, juice bar and coworking.",
    "rows": [
     [
-     "Area",
+     "Plate",
      "25,203 sf"
+    ],
+    [
+     "Core",
+     "4,466 sf"
+    ],
+    [
+     "Efficiency",
+     "82.3 %"
     ]
    ],
    "program": "AMENITY",
@@ -380,8 +412,16 @@
    "description": "Transfer and booster pumps; rooftop-bound systems.",
    "rows": [
     [
-     "Area",
+     "Plate",
      "28,578 sf"
+    ],
+    [
+     "Core",
+     "4,466 sf"
+    ],
+    [
+     "Efficiency",
+     "84.4 %"
     ]
    ],
    "program": "MEP",
@@ -411,8 +451,16 @@
    "description": "Cafe bar, lounge and pool deck.",
    "rows": [
     [
-     "Area",
+     "Plate",
      "11,760 sf"
+    ],
+    [
+     "Core",
+     "2,480 sf"
+    ],
+    [
+     "Efficiency",
+     "78.9 %"
     ]
    ],
    "program": "AMENITY",
