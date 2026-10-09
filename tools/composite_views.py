@@ -27,7 +27,7 @@ VIEW_SET = [
     ("L45-SSW",    "L45-SSW",    "L45 · Hotel B",  "Suite, looking south-southwest", "View from a suite, L45, south-southwest"),
     ("L45-W",      "L45-W",      "L45 · Hotel B",  "Suite, looking west",            "View from a suite, L45, west"),
     ("Terrace-L17-E", "Terrace-L17-E", "L17 · Holodeck", "Terrace, looking east to the Loop", "View from the outdoor terrace, L17, east"),
-    ("Pool-L34-SSW", "Pool-L34-SSW", "L34 · Clubhouse", "Pool deck, looking south-southwest", "View from the pool deck, L34, south-southwest"),
+    ("Pool-L34-ENE", "Pool-L34-ENE", "L34 · Clubhouse", "Pool deck, looking east-northeast", "View from the pool deck, L34, east-northeast"),
 ]
 ATTRIB = "Imagery © Google"
 FIG_START = 18                       # 4 sketch slides (Fig. 01-04) + 13 level plans (Fig. 05-17) come first
@@ -47,6 +47,8 @@ def composite(key, stem, dry):
         return name, f"{key}: render {os.path.basename(renders[-1])} -> assets/views/{name}"
     cap = os.path.join(VIEWS, f"735WRandolph_{key}_Capture_v1.0.png")
     earth = os.path.join(EARTH, f"735WRandolph_{stem}_View_v1.1.jpg")
+    if not os.path.exists(earth):
+        earth = os.path.join(EARTH, f"735WRandolph_{stem}_View_v1.0.jpg")
     if not os.path.exists(cap):
         return None, f"{key}: no render or capture yet"
     if not os.path.exists(earth):
@@ -64,7 +66,7 @@ def composite(key, stem, dry):
 
 AFTER = {"O1-L10-E": "L06-L15", "O1-L10-W": "L06-L15", "O2-L25-E": "L18-L32", "O2-L25-W": "L18-L32",
          "Hotel-L41-E": "L35-L41", "Hotel-L41-W": "L35-L41", "L45-SSW": "L42-L47", "L45-W": "L42-L47",
-         "Terrace-L17-E": "L17", "Pool-L34-SSW": "L34"}
+         "Terrace-L17-E": "L17", "Pool-L34-ENE": "L34"}
 
 
 def add_slides(done, dry):
