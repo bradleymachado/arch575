@@ -1,4 +1,4 @@
-# composite_views_v1.2 — This section is intended to use a finished Blender/ComfyUI render when present, else place the Google Earth frames behind the transparent
+# composite_views_v1.3 — This section is intended to use a finished Blender/ComfyUI render when present, else place the Google Earth frames behind the transparent
 # Rhino interior captures (03_Design\05_Presentation\Views\735WRandolph_<key>_Capture_v1.0.png) and write
 # the deck images assets/views/View_<key>_v1.0.jpg (plus a mirror in the Views folder), then add one image
 # slide per view to data/story.json (outro, before the massing images) with the Google attribution.
@@ -69,6 +69,24 @@ AFTER = {"O1-L10-E": "L06-L15", "O1-L10-W": "L06-L15", "O2-L25-E": "L18-L32", "O
          "Terrace-L17-E": "L17", "Pool-L34-ENE": "L34"}
 
 
+def layout_for(key, dry):
+    """The Blender top-view layout capture for a view, as assets/views/Layout_<key>_v1.0.jpg (Brad 2026-10-09:
+    shown under the text on the rendering slides). Returns the web path or None."""
+    src = os.path.join(VIEWS, f"735WRandolph_{key}_Layout_v1.0.png")
+    if not os.path.exists(src):
+        return None
+    name = f"Layout_{key}_v1.0.jpg"
+    if not dry:
+        os.makedirs(OUT, exist_ok=True)
+        im = Image.open(src).convert("L")                    # discreet: greyscale, lightened, small (Brad 02:55)
+        im = ImageOps.autocontrast(im, cutoff=1)
+        im = Image.blend(im, Image.new("L", im.size, 255), 0.35).convert("RGB")
+        if im.width > 1000:
+            im = im.resize((1000, round(im.height * 1000 / im.width)), Image.LANCZOS)
+        im.save(os.path.join(OUT, name), quality=86, optimize=True, progressive=True)
+    return f"assets/views/{name}"
+
+
 def add_slides(done, dry):
     """story.json 'views': one image slide per view, placed by js/app.js directly after the level in AFTER
     (Brad 2026-10-09 01:40). Figure numbers are assigned at render time by js/app.js. Any copy of a view that
@@ -83,13 +101,20 @@ def add_slides(done, dry):
             continue
         src = f"assets/views/{fn}"
         d["outro"] = [s for s in d.get("outro", []) if s.get("src") != src]
+        lay = layout_for(key, dry)
         if src in have:
+            for v in views:
+                if v.get("src") == src and lay:
+                    v["layout"] = lay
             continue
-        views.append({"kind": "image", "src": src, "after": AFTER[key], "label": label, "name": name, "sub": "",
-                      "lines": [], "caption": f"{caption} · {ATTRIB}"})
+        entry = {"kind": "image", "src": src, "after": AFTER[key], "label": label, "name": name, "sub": "",
+                 "lines": [], "caption": f"{caption} · {ATTRIB}"}
+        if lay:
+            entry["layout"] = lay
+        views.append(entry)
         inserted += 1
     order = [k for k, *_ in VIEW_SET]
-    views.sort(key=lambda v: next((i for i, k in enumerate(order) if v["src"].endswith(f"View_{k}_v1.0.jpg")), 99))
+    views.sort(key=lambda v: next((i for i, k in enumerate(order) if v.get("src", "").endswith(f"View_{k}_v1.0.jpg")), 99))
     if not dry:
         with open(STORY, "w", encoding="utf-8", newline="\n") as f:
             json.dump(d, f, indent=1, ensure_ascii=False); f.write("\n")

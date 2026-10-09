@@ -325,6 +325,17 @@ function renderImage(t) {
   img.src = t.src;
   img.alt = t.caption;
   setText(el, 'caption', `Fig. ${pad2(t.fig)} — ${t.caption}.`);
+  const lay = field(el, 'layout');
+  if (lay) {
+    if (t.layout) {                               // camera position in plan, under the text (Brad 2026-10-09)
+      const li = field(el, 'layoutImg');
+      li.src = t.layout; li.alt = 'Camera position in plan';
+      setText(el, 'layoutCap', 'Camera position, plan');
+      lay.hidden = false;
+    } else {
+      lay.remove();
+    }
+  }
   return el;
 }
 

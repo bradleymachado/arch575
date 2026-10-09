@@ -142,7 +142,8 @@
    "name": "Looking east to the Loop",
    "sub": "",
    "lines": [],
-   "caption": "View from Office 2, L25, east · Imagery © Google"
+   "caption": "View from Office 2, L25, east · Imagery © Google",
+   "layout": "assets/views/Layout_O2-L25-E_v1.0.jpg"
   },
   {
    "kind": "image",
@@ -152,7 +153,8 @@
    "name": "Suite, looking south-southwest",
    "sub": "",
    "lines": [],
-   "caption": "View from a suite, L45, south-southwest · Imagery © Google"
+   "caption": "View from a suite, L45, south-southwest · Imagery © Google",
+   "layout": "assets/views/Layout_L45-SSW_v1.0.jpg"
   },
   {
    "kind": "image",
@@ -162,7 +164,19 @@
    "name": "Terrace, looking east to the Loop",
    "sub": "",
    "lines": [],
-   "caption": "View from the outdoor terrace, L17, east · Imagery © Google"
+   "caption": "View from the outdoor terrace, L17, east · Imagery © Google",
+   "layout": "assets/views/Layout_Terrace-L17-E_v1.0.jpg"
+  },
+  {
+   "kind": "image",
+   "src": "assets/views/View_Pool-L34-ENE_v1.0.jpg",
+   "after": "L34",
+   "label": "L34 · Clubhouse",
+   "name": "Pool deck, looking east-northeast",
+   "sub": "",
+   "lines": [],
+   "caption": "View from the pool deck, L34, east-northeast · Imagery © Google",
+   "layout": "assets/views/Layout_Pool-L34-ENE_v1.0.jpg"
   },
   {
    "kind": "model",

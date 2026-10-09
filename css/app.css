@@ -219,6 +219,11 @@ html, body { height: 100%; }
 }
 .pair__item figcaption { margin-top: 8px; }
 
+/* View slides: the Blender layout capture under the text column (Brad 2026-10-09) */
+.site__layout { margin: 32px 0 0; max-width: 100%; }
+.site__layout-img { display: block; width: auto; max-width: 100%; max-height: 22vh; object-fit: contain; object-position: left top; border: 1px solid var(--color-hairline); }
+.site__layout figcaption { margin-top: 8px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; color: var(--color-muted); text-transform: uppercase; }
+
 /* --------------------------------------------------------------------------
    Story slides (data/story.json, review T4): text = title layout, image = site layout
    -------------------------------------------------------------------------- */
