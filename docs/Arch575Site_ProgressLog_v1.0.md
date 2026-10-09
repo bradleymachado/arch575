@@ -65,6 +65,12 @@ For Brad: <open items, or "none">
 
 ---
 
+## 2026-10-08 22:45 · Slide 05 removed · Opus 5.5 (review conversation) · STATUS: done
+Measured: Brad: "remove slide 5". Live slide 05 was the story slide "Ground floor — One grand lobby." Removed from `data/story.json` intro; entry kept under `_removed`. Deck 18 → 17 slides (headless check: `deck.count` 17, slide 05 now B1).
+Outputs: commit 0429518 (`story.json`, CHANGELOG Unreleased).
+Deviations: none. Prompts or plans that cite slide numbers after #04 (S11/S12 review mode, S17) are off by one.
+For Brad: none.
+
 ## 2026-10-08 18:40 · Brad decisions (copy gate, footprint) · Fable (strategy conversation) · STATUS: done
 Measured: Brad replied "I accept" to (a) the S14 tower-footprint overhang (tower.glb 321 × 208 ft on the 338 × 198 ft lot: 1.2–2.3 m over the line, NW corner in the notch) and (b) the 18 copy lines. Interpretation recorded here; Brad can revert (b) by saying so.
 Outputs: copy-status table all rows confirmed; running-list items 3, 12, 21 closed; S14 For Brad (1) closed; `CHANGELOG.md` Unreleased → `v1.0.0`; annotated tag `v1.0.0` on the live HEAD (S6 passed, copy confirmed); log mirrored to `<ROOT>_Design_Presentation\Web\`.
