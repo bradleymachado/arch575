@@ -403,6 +403,9 @@ def surface_z(parts, xy):
     (falls back to the terrain when none within 60 ft)."""
     V = surface_z.V
     d = np.hypot(V[:, 0] - xy[0], V[:, 1] - xy[1])
+    near = d <= 30.0
+    if near.any():                       # v1.2 (Brad 23:31): bridge decks win over the road beneath them
+        return float(V[near, 2].max())
     k = np.argsort(d)[:6]
     if d[k[0]] > 60.0:
         return terrain_z(parts, xy)
@@ -439,7 +442,7 @@ def ribbon(P, half_ft, parts):
 
 def street_ribbons(parts, lines, box):
     """One ribbon mesh per street from its carriageway ways clipped to the model extent."""
-    surface_z.V = np.vstack([v for v, _ in parts["roads"]])
+    surface_z.V = np.vstack([v for v, _ in parts["roads"]] + [v for v, _ in parts.get("bridges", parts.get("Bridges", []))])   # v1.2: roads + bridge decks
     hw = osm_streets.highway
     out, stats = {}, {}
     for key, width in RIBBON_WIDTH_M.items():

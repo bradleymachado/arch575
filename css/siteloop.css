@@ -30,6 +30,25 @@
   min-height: 1.5em;
 }
 
+.siteloop__name {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 3;
+  margin: 0;
+  padding-bottom: 12px;
+  font-family: var(--font-sans, Arial, Helvetica, sans-serif);
+  font-size: 44px;
+  line-height: 1.1;
+  color: var(--color-ink);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+body:not(.is-siteloop) .siteloop__name { display: none; }
+
 .siteloop__attribution {
   font-size: 11px;
   letter-spacing: 0.04em;

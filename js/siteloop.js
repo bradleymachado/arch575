@@ -53,10 +53,10 @@ const FT = 0.3048;
 const DEG = Math.PI / 180;
 
 const FEATURES = [
-  { id: 'randolph', label: 'Randolph St', node: 'r_randolph' },
+  { id: 'randolph', label: 'Randolph Street', node: 'r_randolph' },
   { id: 'restaurantrow', label: 'Restaurant Row', node: 'b_restaurantrow' },
-  { id: 'halsted', label: 'Halsted St', node: 'r_halsted' },
-  { id: 'washington', label: 'Washington Blvd', node: 'r_washington' },
+  { id: 'halsted', label: 'Halsted Street', node: 'r_halsted' },
+  { id: 'washington', label: 'Washington Boulevard', node: 'r_washington' },
   { id: 'skybridge', label: 'Skybridge', node: 'b_skybridge' },
   { id: 'site', label: '735 W Randolph', node: 'Site' },
 ];
@@ -74,8 +74,8 @@ const CYCLE_MS = RESET_AT + RESET_MS;                 // 23800
 // principal point sits 8 % right of centre so the text column stays clear (setViewOffset, as #01).
 // Distance and target are fitted at runtime (logged in .view).
 const SITE_VIEW = {
-  yawDeg: 110,                                        // tower.js place(): offset (sin az, ., cos az); +x south, -z east -> az 110 = 20 deg east of south (title view 31.95 is SW: swing 78 deg; at 100 the Skybridge block covers the site)
-  pitchDeg: -42,                                     // strategy session 23:20: -30 put two towers across the site; -42 shows the grid
+  yawDeg: 195,                                        // 23:50 (Brad): from the east-north-east looking down Randolph, so 737 W Washington no longer stands between the camera and the site (was 110 = SSE)                                        // tower.js place(): offset (sin az, ., cos az); +x south, -z east -> az 110 = 20 deg east of south (title view 31.95 is SW: swing 78 deg; at 100 the Skybridge block covers the site)
+  pitchDeg: -38,                                     // strategy session 23:20: -30 put two towers across the site; -42 shows the grid
   biasX: 0.08,
   kennedyEastFt: 250,                                 // east edge of the expressway = OSM centre + this
   frameFt: { x0: 979, x1: 1918, y0: 1198, y1: 1598 },   // defaults; site.json siteLoop.frameFt overrides
@@ -101,6 +101,10 @@ meta.id = 'siteloop';
 meta.hidden = true;
 meta.setAttribute('aria-hidden', 'true');
 meta.innerHTML = '<p class="siteloop__caption"></p><p class="siteloop__attribution"></p>';
+// Large feature name over the feature itself (Brad, 23:50): projected centre of the active node
+const nameEl = document.createElement('p');
+nameEl.className = 'siteloop__name';
+document.body.appendChild(nameEl);
 document.body.append(meta);
 const captionEl = meta.querySelector('.siteloop__caption');
 const attributionEl = meta.querySelector('.siteloop__attribution');
@@ -192,7 +196,24 @@ function applyState(s) {
   window.tower?.ghostSetLevel?.(s.ghost);
   captionEl.textContent = s.active >= 0 ? FEATURES[s.active].label : '';
   captionEl.style.opacity = String(s.captionK);
+  placeName(s);
   st.last = s;
+}
+
+// The big name: centred above the active feature's projected bounds centre (cached per node)
+function placeName(s) {
+  const tower = window.tower;
+  if (s.active < 0 || !tower?.project) { nameEl.style.opacity = '0'; return; }
+  const f = FEATURES[s.active];
+  const node = st.nodes?.[f.node];
+  if (!node) { nameEl.style.opacity = '0'; return; }
+  const THREE = st.THREE;
+  if (!THREE) { nameEl.style.opacity = '0'; return; }
+  if (!node.userData.centre) node.userData.centre = new THREE.Box3().setFromObject(node).getCenter(new THREE.Vector3());
+  const p = tower.project(node.userData.centre.clone());
+  nameEl.textContent = f.label;
+  nameEl.style.transform = `translate(${Math.round(p.x)}px, ${Math.round(p.y)}px) translate(-50%, -100%)`;
+  nameEl.style.opacity = String(s.captionK);
 }
 
 /* --------------------------------------------------------------------------
@@ -205,6 +226,7 @@ function cssColor(name, fallback) {
 }
 
 function prepareContext(THREE) {
+  st.THREE = THREE;
   const tower = window.tower;
   st.nodes = tower.contextNodes();
   if (!st.nodes) return false;
