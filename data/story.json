@@ -125,7 +125,47 @@
    ]
   }
  ],
- "outro": [],
+ "outro": [
+  {
+   "_source": "Pin-up PinUp_ProgressUpdate_v1.17 slide 9 (2026-09-30), Brad 2026-10-09: last slide of the deck. Address 735 -> 725 per the 2026-10-09 correction.",
+   "kind": "thanks",
+   "heading": "Thank you",
+   "sub": "725 W. Randolph · hybrid hi-rise: office + hotel",
+   "people": [
+    {
+     "name": "Brad Machado",
+     "links": [
+      {
+       "text": "machado5@illinois.edu",
+       "href": "mailto:machado5@illinois.edu"
+      }
+     ],
+     "qr": {
+      "src": "assets/qr/QR_BradMachado_v1.1.svg",
+      "href": "https://bradmachado.com",
+      "text": "bradmachado.com"
+     }
+    },
+    {
+     "name": "Jeremiah Pham",
+     "links": [
+      {
+       "text": "jtpham2@illinois.edu",
+       "href": "mailto:jtpham2@illinois.edu"
+      },
+      {
+       "text": "linkedin.com/in/jeremiahpham",
+       "href": "https://www.linkedin.com/in/jeremiahpham"
+      }
+     ]
+    }
+   ],
+   "course": [
+    "ARCH 575 E1 · Fall 2026",
+    "Prof. Thomas Leslie, FAIA"
+   ]
+  }
+ ],
  "_removed": [
   {
    "removed": "2026-10-08 22:45 CT, Brad: remove slide 5",

@@ -699,3 +699,132 @@ html, body { height: 100%; }
     bottom: 16px;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Title slide QR (Brad 2026-10-09 markup): under the eyebrow, from column 2
+   of the six-column title text block; fades with the title text after the
+   intro. Desktop only (on a phone the reader is already here).
+   -------------------------------------------------------------------------- */
+
+.slide--title .slide__text { position: relative; }
+
+.title__qr {
+  --qr-w: clamp(150px, 22vh, 320px);           /* image incl. its 4-module quiet zone (37 modules) */
+  --qr-quiet: calc(var(--qr-w) * 4 / 37);
+  position: absolute;
+  top: calc(40px - var(--qr-quiet));
+  left: calc((100% + var(--deck-gap)) / 6 - var(--qr-quiet));   /* visible modules on the column-2 line */
+  width: var(--qr-w);
+}
+
+.title__qr-img {
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+}
+
+.title__qr figcaption { margin-top: calc(14px - var(--qr-quiet)); padding-left: var(--qr-quiet); white-space: nowrap; }
+
+/* --------------------------------------------------------------------------
+   Closing slide (story.outro kind 'thanks', from the 2026-09-30 pin-up):
+   centred block in cols 3-10, accent rule, two contact columns
+   -------------------------------------------------------------------------- */
+
+.slide--thanks { align-items: center; }
+
+.thanks {
+  grid-column: 3 / 11;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.thanks__rule {
+  display: block;
+  width: 33%;
+  height: 4px;
+  background: var(--color-accent);
+}
+
+.thanks__h2 {
+  margin-top: 40px;
+  font-size: clamp(48px, 5vw, 96px);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+
+.thanks__sub {
+  margin-top: 20px;
+  font-size: 20px;
+  line-height: 1.4;
+  color: var(--color-body);
+}
+
+.thanks__people {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--deck-gap);
+  width: 100%;
+  margin-top: clamp(40px, 7vh, 80px);
+}
+
+.thanks__person {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.thanks__name {
+  margin-bottom: 4px;
+  font-size: 20px;
+  color: var(--color-ink);
+}
+
+.thanks__link {
+  font-size: 16px;
+  color: var(--color-body);
+  text-decoration: underline;
+  text-decoration-color: var(--color-hairline);
+  text-underline-offset: 4px;
+}
+
+.thanks__link:hover { color: var(--color-accent); text-decoration-color: currentColor; }
+
+.thanks__qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-faint);
+}
+
+.thanks__qr img {
+  width: clamp(120px, 16vh, 220px);
+  height: auto;
+  margin-bottom: 4px;
+  image-rendering: pixelated;
+}
+
+.thanks__course {
+  margin-top: clamp(40px, 7vh, 80px);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.8;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-faint);
+}
+
+@media (max-width: 899.98px) {
+  .title__qr { display: none; }
+  .thanks__people { grid-template-columns: 1fr; row-gap: 32px; }
+  .thanks__h2 { font-size: clamp(40px, 11vw, 64px); }
+  .thanks__sub { font-size: 17px; }
+}

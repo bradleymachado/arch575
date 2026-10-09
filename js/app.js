@@ -413,6 +413,48 @@ function renderPair(t) {
   return el;
 }
 
+// Closing slide (story.outro kind 'thanks'; pin-up v1.17 slide 9, Brad 2026-10-09):
+// heading, subline, one column per person (name, links, optional QR), course lines
+function renderThanks(t) {
+  const el = clone('tpl-thanks');
+  setText(el, 'heading', t.heading);
+  setText(el, 'sub', t.sub);
+  field(el, 'people').replaceChildren(...(t.people || []).map((p) => {
+    const col = document.createElement('div');
+    col.className = 'thanks__person';
+    const name = document.createElement('p');
+    name.className = 'thanks__name';
+    name.textContent = p.name;
+    col.append(name);
+    for (const l of p.links || []) {
+      const a = document.createElement('a');
+      a.className = 'thanks__link';
+      a.href = l.href;
+      a.textContent = l.text;
+      if (/^https?:/.test(l.href)) { a.target = '_blank'; a.rel = 'noopener'; }
+      col.append(a);
+    }
+    if (p.qr) {
+      const a = document.createElement('a');
+      a.className = 'thanks__qr';
+      a.href = p.qr.href;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      const img = document.createElement('img');
+      img.src = p.qr.src;
+      img.alt = `QR code: ${p.qr.text}`;
+      img.width = 120; img.height = 120;
+      const cap = document.createElement('span');
+      cap.textContent = p.qr.text;
+      a.append(img, cap);
+      col.append(a);
+    }
+    return col;
+  }));
+  setLines(el, 'course', t.course || []);
+  return el;
+}
+
 function renderStory(t, data) {
   if (t.kind === 'text') return { kind: 'text', el: renderText(t) };
   if (t.kind === 'image') return { kind: 'image', el: renderImage(t) };
@@ -451,6 +493,7 @@ function renderStory(t, data) {
     return { kind: t.kind === 'grid' ? 'image' : 'model', el };   // a grid slide hides the tower like an image slide
   }
   if (t.kind === 'closing') return { kind: 'title', el: renderTitle(data.title) };
+  if (t.kind === 'thanks') return { kind: 'image', el: renderThanks(t) };   // closing slide from the 2026-09-30 pin-up; tower hidden
   return null;
 }
 

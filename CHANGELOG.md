@@ -2,6 +2,12 @@
 
 Format: one section per tag, newest first. Site releases use `vMAJOR.MINOR.PATCH`; documentation milestones use `plan-vX.Y`.
 
+## Unreleased — 2026-10-09 03:30
+
+- Slide 01: QR code to https://arch575.bradmachado.com/ under the eyebrow, visible modules on the column-2 line of the title text block (Brad's markup), `assets/qr/QR_Arch575Deck_v1.0.svg`, ink on the page white, 22vh (150–320 px), caption "Scan · arch575.bradmachado.com"; fades in with the title text; hidden below 900 px.
+- New last slide 23 (`story.outro`, kind `thanks`, `tpl-thanks` / `renderThanks`): the closing slide of pin-up PinUp_ProgressUpdate_v1.17 (2026-09-30) — Thank you; 725 W. Randolph · hybrid hi-rise: office + hotel; Brad Machado (machado5@illinois.edu, QR to bradmachado.com `assets/qr/QR_BradMachado_v1.1.svg`), Jeremiah Pham (jtpham2@illinois.edu, linkedin.com/in/jeremiahpham); ARCH 575 E1 · Fall 2026, Prof. Thomas Leslie, FAIA. Address 735 → 725 per the 2026-10-09 correction. Tower hidden. Deck 23 slides.
+- QR SVGs from `tools/PinUp_QR_v1.1.py` (own encoder, v3-M; SVG output added); both decode with OpenCV on the rendered slides at 1920 × 1080 and 3840 × 1914.
+
 ## v1.2.0 — 2026-10-08
 
 - Site loop (S17): slide 02 at ≥ 900 px shows the S14 site context greyed out (`js/siteloop.js`, `css/siteloop.css`) and cycles Randolph St, Restaurant Row, Halsted St, Washington Blvd, Skybridge and the site to the accent (rise 0.4 s, hold 2.0 s, fall 0.4 s overlapping; 2.4 s per step), then the site plate holds while the tower rises as a ghost (`tower.js` `ghostMode` / `setGhost`: one translucent pale fill at 0.30, `EdgesGeometry` lines in ink at 0.5) for 8 s; reset 0.6 s; cycle 23.8 s, looping (`LOOP`, `HOLD_SITE_MS`). Mono caption bottom-left + OpenStreetMap attribution. `I` on `#02` restarts; reduced motion = the static site + ghost frame; the photo slide stays below 900 px / without WebGL / if `site.glb` fails. `?loopat=1..6|ghost` freezes a step.
