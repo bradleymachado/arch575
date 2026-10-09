@@ -186,6 +186,17 @@
  "views": [
   {
    "kind": "image",
+   "src": "assets/views/View_O1-L10-E_v1.0.jpg",
+   "after": "L06-L15",
+   "label": "L10 · Office 1",
+   "name": "Looking east to the Loop",
+   "sub": "",
+   "lines": [],
+   "caption": "View from Office 1, L10, east · Imagery © Google",
+   "layout": "assets/views/Layout_O1-L10-E_v1.0.jpg"
+  },
+  {
+   "kind": "image",
    "src": "assets/views/View_O2-L25-E_v1.0.jpg",
    "after": "L18-L32",
    "label": "L25 · Office 2",
