@@ -2,34 +2,6 @@
  "_source": "Review notes T4 (2026-10-08). Copy from 03_Design/05_Presentation/MidReview/ARCH575_MidReview_Plan_v1.0.md decisions D5 (thesis) and D6 (the hall); totals from levels.json rows, office target 812,500 gsf from V14Plates plan. All lines await Brad's confirmation (copy gate).",
  "intro": [
   {
-   "kind": "image",
-   "src": "assets/story/SiteAccess_Map_Web_v1.0.jpg",
-   "label": "Site",
-   "name": "Site access",
-   "sub": "",
-   "lines": [],
-   "fig": 1,
-   "caption": "Site access: walking, car, bike, bus, Green and Pink Line, Blue Line"
-  },
-  {
-   "kind": "image-pair",
-   "label": "Sketch",
-   "items": [
-    {
-     "src": "assets/sketches/Tower_ContextElevationSketch_Web_v1.1.jpg",
-     "name": "Street elevation",
-     "fig": 2,
-     "caption": "Street elevation. Podium height respects the street; the hotel has 360° unobstructed views"
-    },
-    {
-     "src": "assets/sketches/RandolphStreet_SectionSketch_Web_v1.2.jpg",
-     "name": "Randolph Street section",
-     "fig": 3,
-     "caption": "Randolph Street section. Pay careful attention to the pedestrian scale on Randolph"
-    }
-   ]
-  },
-  {
    "kind": "text",
    "eyebrow": "Thesis",
    "heading": "The gateway lot from the Loop into Fulton Market.",
@@ -102,9 +74,37 @@
    ],
    "aside": {
     "src": "assets/story/Building_Section_Web_v1.0.jpg",
-    "fig": 4,
+    "fig": 1,
     "caption": "Building section, B1 to L49"
    }
+  },
+  {
+   "kind": "image",
+   "src": "assets/story/SiteAccess_Map_Web_v1.0.jpg",
+   "label": "Site",
+   "name": "Site access",
+   "sub": "",
+   "lines": [],
+   "fig": 2,
+   "caption": "Site access: walking, car, bike, bus, Green and Pink Line, Blue Line"
+  },
+  {
+   "kind": "image-pair",
+   "label": "Sketch",
+   "items": [
+    {
+     "src": "assets/sketches/Tower_ContextElevationSketch_Web_v1.1.jpg",
+     "name": "Street elevation",
+     "fig": 3,
+     "caption": "Street elevation. Podium height respects the street; the hotel has 360° unobstructed views"
+    },
+    {
+     "src": "assets/sketches/RandolphStreet_SectionSketch_Web_v1.2.jpg",
+     "name": "Randolph Street section",
+     "fig": 4,
+     "caption": "Randolph Street section. Pay careful attention to the pedestrian scale on Randolph"
+    }
+   ]
   },
   {
    "kind": "image-pair",
