@@ -170,7 +170,25 @@
    "after": "L42-L47",
    "eyebrow": "Supplemental",
    "heading": "Structural framing",
-   "lines": []
+   "lines": [],
+   "images": [
+    {
+     "src": "assets/story/structure/StructuralPlan_Podium_v1.0.jpg",
+     "name": "Podium"
+    },
+    {
+     "src": "assets/story/structure/StructuralPlan_Office1_v1.0.jpg",
+     "name": "Office 1"
+    },
+    {
+     "src": "assets/story/structure/StructuralPlan_Office2_v1.0.jpg",
+     "name": "Office 2"
+    },
+    {
+     "src": "assets/story/structure/StructuralPlan_Hotel_v1.0.jpg",
+     "name": "Hotel"
+    }
+   ]
   }
  ]
 }

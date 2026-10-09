@@ -663,6 +663,12 @@ async function main() {
       applyGhostLevel(g.anim.from + (g.anim.to - g.anim.from) * easeInOutCubic(k));
       if (k >= 1) g.anim = null;
     }
+    if (state.spin && !anim) {                     // supplemental model: slow continuous turn (Brad 2026-10-09)
+      const now = performance.now();
+      const dt = Math.min(0.1, (now - (state.spinT || now)) / 1000);
+      state.spinT = now;
+      state.yaw = (state.yaw + SPIN_DEG_PER_S * dt) % 360;
+    }
     if (anim) {
       const k = Math.min(1, (performance.now() - anim.t0) / TWEEN_MS);
       const e = easeInOutCubic(k);
@@ -675,7 +681,7 @@ async function main() {
       }
     }
     render();
-    if (anim || state.ctx.anim || state.ghost.anim) requestFrame();
+    if (anim || state.ctx.anim || state.ghost.anim || state.spin) requestFrame();
   }
 
   function requestFrame() {
@@ -740,6 +746,7 @@ async function main() {
      on 'model' slides (e.g. assets/structure.glb). Same camera as a whole-tower view; loaded on first request. */
   const models = {};
   let modelShown = null;
+  const SPIN_DEG_PER_S = 6;                        // one turn a minute
   async function loadModel(url) {
     if (models[url]) return models[url];
     const p = (async () => {
@@ -761,10 +768,12 @@ async function main() {
   tower.showModel = async function (url) {
     modelShown = url;
     for (const k of Object.keys(models)) { const m = await models[k]; if (m && k !== url) m.visible = false; }
+    state.spin = false; state.spinT = 0;
     if (!url) { gltf.scene.visible = true; boxes.visible = true; requestFrame(); return; }
     const m = await loadModel(url);
     if (modelShown !== url) return;                 // slide changed while loading
     gltf.scene.visible = false; boxes.visible = false; m.visible = true;
+    state.spin = !reducedMotion();
     requestFrame();
   };
 

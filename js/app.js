@@ -173,6 +173,8 @@ function renderText(t) {
   }
   if (!(t.rows || []).length) tbody.parentElement.remove();
   // Optional aside image right of the tower (Brad 2026-10-09: the building section beside the stacking model)
+  const grid0 = field(el, 'grid');
+  if (grid0 && !(t.images && t.images.length)) grid0.remove();   // the grid is filled by model slides only
   const aside = field(el, 'aside');
   if (t.aside && t.aside.src) {
     const img = field(el, 'asideImg');
@@ -345,9 +347,26 @@ function renderStory(t, data) {
   if (t.kind === 'image') return { kind: 'image', el: renderImage(t) };
   if (t.kind === 'image-pair') return { kind: 'image', el: renderPair(t) };   // tower hidden as on image slides
   if (t.kind === 'model') {                       // supplemental GLB in place of the tower (js/tower.js showModel)
-    const el = renderText({ eyebrow: t.eyebrow || t.label || '', heading: t.heading || t.name || '', lines: t.lines || [], rows: t.rows || [] });
+    const el = renderText({ eyebrow: t.eyebrow || t.label || '', heading: t.heading || t.name || '', lines: t.lines || [], rows: t.rows || [], images: t.images });
     el.classList.add('slide--model');
     el.dataset.model = t.src;
+    const grid = field(el, 'grid');
+    if (t.images && t.images.length) {           // 2 x 2 image grid left of the model (Brad 2026-10-09)
+      for (const im of t.images) {
+        const fig = document.createElement('figure');
+        fig.className = 'model__item';
+        const img = document.createElement('img');
+        img.src = im.src; img.alt = im.name || ''; img.loading = 'lazy';
+        const cap = document.createElement('figcaption');
+        cap.textContent = im.name || '';
+        fig.append(img, cap);
+        grid.append(fig);
+      }
+      grid.hidden = false;
+      el.classList.add('has-grid');
+    } else if (grid) {
+      grid.remove();
+    }
     return { kind: 'model', el };
   }
   if (t.kind === 'closing') return { kind: 'title', el: renderTitle(data.title) };
@@ -557,7 +576,8 @@ function activate(i, { fromHash = false, fromScroll = false, replace = false, in
 
   state.slides.forEach((s, k) => s.el.classList.toggle('is-active', k === i));
   deckEl.dataset.kind = slide.kind;
-  deckEl.dataset.aside = slide.el.classList.contains('has-aside') ? '1' : '';   // text slide with a side image: tower in cols 5-9
+  deckEl.dataset.aside = slide.el.classList.contains('has-aside') ? '1' : '';
+  deckEl.dataset.grid = slide.el.classList.contains('has-grid') ? '1' : '';   // text slide with a side image: tower in cols 5-9
   countEl.textContent = `${pad2(i + 1)} / ${pad2(n)}`;
   prevBtn.disabled = i === 0;
   nextBtn.disabled = i === n - 1;
