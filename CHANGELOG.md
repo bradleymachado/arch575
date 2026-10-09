@@ -2,6 +2,10 @@
 
 Format: one section per tag, newest first. Site releases use `vMAJOR.MINOR.PATCH`; documentation milestones use `plan-vX.Y`.
 
+## Unreleased — 2026-10-08 22:45
+
+- Story slide "Ground floor — One grand lobby." removed from the intro (Brad: remove slide 5). Entry kept under `_removed` in `data/story.json`; deck is 17 slides; hash links after #04 shift down by one.
+
 ## plan-v1.4 — 2026-10-08
 
 - S17 Site Loop (Fable) added from Brad's 22:00 request: slide 02 (≥ 900 px) shows the greyed-out site context in the three.js scene and cycles Randolph St, Restaurant Row, Halsted St, Washington Blvd and the Skybridge to the accent (2 s each), ending on the site band with the tower as a ghost (translucent fill, ink edges), 8 s hold, looping. Not a `.gif` file; a GIF of one cycle is exported for the PowerPoint backup when the tooling allows. `assets/site.glb` is rebuilt with named feature nodes from the OSM way ids and centrelines; placement unchanged. Tag `v1.2.0`.

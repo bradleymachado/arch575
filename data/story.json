@@ -18,22 +18,26 @@
    "heading": "Office below, hotel above.",
    "lines": [],
    "rows": [
-    ["Office 1 · L06–15", "10 × 39,930 sf"],
-    ["Office 2 · L18–32", "15 × 28,578 sf"],
-    ["Office total", "827,970 sf"],
-    ["Office target", "812,500 sf · 101.9 %"],
-    ["Hotel · L35–47", "13 floors · 305 keys"]
-   ]
-  },
-  {
-   "kind": "text",
-   "eyebrow": "Ground floor",
-   "heading": "One grand lobby.",
-   "lines": [
-    "Hotel entrance on Halsted, with the drop-off.",
-    "Office entrance on Washington.",
-    "The office rises at once to a mezzanine for its banks and turnstiles.",
-    "The hotel stays at grade to its cars."
+    [
+     "Office 1 · L06–15",
+     "10 × 39,930 sf"
+    ],
+    [
+     "Office 2 · L18–32",
+     "15 × 28,578 sf"
+    ],
+    [
+     "Office total",
+     "827,970 sf"
+    ],
+    [
+     "Office target",
+     "812,500 sf · 101.9 %"
+    ],
+    [
+     "Hotel · L35–47",
+     "13 floors · 305 keys"
+    ]
    ]
   }
  ],
@@ -58,6 +62,24 @@
    "fig": 12,
    "caption": "Massing from the north-northeast"
   },
-  { "kind": "closing" }
+  {
+   "kind": "closing"
+  }
+ ],
+ "_removed": [
+  {
+   "removed": "2026-10-08 22:45 CT, Brad: remove slide 5",
+   "slide": {
+    "kind": "text",
+    "eyebrow": "Ground floor",
+    "heading": "One grand lobby.",
+    "lines": [
+     "Hotel entrance on Halsted, with the drop-off.",
+     "Office entrance on Washington.",
+     "The office rises at once to a mezzanine for its banks and turnstiles.",
+     "The hotel stays at grade to its cars."
+    ]
+   }
+  }
  ]
 }
